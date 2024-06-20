@@ -43,3 +43,8 @@ You need to understand parallel processing and data architecture patterns. You s
 Training in this course
 
  - [Introduction to data engineering on Azure](./introduction_data_engineering.md)
+ - [Introduction to Azure Data Lake Storage Gen2](./introduction_data_lake_storage.md)
+ - [Introduction to Azure Synapse Analytics](./introduction_synapse_analytics.md)
+ - [Use Azure Synapse serverless SQL pool to query files in a data lake](./use_synapse_sql_query_data_lake.md)
+ - [Use Azure Synapse serverless SQL pool to transform data in a data lake](./use_synapse_sql_transform_data_lake.md)
+
