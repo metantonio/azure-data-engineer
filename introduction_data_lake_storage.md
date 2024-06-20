@@ -46,3 +46,11 @@ Azure Data Lake Storage **organizes the stored data into a hierarchy of director
 Data Lake Storage takes advantage of the **Azure Blob replication models** that provide data redundancy in a single data center with **locally redundant storage (LRS)**, or to a secondary region by using the **Geo-redundant storage (GRS)** option. This feature ensures that your data is always available and protected if catastrophe strikes.
 
 ## Enable Azure Data Lake Storage Gen2 in Azure Storage
+
+**Azure Data Lake Storage Gen2 isn't a standalone Azure service**, but rather a configurable capability of a StorageV2 (General Purpose V2) Azure Storage.
+
+To enable Azure Data Lake Storage Gen2 in an Azure Storage account, you can select the option to **Enable hierarchical namespace** in the **Advanced page** when creating the storage account in the Azure portal:
+
+<a href="#">
+    <img src="./img/create-storage-account-advanced.png" />
+</a>
