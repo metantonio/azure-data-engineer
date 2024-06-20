@@ -128,3 +128,11 @@ The analytical data stores that are populated with data produced by data enginee
     - [ ] Azure Stream Analytics
     - [x] Azure Synapse Analytics
     - [ ] Azure Databricks
+
+## Summary
+
+Data engineering is a well established industry role that is supported by multiple services in Microsoft Azure. Data engineers can use these services to work with different types of data, building integration, transformation, and consolidation solutions to support enterprise analytics.
+
+### Tip
+ 
+To learn more about Azure architecture solutions for data analytics, see [Analytics architecture design](https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/analytics-start-here).
