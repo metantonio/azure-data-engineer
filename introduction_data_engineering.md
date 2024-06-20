@@ -109,3 +109,22 @@ This **operational data must be captured, ingested, and consolidated into analyt
 
 The analytical data stores that are populated with data produced by data engineering workloads support data modeling and visualization for reporting and analysis, often using sophisticated visualization tools such as Microsoft Power BI.
 
+## Knowledge check
+
+1. Data in a relational database table is… 
+
+    - [x] Structured
+    - [ ] Semi-stuctured
+    - [ ] Unstuctured
+
+2. In a data lake, data is stored in? 
+
+    - [ ] Relational tables
+    - [x] Files
+    - [ ] A single  JSON document
+
+3. Which of the following Azure services provides capabilities for running data pipelines AND managing analytical data in a data lake or relational data warehouse? 
+
+    - [ ] Azure Stream Analytics
+    - [x] Azure Synapse Analytics
+    - [ ] Azure Databricks
