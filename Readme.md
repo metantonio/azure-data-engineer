@@ -36,3 +36,10 @@ You need to understand parallel processing and data architecture patterns. You s
  - Design and implement data storage
  - Develop data processing
  - Secure, monitor, and optimize data storage and data processing
+
+
+## COURSE
+
+Training in this course
+
+ - [Introduction to data engineering on Azure](./introduction_data_engineering.md)
