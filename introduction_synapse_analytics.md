@@ -150,3 +150,17 @@ Now it's your chance to explore the capabilities of Azure Synapse Analytics for 
 
  To [complete this lab](https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/01-Explore-Azure-Synapse.html), you will need an Azure subscription in which you have administrative access.
 
+
+### Provision an Azure Synapse Analytics workspace
+
+An Azure Synapse Analytics workspace provides a central point for managing data and data processing runtimes. You can provision a workspace using the interactive interface in the Azure portal, or you can deploy a workspace and resources within it by using a script or template. In most production scenarios, **it’s best to automate provisioning with scripts and templates** so that you can incorporate resource deployment into a repeatable **development and operations (DevOps) process**.
+
+In this exercise, you’ll use a combination of a **PowerShell script and an ARM template** to provision Azure Synapse Analytics.
+
+ - In a web browser, sign into the [Azure portal](https://portal.azure.com).
+ - Use the [>_] button to the right of the search bar at the top of the page to create a **new Cloud Shell** in the Azure portal, **selecting a PowerShell environment** and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+
+<a href="#">
+    <img src="./img/cloud-shell.png" />
+</a>
+
