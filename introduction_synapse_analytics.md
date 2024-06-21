@@ -411,6 +411,18 @@ While SQL is a common language for querying structured datasets, many data analy
     display(df.limit(10))
     ```
 
+ 4) Use the **▷ icon** to the left of the code cell **to run it**, and wait for the results. The first time you run a cell in a notebook, the Spark pool is started - so it may take a minute or so to return any results.
+
+ 5) Eventually, the results should appear below the cell, and they should be similar to this:
+ 
+    ````table    
+        c0	        c1	                        c2	            c3
+        ProductID	ProductName	                Category	    ListPrice
+        771	        Mountain-100 Silver, 38	    Mountain Bikes	3399.9900
+        772	        Mountain-100 Silver, 42	    Mountain Bikes	3399.9900
+        …	…	…	…
+    ```
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
