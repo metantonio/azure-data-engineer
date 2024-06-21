@@ -334,8 +334,9 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
          HEADER_ROW = TRUE
      ) AS [result]
  ```
- Now the results look like this:
  
+ Now the results look like this:
+
     ```table     
      ProductID	    ProductName	    Category	ListPrice
      771	        Mountain-100    Silver, 38	Mountain Bikes	3399.9900
