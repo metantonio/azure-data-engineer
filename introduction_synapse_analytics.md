@@ -157,10 +157,21 @@ An Azure Synapse Analytics workspace provides a central point for managing data 
 
 In this exercise, you’ll use a combination of a **PowerShell script and an ARM template** to provision Azure Synapse Analytics.
 
- - In a web browser, sign into the [Azure portal](https://portal.azure.com).
- - Use the [>_] button to the right of the search bar at the top of the page to create a **new Cloud Shell** in the Azure portal, **selecting a PowerShell environment** and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+ 1) In a web browser, sign into the [Azure portal](https://portal.azure.com).
+ 2) Use the [>_] button to the right of the search bar at the top of the page to create a **new Cloud Shell** in the Azure portal, **selecting a PowerShell environment** and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
 
 <a href="#">
     <img src="./img/cloud-shell.png" />
 </a>
 
+#### Note:
+ If you have previously created a cloud shell that uses a Bash environment, use the the drop-down menu at the top left of the cloud shell pane to change it to PowerShell.
+
+ 3) Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the —, ◻, and X icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
+
+ 4) In the PowerShell pane, enter the following commands to clone this repo:
+
+ ```powershell
+    rm -r dp-203 -f
+    git clone https://github.com/MicrosoftLearning/dp-203-azure-data-engineer dp-203
+ ```
