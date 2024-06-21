@@ -202,3 +202,16 @@ Synapse Studio is a web-based portal in which you can manage and work with the r
  <a href="#">
     <img src="./img/synapse-studio.png" />
  </a>
+
+ 4) View the **Data** page, and note that there are two tabs containing data sources:
+     - A **Workspace tab** containing databases defined in the workspace (including dedicated SQL databases and Data Explorer databases)
+     - A **Linked tab** containing data sources that are linked to the workspace, including Azure Data Lake storage.
+ 5) View the **Develop page**, which is currently empty. This is where you can define scripts and other assets used to develop data processing solutions.
+ 6) View the **Integrate page**, which is also empty. You use this page to manage data ingestion and integration assets; such as pipelines to transfer and transform data between data sources.
+ 7) View the **Monitor page**. This is where you can observe data processing jobs as they run and view their history.
+ 8) View the **Manage page**. This is where you manage the pools, runtimes, and other assets used in your Azure Synapse workspace. View each of the tabs in the Analytics pools section and note that your workspace includes the following pools:
+     - **SQL pools**:
+         - **Built-in**: A serverless SQL pool that you can use on-demand to explore or process data in a data lake by using SQL commands.
+         - **sqlxxxxxxx**: A dedicated SQL pool that hosts a relational data warehouse database.
+     - **Apache Spark pools**:
+         - **sparkxxxxxxx**: that you can use on-demand to explore or process data in a data lake by using programming languages like Scala or Python.
