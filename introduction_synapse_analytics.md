@@ -321,8 +321,13 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
      …	            …	            …	        …
     ```
 
-
-
+ 5) Note the results consist of four columns named C1, C2, C3, and C4; and that the first row in the results contains the names of the data fields. To fix this problem, add a **HEADER_ROW = TRUE** parameters to the **OPENROWSET function** as shown here (replacing datalakexxxxxxx with the name of your data lake storage account), and then rerun the query:
+    ```table     
+     ProductID	    ProductName	    Category	ListPrice
+     771	        Mountain-100    Silver, 38	Mountain Bikes	3399.9900
+     772	        Mountain-100    Silver, 42	Mountain Bikes	3399.9900
+     …	            …	            …	        …
+    ```
 
 
 
