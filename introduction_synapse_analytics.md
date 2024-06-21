@@ -387,9 +387,9 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
          - **Category label**: Leave blank
     The resulting chart should resemble this:
 
-    <a href="#">
+<a href="#">
     <img src="./img/column-chart.png" />
-    </a>
+</a>
 
 ## Knowledge check
 
