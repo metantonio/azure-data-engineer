@@ -322,6 +322,19 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
     ```
 
  5) Note the results consist of four columns named C1, C2, C3, and C4; and that the first row in the results contains the names of the data fields. To **fix headers**, add a **HEADER_ROW = TRUE** parameters to the **OPENROWSET function** as shown here (replacing datalakexxxxxxx with the name of your data lake storage account), and then rerun the query:
+
+  ```powershell
+ SELECT
+     TOP 100 *
+ FROM
+     OPENROWSET(
+        BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/product_data/products.csv',
+        FORMAT = 'CSV',
+        PARSER_VERSION='2.0',
+        HEADER_ROW = TRUE
+     ) AS [result]
+ ```
+ Now the results look like this:
     ```table     
      ProductID	    ProductName	    Category	ListPrice
      771	        Mountain-100    Silver, 38	Mountain Bikes	3399.9900
