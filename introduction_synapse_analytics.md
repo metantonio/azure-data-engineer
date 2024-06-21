@@ -344,7 +344,29 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
      …	            …	            …	        …
     ```
 
+ 6) Modify the query as follows (replacing datalakexxxxxxx with the name of your data lake storage account):
 
+    ```powershell
+    SELECT
+        Category, COUNT(*) AS ProductCount
+    FROM
+        OPENROWSET(
+            BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/product_data/products.csv',
+            FORMAT = 'CSV',
+            PARSER_VERSION='2.0',
+            HEADER_ROW = TRUE
+        ) AS [result]
+    GROUP BY Category;
+    ```
+
+ 7) Run the modified query, which should return a resultset that contains the number products in each category, like this:
+
+    ```table     
+     Category	    ProductCount	 
+     Bib Shorts	    3   
+     Bike Racks	    1  
+     …	            …	         
+    ```
 
 ## Knowledge check
 
