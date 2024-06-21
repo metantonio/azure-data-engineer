@@ -186,3 +186,19 @@ In this exercise, you’ll use a combination of a **PowerShell script and an ARM
  6) If prompted, choose which subscription you want to use (this will only happen if you have access to multiple Azure subscriptions).
 
  7) When prompted, **enter a suitable password** to be set for your Azure Synapse SQL pool. **Be sure to remember this password! Additionally, the password cannot contain all or part of the login name**.
+
+ 8) Wait for the script to complete - this typically takes around 20 minutes, but in some cases may take longer. While you are waiting, review the What is [Azure Synapse Analytics?](https://learn.microsoft.com/en-us/azure/synapse-analytics/overview-what-is) article in the Azure Synapse Analytics documentation.
+
+### Explore Synapse Studio
+
+Synapse Studio is a web-based portal in which you can manage and work with the resources in your Azure Synapse Analytics workspace.
+
+ 1) When the setup script has finished running, in the Azure portal, go to the dp203-xxxxxxx resource group that it created, and notice that this resource group contains your Synapse workspace, a Storage account for your data lake, an Apache Spark pool, a Data Explorer pool, and a Dedicated SQL pool.
+
+ 2) Select your Synapse workspace, and in its Overview page, in the Open Synapse Studio card, select Open to open Synapse Studio in a new browser tab. Synapse Studio is a web-based interface that you can use to work with your Synapse Analytics workspace.
+ 
+ 3) On the left side of Synapse Studio, use the ›› icon to expand the menu - this reveals the different pages within Synapse Studio that you’ll use to manage resources and perform data analytics tasks, as shown here:
+
+ <a href="#">
+    <img src="./img/synapse-studio.png" />
+ </a>
