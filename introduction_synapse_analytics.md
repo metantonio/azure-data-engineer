@@ -456,12 +456,12 @@ While SQL is a common language for querying structured datasets, many data analy
 
  10) Run the new code cell by clicking its ▷ icon, and review the results, which should look similar to this:
 
-    ```table     
-     Category	    count	 
-     Headsets	    3   
-     Wheels	        14  
-     …	            …	         
-    ```
+        ```table     
+        Category	    count	 
+        Headsets	    3   
+        Wheels	        14  
+        …	            …	         
+        ```
 
 ## Knowledge check
 
