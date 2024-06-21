@@ -119,6 +119,7 @@ Azure Synapse Analytics can be integrated with other Azure data services for end
 Across all organizations and industries, the common use cases for Azure Synapse Analytics are identified by the need for:
 
 ### Large-scale data warehousing
+
 Data warehousing includes the need to integrate all data, including big data, to reason over data for analytics and reporting purposes from a descriptive analytics perspective, independent of its location or structure.
 
 ### Advanced analytics
