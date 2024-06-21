@@ -237,3 +237,9 @@ One of the key tasks you can perform with Azure Synapse Analytics is to **define
          - **Server Certificate Validation**: Enable
          - **Authentication type**: Anonymous
  4) After creating the connection, on the **Source data store** page, ensure the following settings are selected, and then select **Next >**:
+     - **Relative URL**: Leave blank
+     - **Request method**: GET
+     - **Additional headers**: Leave blank
+     - **Binary copy**: Unselected
+     - **Request timeout**: Leave blank
+     - **Max concurrent connections**: Leave blank
