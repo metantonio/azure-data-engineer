@@ -443,6 +443,26 @@ While SQL is a common language for querying structured datasets, many data analy
          …	            …	                        …	            …
     ```
 
+    Notice that running the cell again takes less time, because the Spark pool is already started.
+
+ 8) Under the results, use the **＋ Code** icon **to add a new code cell** to the notebook.
+
+ 9) In the new empty code cell, add the following code:
+
+    ```python
+    df_counts = df.groupby(df.Category).count()
+    display(df_counts)
+    ```
+
+ 10) Run the new code cell by clicking its ▷ icon, and review the results, which should look similar to this:
+
+    ```table     
+     Category	    count	 
+     Headsets	    3   
+     Wheels	        14  
+     …	            …	         
+    ```
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
