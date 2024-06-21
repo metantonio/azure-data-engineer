@@ -215,3 +215,10 @@ Synapse Studio is a web-based portal in which you can manage and work with the r
          - **sqlxxxxxxx**: A dedicated SQL pool that hosts a relational data warehouse database.
      - **Apache Spark pools**:
          - **sparkxxxxxxx**: that you can use on-demand to explore or process data in a data lake by using programming languages like Scala or Python.
+
+### Ingest data with a pipeline
+
+One of the key tasks you can perform with Azure Synapse Analytics is to **define pipelines that transfer** (and if necessary, transform) **data** from a wide range of sources **into your workspace for analysis**.
+
+#### Use the Copy Data task to create a pipeline
+
