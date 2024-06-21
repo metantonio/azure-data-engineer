@@ -55,7 +55,7 @@ After creating a Synapse Analytics workspace, you can **manage the services in i
 
 ### Working with files in a data lake
 
-One of the core resources in a Synapse Analytics workspace is a **data lake**, in which data files can be stored and processed at scale. A w**orkspace typically has a default data lake**, which is implemented **as a linked service to an Azure Data Lake Storage Gen2 container**. **You can add linked services for multiple data lakes** that are based on different storage platforms as required.
+One of the core resources in a Synapse Analytics workspace is a **data lake**, in which data files can be stored and processed at scale. A **workspace typically has a default data lake**, which is implemented **as a linked service to an Azure Data Lake Storage Gen2 container**. **You can add linked services for multiple data lakes** that are based on different storage platforms as required.
 
 <a href="#">
     <img src="./img/data-lake-store.png" />
@@ -320,3 +320,38 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
      772	        Mountain-100    Silver, 42	Mountain Bikes	3399.9900
      …	            …	            …	        …
     ```
+
+
+
+
+
+
+## Knowledge check
+
+1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
+
+    - [ ] Serverless SQL pool
+    - [ ] Apache Spark pool
+    - [x] Pipelines
+
+2. You want to create a data warehouse in Azure Synapse Analytics in which the data is stored and queried in a relational data store. What kind of pool should you create? 
+
+    - [ ] Serverless SQL pool
+    - [x] Dedicated SQL pool
+    - [ ] Apache Spark pool
+
+3. A data analyst wants to analyze data by using Python code combined with text descriptions of the insights gained from the analysis. What should they use to perform the analysis? 
+
+    - [x] A notebook connected to an Apache Spark pool.
+    - [ ] A SQL script connected to a serverless SQL pool.
+    - [ ] A KQL script connected to a Data Explorer pool.
+
+## Summary
+
+Azure Synapse Analytics provides an integrated cloud-based platform for big data processing and analysis. You can use it to build descriptive, diagnostic, predictive, and prescriptive analytics solutions.
+
+In this module, you learned how to:
+
+ - Identify the business problems that Azure Synapse Analytics addresses.
+ - Describe core capabilities of Azure Synapse Analytics.
+ - Determine when to use Azure Synapse Analytics.
