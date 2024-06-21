@@ -243,3 +243,40 @@ One of the key tasks you can perform with Azure Synapse Analytics is to **define
      - **Binary copy**: Unselected
      - **Request timeout**: Leave blank
      - **Max concurrent connections**: Leave blank
+
+ 5) On the **Source** step, in the **Configuration** substep, select **Preview data** to see a preview of the product data your pipeline will ingest, then close the preview.
+ 6) After previewing the data, on the **File format settings** page, ensure the following settings are selected, and then select **Next >**:
+     - **File format**: DelimitedText
+     - **Column delimiter**: Comma (,)
+     - **Row delimiter**: Line feed (\n)
+     - **First rowas header** : Selected
+     - **Compression type**: None
+ 7) On the **Destination** step, in the **Dataset** substep, select the following settings:
+     - **Destination type**: Azure Data Lake Storage Gen 2
+     - **Connection**: Select the existing connection to your data lake store (this was created for you when you created the workspace).
+ 8) After selecting the connection, on the **Destination/Dataset** step, ensure the following settings are selected, and then select *Next >*:
+     - **Folder path**: files/product_data
+     - **File name**: products.csv
+     - **Copy behavior**: None
+     - **Max concurrent** connections: Leave blank
+     - **Block size (MB)**: Leave blank
+ 9) On the **Destination** step, in the **Configuration** substep, on the **File format settings** page, ensure that the following properties are selected. Then select *Next >*:
+     - **File format**: DelimitedText
+     - **Column delimiter**: Comma (,)
+     - **Row delimiter**: Line feed (\n)
+     - **Add header to file**: Selected
+     - **Compression type**: None
+     - **Max rows per file**: Leave blank
+     - **File name prefix**: Leave blank
+ 10) On the **Settings** step, enter the following settings and then click **Next >**:
+     - **Task name**: Copy products
+     - **Task description** Copy products data
+     - **Fault tolerance**: Leave blank
+     - **Enable logging**: Unselected
+     - **Enable staging**: Unselected
+ 11) On the **Review and finish** step, on the **Review** substep, read the summary and then click **Next >**.
+ 12) On the **Deployment** step, wait for the pipeline to be deployed and then click **Finish**.
+ 13) In **Synapse Studio**, select the **Monitor page**, and in the **Pipeline runs tab**, wait for the **Copy products** pipeline to complete with a status of **Succeeded** (you can use the ↻ *Refresh* button on the Pipeline runs page to refresh the status).
+ 14) View the **Integrate** page, and verify that it now contains a pipeline named **Copy products**.
+
+#### View the ingested data
