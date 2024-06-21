@@ -169,9 +169,20 @@ In this exercise, you’ll use a combination of a **PowerShell script and an ARM
 
  3) Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the —, ◻, and X icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
 
- 4) In the PowerShell pane, enter the following commands to clone this repo:
+ 4) In the PowerShell pane, enter the following commands to **clone this repo**:
 
  ```powershell
     rm -r dp-203 -f
     git clone https://github.com/MicrosoftLearning/dp-203-azure-data-engineer dp-203
  ```
+
+ 5) After the repo has been cloned, enter the following commands to change to the folder for this exercise and **run the setup.ps1 script** it contains:
+
+ ```powershell
+    cd dp-203/Allfiles/labs/01
+    ./setup.ps1
+ ```
+
+ 6) If prompted, choose which subscription you want to use (this will only happen if you have access to multiple Azure subscriptions).
+
+ 7) When prompted, **enter a suitable password** to be set for your Azure Synapse SQL pool. **Be sure to remember this password! Additionally, the password cannot contain all or part of the login name**.
