@@ -463,6 +463,22 @@ While SQL is a common language for querying structured datasets, many data analy
         …	            …	         
         ```
 
+ 11) In the results output for the cell, select the **Chart** view. The resulting chart should resemble this:
+
+<a href="#">
+    <img src="./img/bar-chart.png" />
+</a>
+
+ 12) If it is not already visible, show the **Properties** page by selecting the **Properties** button (which looks similar to 🗏*) on the right end of the toolbar. Then in the **Properties** pane, change the notebook name to **Explore products** and use the **Publish** button on the toolbar to save it.
+
+ 13) Close the notebook pane and stop the Spark session when prompted. Then view the **Develop** page to verify that the notebook has been saved.
+
+
+### Use a dedicated SQL pool to query a data warehouse
+
+So far you’ve seen some techniques for exploring and processing file-based data in a data lake. In many cases, an enterprise analytics solution uses a data lake to store and prepare unstructured data that can then be loaded into a relational data warehouse to support business intelligence (BI) workloads. In Azure Synapse Analytics, these data warehouses can be implemented in a dedicated SQL pool.
+
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
