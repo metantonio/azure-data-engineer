@@ -141,3 +141,12 @@ Azure Synapse Pipelines enables you to ingest, prepare, model and serve the data
 ### Integrated analytics
 
 With the variety of analytics that can be performed on the data at your disposal, putting together the services in a cohesive solution can be a complex operation. Azure Synapse Analytics removes this complexity by integrating the analytics landscape into one service. That way you can spend more time working with the data to bring business benefit, than spending much of your time provisioning and maintaining multiple systems to achieve the same outcomes.
+
+## Exercise - Explore Azure Synapse Analytics
+
+Now it's your chance to explore the capabilities of Azure Synapse Analytics for yourself. In this exercise, you'll use a provided script to provision an Azure Synapse Analytics workspace in your Azure subscription; and then use Azure Synapse Studio to perform core data analytics tasks.
+
+#### Note:
+
+ To [complete this lab](https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/01-Explore-Azure-Synapse.html), you will need an Azure subscription in which you have administrative access.
+
