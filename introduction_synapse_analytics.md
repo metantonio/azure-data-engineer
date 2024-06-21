@@ -394,7 +394,7 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
 
 ### Use a Spark pool to analyze data
 
-
+While SQL is a common language for querying structured datasets, many data analysts find languages like Python useful to explore and prepare data for analysis. In Azure Synapse Analytics, **you can run Python** (and other) code **in a Spark pool**; which uses a distributed data processing engine **based on Apache Spark**.
 
 ## Knowledge check
 
