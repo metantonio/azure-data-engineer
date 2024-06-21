@@ -280,3 +280,11 @@ One of the key tasks you can perform with Azure Synapse Analytics is to **define
  14) View the **Integrate** page, and verify that it now contains a pipeline named **Copy products**.
 
 #### View the ingested data
+
+ 1) On the **Data** page, select the **Linked** tab and expand the **synapsexxxxxxx (Primary) datalake** container hierarchy until you see the **files** file storage for your Synapse workspace. Then select the file storage to verify that a folder named **product_data** containing a file named **products.csv** has been copied to this location, as shown here:
+
+ <a href="#">
+    <img src="./img/product_files.png" />
+ </a>
+
+ 2) **Right-click the products.csv** data file and select **Preview** to view the ingested data. Then close the preview.
