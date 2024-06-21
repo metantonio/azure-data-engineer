@@ -328,13 +328,14 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
      TOP 100 *
  FROM
      OPENROWSET(
-        BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/product_data/products.csv',
-        FORMAT = 'CSV',
-        PARSER_VERSION='2.0',
-        HEADER_ROW = TRUE
+         BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/product_data/products.csv',
+         FORMAT = 'CSV',
+         PARSER_VERSION='2.0',
+         HEADER_ROW = TRUE
      ) AS [result]
  ```
  Now the results look like this:
+ 
     ```table     
      ProductID	    ProductName	    Category	ListPrice
      771	        Mountain-100    Silver, 38	Mountain Bikes	3399.9900
