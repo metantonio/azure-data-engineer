@@ -500,6 +500,31 @@ So far you’ve seen some techniques for exploring and processing file-based dat
     ORDER BY d.MonthNumberOfYear
     ```
 
+ 7) Use the **▷ Run** button to run the modified query, which returns the quantity of each product sold by year and month.
+
+ 8) If it is not already visible, show the **Properties** page by selecting the **Properties** button (which looks similar to 🗏*) on the right end of the toolbar. Then in the **Properties** pane, change the query name to **Aggregate product sales** and use the **Publish** button on the toolbar to save it.
+
+ 9) Close the query pane, and then view the **Develop** page to verify that the SQL script has been saved.
+
+ 10) On the **Manage** page, select the **sqlxxxxxxx** dedicated SQL pool row and use its **❚❚** icon to pause it.
+
+### Delete Azure resources
+
+Now that you’ve finished exploring Azure Synapse Analytics, you should delete the resources you’ve created to avoid unnecessary Azure costs.
+
+ 1) Close the Synapse Studio browser tab and return to the Azure portal.
+ 
+ 2) On the Azure portal, on the Home page, select Resource groups.
+ 
+ 3) Select the dp203-xxxxxxx resource group for your Synapse Analytics workspace (not the managed resource group), and verify that it contains the Synapse workspace, storage account, SQL pool, Data Explorer pool, and Spark pool for your workspace.
+ 
+ 4) At the top of the Overview page for your resource group, select Delete resource group.
+ 
+ 5) Enter the dp203-xxxxxxx resource group name to confirm you want to delete it, and select Delete.
+
+    After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
+
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
