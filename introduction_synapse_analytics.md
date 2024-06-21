@@ -420,7 +420,27 @@ While SQL is a common language for querying structured datasets, many data analy
          ProductID	    ProductName	                Category	    ListPrice
          771	        Mountain-100 Silver, 38	    Mountain Bikes	3399.9900
          772	        Mountain-100 Silver, 42	    Mountain Bikes	3399.9900
-        …	        …	                        …	            …
+         …	            …	                        …	            …
+    ```
+
+ 6) Uncomment the ,**header=True** line (because the products.csv file has the column headers in the first line), so your code looks like this:
+
+    ```python
+    %%pyspark
+    df = spark.read.load('abfss://files@datalakexxxxxxx.dfs.core.windows.net/product_data/products.csv', format='csv'
+    ## If header exists uncomment line below
+    , header=True
+    )
+    display(df.limit(10))
+    ```
+
+ 7) Rerun the cell and verify that the results look like this:
+
+    ```table    
+         ProductID	    ProductName	                Category	    ListPrice
+         771	        Mountain-100 Silver, 38	    Mountain Bikes	3399.9900
+         772	        Mountain-100 Silver, 42	    Mountain Bikes	3399.9900
+         …	            …	                        …	            …
     ```
 
 ## Knowledge check
