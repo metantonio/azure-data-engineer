@@ -396,6 +396,21 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
 
 While SQL is a common language for querying structured datasets, many data analysts find languages like Python useful to explore and prepare data for analysis. In Azure Synapse Analytics, **you can run Python** (and other) code **in a Spark pool**; which uses a distributed data processing engine **based on Apache Spark**.
 
+ 1) in Synapse Studio, if the **files** tab you opened earlier containing the **products.csv** file is no longer open, on the **Data** page, browse **product_data** folder. Then right-click **products.csv**, point to **New notebook**, and select **Load to DataFrame**.
+
+ 2) In the **Notebook 1** pane that opens, in the **Attach to** list, select the **sparkxxxxxxx** Spark pool and ensure that the **Language** is set to **PySpark** **(Python)**.
+
+ 3) Review the code in the first (and only) cell in the notebook, which should look like this:
+
+    ```python
+    %%pyspark
+    df = spark.read.load('abfss://files@datalakexxxxxxx.dfs.core.windows.net/product_data/products.csv', format='csv'
+    ## If header exists uncomment line below
+    ##, header=True
+    )
+    display(df.limit(10))
+    ```
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
