@@ -57,3 +57,34 @@ Common use cases for serverless SQL pools include:
  - **Data transformation**: While Azure Synapse Analytics provides great data transformations capabilities with Synapse Spark, some data engineers might find data transformation easier to achieve using SQL. Serverless SQL pool enables you to perform SQL-based data transformations; either interactively or as part of an automated data pipeline.
  
  - **Logical data warehouse**: After your initial exploration of the data in the data lake, you can define external objects such as tables and views in a serverless SQL database. The data remains stored in the data lake files, but are abstracted by a relational schema that can be used by client applications and analytical tools to query the data as they would in a relational database hosted in SQL Server.
+
+## Query files using a serverless SQL pool
+
+You can **use a serverless SQL pool to query data files** in various common file formats, including:
+
+ - Delimited text, such as comma-separated values (**CSV**) files.
+ - JavaScript object notation (**JSON**) files.
+ - **Parquet** files.
+
+The basic syntax for querying is the same for all of these types of file, and is built on the **OPENROWSET SQL function**; which generates a tabular rowset from data in one or more files. For example, **the following query could be used to extract data from CSV files**.
+
+    ```sql
+    SELECT TOP 100 *
+    FROM OPENROWSET(
+        BULK 'https://mydatalake.blob.core.windows.net/data/files/*.csv',
+        FORMAT = 'csv') AS rows
+    ```
+
+The **OPENROWSET function** includes more parameters that determine factors such as:
+
+ -The schema of the resulting rowset
+ -Additional formatting options for delimited text files.
+
+### tip 
+
+You'll find the full syntax for the OPENROWSET function in the A[zure Synapse Analytics documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-openrowset#syntax).
+
+The **output** from **OPENROWSET** is a **rowset** to which an alias must be assigned. In the previous example, the alias rows is used to name the resulting rowset.
+
+The **BULK** parameter includes the full **URL to the location in the data lake containing the data files**. This can be an individual file, or a folder with a wildcard expression to filter the file types that should be included. The **FORMAT** parameter specifies the **type of data being queried**. The example above reads delimited text from all .csv files in the files folder.
+
