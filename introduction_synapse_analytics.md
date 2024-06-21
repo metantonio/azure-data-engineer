@@ -368,6 +368,29 @@ Now that you’ve ingested some data into your workspace, you can **use Synapse 
      …	            …	         
     ```
 
+ 8) In the Properties pane for SQL Script 1, change the Name to Count Products by Category. Then in the toolbar, select Publish to save the script.
+
+ 9) Close the Count Products by Category script pane.
+
+ 10) In Synapse Studio, select the Develop page, and notice that your published Count Products by Category SQL script has been saved there.
+
+ 11) Select the Count Products by Category SQL script to reopen it. Then ensure that the script is connected to the Built-in SQL pool and run it to retrieve the product counts.
+
+ 12) In the Results pane, select the Chart view, and then select the following settings for the chart:
+         - **Chart type**: Column
+         - **Category column**: Category
+         - **Legend (series) columns**: ProductCount
+         - **Legend position**: bottom - center
+         - **Legend (series) label**: Leave blank
+         - **Legend (series) minimum** value: Leave blank
+         - **Legend (series) maximum**: Leave blank
+         - **Category label**: Leave blank
+    The resulting chart should resemble this:
+
+    <a href="#">
+    <img src="./img/column-chart.png" />
+    </a>
+
 ## Knowledge check
 
 1. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
