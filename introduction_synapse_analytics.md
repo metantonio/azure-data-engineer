@@ -288,3 +288,33 @@ One of the key tasks you can perform with Azure Synapse Analytics is to **define
  </a>
 
  2) **Right-click the products.csv** data file and select **Preview** to view the ingested data. Then close the preview.
+
+### Use a serverless SQL pool to analyze data
+
+Now that you’ve ingested some data into your workspace, you can **use Synapse Analytics to query and analyze it**. One of the most common ways to query data is to use SQL, and in Synapse Analytics you can use a **serverless SQL pool to run SQL code against data in a data lake**.
+
+ 1) In Synapse Studio, right-click the **products.csv** file in the file storage for your Synapse workspace, point to **New SQL script**, and select **Select TOP 100 rows**.
+
+ 2) In the **SQL Script 1** pane that opens, review the SQL code that has been generated, which should be similar to this:
+
+ ```powershell
+  -- This is auto-generated code
+ SELECT
+     TOP 100 *
+ FROM
+     OPENROWSET(
+         BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/product_data/products.csv',
+         FORMAT = 'CSV',
+         PARSER_VERSION='2.0'
+     ) AS [result]
+ ```
+ This code opens a rowset from the text file you imported and retrieves the first 100 rows of data.
+
+ 3) In the **Connect to** list, ensure **Built-in** is selected - this represents the built-in SQL Pool that was created with your workspace.
+
+ 4) On the toolbar, use the **▷ Run** button to run the SQL code, and review the results, which should look similar to this:
+     C1	            C2	            C3	        C4
+     ProductID	    ProductName	    Category	ListPrice
+     771	        Mountain-100    Silver, 38	Mountain Bikes	3399.9900
+     772	        Mountain-100    Silver, 42	Mountain Bikes	3399.9900
+     …	            …	            …	        …
