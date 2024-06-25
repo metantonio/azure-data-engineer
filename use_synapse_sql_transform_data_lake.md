@@ -241,3 +241,24 @@ Now it's your opportunity to use the CREATE EXTERNAL TABLE AS SELECT statement t
  <a href="./use_synapse_sql_query_data_lake.md/#exercise---query-files-using-a-serverless-sql-pool" target="_blank">
     Exercise
 </a>
+
+## Knowledge check
+
+1. You need to store the results of a query in a serverless SQL pool as files in a data lake. Which SQL statement should you use? 
+
+    - [ ] BULK INSERT
+    - [x] CREATE EXTERNAL TABLE AS SELECT
+    - [ ] COPY
+
+2. Which of the following file formats can you use to persist the results of a query? 
+
+    - [ ] CSV only
+    - [ ] Parquet only
+    - [x] CSV and Parquet
+
+3. You drop an existing external table from a database in a serverless SQL pool. What else must you do before recreating an external table with the same location?  
+
+    - [x] Delete the folder containing the data files for dropped table.
+    - [ ] Drop and recreate the database
+    - [ ] Create an Apache Spark pool
+
