@@ -371,3 +371,54 @@ Now that you have some tables in your database, you can use them to work with th
 
 #### Query tables using SQL
 
+ 1) In Synapse Studio, select the **Develop** page.
+ 2) In the **Develop** pane, in the **+** menu, select **SQL script**.
+ 3) In the new **SQL script 1** pane, ensure the script is connected to the **Built-in** SQL pool and in the **User database** list, select **RetailDB**.
+ 4) Enter the following SQL code:
+
+```sql
+ SELECT o.SalesOrderID, c.EmailAddress, p.ProductName, o.Quantity
+ FROM SalesOrder AS o
+ JOIN Customer AS c ON o.CustomerId = c.CustomerId
+ JOIN Product AS p ON o.ProductId = p.ProductId
+```
+ 5) Use the **▷ Run** button to run the SQL code.
+
+ The results show order details with customer and product information.
+
+ 6) Close the **SQL script 1** pane, discarding your changes.
+
+#### Insert data using Spark
+
+ 1) In the **Develop** pane, in the **+ menu**, select **Notebook**.
+ 2) In the new **Notebook 1** pane, attach the notebook to the **sparkxxxxxxx*** Spark pool.
+ 3) Enter the following code in the empty notebook cell:
+
+```sql
+ %%sql
+ INSERT INTO `RetailDB`.`SalesOrder` VALUES (99999, CAST('2022-01-01' AS TimeStamp), 1, 6, 5, 1)
+```
+
+ 4) Use the **▷ button** on the left of the cell to run it and wait for it to finish running. Note that it will take some time to start the Spark pool.
+ 5) Use the **+ Code** button to add a new cell to the notebook.
+ 6) Enter the following code in the new cell:
+
+```sql
+ %%sql
+ SELECT * FROM `RetailDB`.`SalesOrder` WHERE SalesOrderId = 99999
+```
+
+ 7) Use the **▷** button on the left of the cell to run it and verify that a row for sales order 99999 was inserted into the **SalesOrder** table.
+ 8) Close the **Notebook 1** pane, stopping the Spark session and discarding your changes.
+
+## Delete Azure resources
+
+If **you’ve finished** exploring Azure Synapse Analytics, **you should delete the resources you’ve created to avoid unnecessary Azure costs**.
+
+ 1) Close the Synapse Studio browser tab and **return to the Azure portal**.
+ 2) On the Azure portal, on the **Home** page, select **Resource groups**.
+ 3) Select the **dp203-xxxxxxx** resource group for your Synapse Analytics workspace (not the managed resource group), and verify that it contains the Synapse workspace and storage account for your workspace.
+ 4) At the top of the **Overview** page for your resource group, select **Delete resource group**.
+ 5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
+
+After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
