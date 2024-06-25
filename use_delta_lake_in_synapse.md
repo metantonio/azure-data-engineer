@@ -364,3 +364,7 @@ SELECT * FROM MyDeltaTable;
  Tip: For more information about using Delta Tables from a serverless SQL pool, see[ Query Delta Lake files using serverless SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) in the Azure Synapse Analytics documentation.
 
 ## Exercise - Use Delta Lake in Azure Synapse Analytics
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/07-Use-delta-lake.html" target="_blank">
+    Exercise
+</a>
