@@ -126,3 +126,50 @@ You could then use the following code to query the table:
 SELECT * FROM `RetailDB`.`Customer` WHERE CustomerID = 123
 ```
 
+## Exercise - Analyze data in a lake database
+
+Now it's your opportunity to create and use a lake database. In this exercise, you'll use a provided script to provision an Azure Synapse Analytics workspace in your Azure subscription; and then create a lake database in Azure Synapse Studio.
+
+### Analyze data in a lake database
+
+Azure Synapse Analytics enables you to combine the flexibility of file storage in a data lake with the structured schema and SQL querying capabilities of a relational database through the ability to create a lake database. A lake database is a relational database schema defined on a data lake file store that enables data storage to be separated from the compute used to query it. Lake databases combine the benefits of a structured schema that includes support for data types, relationships, and other features typically only found in relational database systems, with the flexibility of storing data in files that can be used independently of a relational database store. Essentially, the lake database “overlays” a relational schema onto files in folders in the data lake.
+
+### Provision an Azure Synapse Analytics workspace
+
+You’ll need an Azure Synapse Analytics workspace with access to data lake storage. You can use the built-in serverless SQL pool to query files in the data lake.
+
+In this exercise, you’ll use a combination of a PowerShell script and an ARM template to provision an Azure Synapse Analytics workspace.
+
+ 1) Sign into the Azure portal at [Azure Portal link](https://portal.azure.com).
+
+ 2) Use the **[>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **PowerShell** environment and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+
+<a href="#">
+    <img src="./img/cloud-shell-run.png" />
+</a>
+
+    NOTE: If you have previously created a cloud shell that uses a Bash environment, use the the drop-down menu at the top left of the cloud shell pane to change it to PowerShell.
+
+ 3) Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the **—**, **◻**, and **X** icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
+
+ 4) In the PowerShell pane, enter the following commands to clone this repo:
+
+```bash
+ rm -r dp-203 -f
+ git clone https://github.com/MicrosoftLearning/dp-203-azure-data-engineer dp-203
+```
+
+ 5) After the repo has been cloned, enter the following commands to change to the folder for this exercise and run the **setup.ps1** script it contains:
+
+```bash
+ cd dp-203/Allfiles/labs/04
+ ./setup.ps1
+```
+
+ 6) **If prompted**, choose which subscription you want to use (this will only happen if you have access to multiple Azure subscriptions).
+
+ 7) When prompted,**enter a suitable password** to be set for your Azure Synapse SQL pool.
+
+    NOTE: Be sure to remember this password!
+
+ 8) Wait for the script to complete - this typically takes around 10 minutes, but in some cases may take longer. While you are waiting, review the [Lake database](https://learn.microsoft.com/en-us/azure/synapse-analytics/database-designer/concepts-lake-database) and [Lake database templates](https://learn.microsoft.com/en-us/azure/synapse-analytics/database-designer/concepts-database-templates) articles in the Azure Synapse Analytics documentation.
