@@ -364,3 +364,10 @@ Product	| ProductId	| SalesOrder	| ProductId|
 
  7) **Publish** the database again to save the changes.
  8) In the **Data** pane on the left, switch back to the **Workspace** tab so you can see the **RetailDB** lake database. Then use the **…** menu for its **Tables** folder to refresh the view and see the newly created **SalesOrder** table.
+
+### Work with lake database tables
+
+Now that you have some tables in your database, you can use them to work with the underlying data.
+
+#### Query tables using SQL
+
