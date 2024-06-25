@@ -541,3 +541,254 @@ The **dataframe** object in Spark is similar to a Pandas dataframe in Python, an
 ### Query data using Spark SQL
 
 As you’ve seen, the native methods of the dataframe object enable you to query and analyze data quite effectively. However, many data analysts are more comfortable working with SQL syntax. Spark SQL is a SQL language API in Spark that you can use to run SQL statements, or even persist data in relational tables.
+
+#### Use Spark SQL in PySpark code
+
+The default language in Azure Synapse Studio notebooks is PySpark, which is a Spark-based Python runtime. Within this runtime, you can use the **spark.sql** library to embed Spark SQL syntax within your Python code, and work with SQL constructs such as tables and views.
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ df.createOrReplaceTempView("salesorders")
+
+ spark_df = spark.sql("SELECT * FROM salesorders")
+ display(spark_df)
+```
+
+ 2) Run the cell and review the results. Observe that:
+
+     - The code persists the data in the **df** dataframe as a temporary view named **salesorders**. Spark SQL supports the use of temporary views or persisted tables as sources for SQL queries.
+     - The **spark.sql** method is then used to run a SQL query against the **salesorders** view.
+     - The results of the query are stored in a dataframe.
+
+#### Run SQL code in a cell
+
+While it’s useful to be able to embed SQL statements into a cell containing PySpark code, data analysts often just want to work directly in SQL.
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```sql
+ %%sql
+ SELECT YEAR(OrderDate) AS OrderYear,
+        SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue
+ FROM salesorders
+ GROUP BY YEAR(OrderDate)
+ ORDER BY OrderYear;
+```
+
+ 2) Run the cell and review the results. Observe that:
+
+     - The **%%sql** line at the beginning of the cell (called a magic) indicates that the Spark SQL language runtime should be used to run the code in this cell instead of **PySpark**.
+     - The SQL code references the **salesorder** view that you created previously using PySpark.
+     - The output from the SQL query is automatically displayed as the result under the cell.
+
+
+### Visualize data with Spark
+
+A picture is proverbially worth a thousand words, and a chart is often better than a thousand rows of data. While notebooks in Azure Synapse Analytics include a built in chart view for data that is displayed from a dataframe or Spark SQL query, it is not designed for comprehensive charting. However, you can use Python graphics libraries like **matplotlib** and **seaborn** to create charts from data in dataframes.
+
+#### View results as a chart
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```sql
+ %%sql
+ SELECT * FROM salesorders
+```
+
+ 2) Run the code and observe that it returns the data from the salesorders view you created previously.
+ 3) In the results section beneath the cell, change the View option from Table to Chart.
+ 4) Use the View options button at the top right of the chart to display the options pane for the chart. Then set the options as follows and select Apply:
+     - **Chart type**: Bar chart
+     - **Key**: Item
+     - **Values**: Quantity
+     - **Series Group**: leave blank
+     - **Aggregation**: Sum
+     - **Stacked**: Unselected
+ 5) Verify that the chart looks similar to this:
+
+<a href="#">
+    <img src="./img/notebook-chart2.png" />
+</a>
+
+#### Get started with matplotlib
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ sqlQuery = "SELECT CAST(YEAR(OrderDate) AS CHAR(4)) AS OrderYear, \
+                 SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue \
+             FROM salesorders \
+             GROUP BY CAST(YEAR(OrderDate) AS CHAR(4)) \
+             ORDER BY OrderYear"
+ df_spark = spark.sql(sqlQuery)
+ df_spark.show()
+```
+
+ 2) Run the code and observe that it returns a Spark dataframe containing the yearly revenue.
+
+    To visualize the data as a chart, we’ll start by using the matplotlib Python library. This library is the core plotting library on which many others are based, and provides a great deal of flexibility in creating charts.
+
+ 3) Add a new code cell to the notebook, and add the following code to it:
+
+```py
+ from matplotlib import pyplot as plt
+
+ # matplotlib requires a Pandas dataframe, not a Spark one
+ df_sales = df_spark.toPandas()
+
+ # Create a bar plot of revenue by year
+ plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'])
+
+ # Display the plot
+ plt.show()
+```
+
+ 4) Run the cell and review the results, which consist of a column chart with the total gross revenue for each year. Note the following features of the code used to produce this chart:
+     - The **matplotlib** library requires a Pandas dataframe, so you need to convert the Spark dataframe returned by the Spark SQL query to this format.
+     - At the core of the **matplotlib** library is the **pyplot** object. This is the foundation for most plotting functionality.
+     - The default settings result in a usable chart, but there’s considerable scope to customize it
+
+ 5) Modify the code to plot the chart as follows:
+
+```py
+ # Clear the plot area
+ plt.clf()
+
+ # Create a bar plot of revenue by year
+ plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+
+ # Customize the chart
+ plt.title('Revenue by Year')
+ plt.xlabel('Year')
+ plt.ylabel('Revenue')
+ plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+ plt.xticks(rotation=45)
+
+ # Show the figure
+ plt.show()
+```
+
+ 6) Re-run the code cell and view the results. The chart now includes a little more information.
+
+    A plot is technically contained with a **Figure**. In the previous examples, the figure was created implicitly for you; but you can create it explicitly.
+
+ 7) Modify the code to plot the chart as follows:
+
+```py
+ # Clear the plot area
+ plt.clf()
+
+ # Create a Figure
+ fig = plt.figure(figsize=(8,3))
+
+ # Create a bar plot of revenue by year
+ plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+
+ # Customize the chart
+ plt.title('Revenue by Year')
+ plt.xlabel('Year')
+ plt.ylabel('Revenue')
+ plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+ plt.xticks(rotation=45)
+
+ # Show the figure
+ plt.show()
+```
+
+ 8) Re-run the code cell and view the results. The figure determines the shape and size of the plot.
+
+    A figure can contain multiple subplots, each on its own axis.
+
+ 9) Modify the code to plot the chart as follows:
+
+```py
+ # Clear the plot area
+ plt.clf()
+
+ # Create a figure for 2 subplots (1 row, 2 columns)
+ fig, ax = plt.subplots(1, 2, figsize = (10,4))
+
+ # Create a bar plot of revenue by year on the first axis
+ ax[0].bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+ ax[0].set_title('Revenue by Year')
+
+ # Create a pie chart of yearly order counts on the second axis
+ yearly_counts = df_sales['OrderYear'].value_counts()
+ ax[1].pie(yearly_counts)
+ ax[1].set_title('Orders per Year')
+ ax[1].legend(yearly_counts.keys().tolist())
+
+ # Add a title to the Figure
+ fig.suptitle('Sales Data')
+
+ # Show the figure
+ plt.show()
+```
+
+ 10) Re-run the code cell and view the results. The figure contains the subplots specified in the code.
+
+#### Tip [matplotlib](https://matplotlib.org/)
+
+    To learn more about plotting with matplotlib, see the matplotlib documentation.
+
+### Use the seaborn library
+
+While **matplotlib** enables you to create complex charts of multiple types, it can require some complex code to achieve the best results. For this reason, over the years, many new libraries have been built on the base of **matplotlib** to abstract its complexity and enhance its capabilities. One such library is **seaborn**.
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ import seaborn as sns
+
+ # Clear the plot area
+ plt.clf()
+
+ # Create a bar chart
+ ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
+ plt.show()
+```
+
+ 2) Run the code and observe that it displays a bar chart using the seaborn library.
+ 3) Add a new code cell to the notebook, and enter the following code in it
+
+ ```py
+  # Clear the plot area
+ plt.clf()
+
+ # Set the visual theme for seaborn
+ sns.set_theme(style="whitegrid")
+
+ # Create a bar chart
+ ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
+ plt.show()
+ ```
+
+ 4) Run the code and note that seaborn enables you to set a consistent color theme for your plots.
+
+ 5) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ # Clear the plot area
+ plt.clf()
+
+ # Create a bar chart
+ ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
+ plt.show()
+```
+
+ 6) Run the code to view the yearly revenue as a line chart.
+
+ Note: To learn more about plotting with seaborn, see the [seaborn documentation](https://seaborn.pydata.org/index.html).
+
+## Delete Azure resources
+
+If **you’ve finished** exploring Azure Synapse Analytics, **you should delete the resources you’ve created to avoid unnecessary Azure costs**.
+
+ 1) Close the Synapse Studio browser tab and **return to the Azure portal**.
+ 2) On the Azure portal, on the **Home** page, select **Resource groups**.
+ 3) Select the **dp203-xxxxxxx** resource group for your Synapse Analytics workspace (not the managed resource group), and verify that it contains the Synapse workspace and storage account for your workspace.
+ 4) At the top of the **Overview** page for your resource group, select **Delete resource group**.
+ 5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
+
+After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
