@@ -436,7 +436,7 @@ In this exercise, you’ll use a serverless SQL pool in Azure Synapse Analytics 
 
 This exercise should take approximately 30 minutes to complete.
 
-## Provision an Azure Synapse Analytics workspace
+### Provision an Azure Synapse Analytics workspace
 
 You’ll need an Azure Synapse Analytics workspace with access to data lake storage. You can use the built-in serverless SQL pool to query files in the data lake.
 
@@ -475,3 +475,65 @@ In this exercise, you’ll use a combination of a PowerShell script and an ARM t
     NOTE: Be sure to remember this password!
 
  8) Wait for the script to complete - this typically takes around 10 minutes, but in some cases may take longer. While you are waiting, review the [CETAS with Synapse SQL](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-tables-cetas) article in the Azure Synapse Analytics documentation.
+
+### Query data in files
+
+The script provisions an Azure Synapse Analytics workspace and an Azure Storage account to host the data lake, then uploads some data files to the data lake.
+
+#### View files in the data lake
+
+ 1) After the script has completed, **in the Azure portal**, go to the **dp203-xxxxxxx** resource group that it created, and select your Synapse workspace.
+ 2) In the **Overview page** for your Synapse workspace, in the **Open Synapse Studio** card, select **Open** to open Synapse Studio in a new browser tab; signing in if prompted.
+ 3) On the left side of Synapse Studio, use the ›› icon to expand the menu - this reveals the different pages within Synapse Studio that you’ll use to manage resources and perform data analytics tasks.
+ 4) On the **Data page**, view the **Linked** tab and **verify** that your workspace includes a link to your Azure Data Lake Storage Gen2 storage account, which should have a **name similar** to **synapsexxxxxxx (Primary - datalakexxxxxxx)**.
+ 5) Expand your storage account and verify that it contains a file system container named **files**.
+ 6) Select the **files** container, and note that it contains a *folder named* **sales**. This folder contains the data files you are going to query.
+ 7) Open the **sales** folder and the **csv** folder it contains, and observe that this folder contains .csv files for three years of sales data.
+ 8) Right-click any of the files and select **Preview** to see the data it contains. Note that the files contain a header row.
+ 9) Close the preview, and then use the **↑** button to navigate back to the **sales** folder.
+
+#### Use SQL to query CSV files
+
+ 1) Select the **csv** folder, and then in the **New SQL script** list on the toolbar, select **Select TOP 100 rows**.
+
+ 2) In the **File type** list, select **Text format**, and then apply the settings to open a new SQL script that queries the data in the folder.
+
+ 3) In the *Properties* pane for **SQL Script 1** that is created, change the name to **Query Sales CSV files**, and **change** the result **settings** to *show* **All rows**. Then in the toolbar, select **Publish to save** the script and use the **Properties** button (which looks similar to 🗏*) on the right end of the toolbar to hide the **Properties** pane.
+
+ 4) Review the SQL code that has been generated, which should be similar to this:
+
+```sql
+ -- This is auto-generated code
+ SELECT
+     TOP 100 *
+ FROM
+     OPENROWSET(
+         BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/sales/csv/**',
+         FORMAT = 'CSV',
+         PARSER_VERSION='2.0'
+     ) AS [result]
+```
+
+This code uses the OPENROWSET to read data from the CSV files in the sales folder and retrieves the first 100 rows of data.
+
+ 5) In this case, the **data files include the column names in the first row**; so *modify the query* to add a **HEADER_ROW = TRUE** parameter to the OPENROWSET clause, as shown here (don’t forget to add a comma after the previous parameter):
+
+```sql
+ SELECT
+     TOP 100 *
+ FROM
+     OPENROWSET(
+         BULK 'https://datalakexxxxxxx.dfs.core.windows.net/files/sales/csv/**',
+         FORMAT = 'CSV',
+         PARSER_VERSION='2.0',
+         HEADER_ROW = TRUE
+     ) AS [result]
+```
+
+ 6) In the **Connect to** list, ensure **Built-in** is selected - this represents the built-in SQL Pool that was created with your workspace. Then on the toolbar, use the **▷ Run** button to run the SQL code, and review the results, which should look similar to this:
+
+
+    SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | EmailAddress | Item | Quantity | UnitPrice | TaxAmount 
+    --- | :---: | --- | --- | --- | --- |:---: | ---: | ---:
+    SO43701	 | 1 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 1 | 3399.99 | 271.9992 
+    … | … |	… | … | … | … | … | … | …
