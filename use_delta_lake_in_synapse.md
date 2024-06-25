@@ -368,3 +368,37 @@ SELECT * FROM MyDeltaTable;
 <a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/07-Use-delta-lake.html" target="_blank">
     Exercise
 </a>
+
+## Knowledge check
+
+1. Which of the following descriptions best fits Delta Lake? 
+
+    - [ ] A Spark API for exporting data from a relational database into CSV files.
+    - [x] A relational storage layer for Spark that supports tables based on Parquet files.
+    - [ ] A synchronization solution that replicates data between SQL pools and Spark pools.
+
+2. You've loaded a Spark dataframe with data, that you now want to use in a Delta Lake table. What format should you use to write the dataframe to storage? 
+
+    - [ ] CSV
+    - [x] PARQUET
+    - [ ] DELTA
+
+3. What feature of Delta Lake enables you to retrieve data from previous versions of a table? 
+
+    - [ ] Spark Structured Streaming
+    - [x] Time Travel
+    - [ ] Catalog Tables
+
+4. You have a managed catalog table that contains Delta Lake data. If you drop the table, what will happen? 
+
+    - [x] The table metadata and data files will be deleted.
+    - [ ] The table metadata will be removed from the catalog, but the data files will remain intact.
+    - [ ] The table metadata will remain in the catalog, but the data files will be deleted.
+
+5.  When using Spark Structured Streaming, a Delta Lake table can be which of the following? 
+
+    - [ ] Only a source
+    - [ ] Only a sink
+    - [x] Either a source or a sink
+
+
