@@ -422,3 +422,24 @@ If **you’ve finished** exploring Azure Synapse Analytics, **you should delete 
  5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
 
 After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
+
+## Knowledge check
+
+1. Which if the following statements is true of a lake database?  
+
+    - [ ] Data is stored in a relational database store and cannot be directly accessed in the data lake files.
+    - [ ] Data is stored in files that cannot be queried using SQL.
+    - [x] A relational schema is overlaid on the underlying files, and can be queried using a serverless SQL pool or a Spark pool.
+
+2. You need to create a new lake database for a retail solution. What's the most efficient way to do this? 
+
+    - [ ] Create a sample database in Azure SQL Database and export the SQL scripts to create the schema for the lake database.
+    - [x] Start with the Retail database template in Azure Synapse Studio, and adapt it as necessary.
+    - [ ] Start with an empty database and create a normalized schema.
+
+3. You have Parquet files in an existing data lake folder for which you want to create a table in a lake database. What should you do? 
+
+    - [ ] Use a CREATE EXTERNAL TABLE AS SELECT (CETAS) query to create the table.
+    - [ ] Convert the files in the folder to CSV format.
+    - [x] Use the database designer to create a table based on the existing folder.
+
