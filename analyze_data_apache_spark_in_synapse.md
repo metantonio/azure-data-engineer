@@ -792,3 +792,24 @@ If **you’ve finished** exploring Azure Synapse Analytics, **you should delete 
  5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
 
 After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
+
+
+## Knowledge check
+
+1. Which definition best describes Apache Spark? 
+
+    - [ ] A highly scalable relational database management system.
+    - [ ] A virtual server with a Python runtime.
+    - [x] A distributed platform for parallel data processing using multiple languages.
+
+2. You need to use Spark to analyze data in a parquet file. What should you do? 
+
+    - [x] Load the parquet file into a dataframe.
+    - [ ] Import the data into a table in a serverless SQL pool.
+    - [ ] Convert the data to CSV format.
+
+3. You want to write code in a notebook cell that uses a SQL query to retrieve data from a view in the Spark catalog. Which magic should you use? 
+
+    - [ ] %%spark
+    - [ ] %%pyspark
+    - [x] %%sql
