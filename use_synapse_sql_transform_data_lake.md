@@ -60,3 +60,102 @@ WITH (
     CREDENTIAL = storageCred
 );
 ```
+
+The **previous example assumes that users** running queries that use the external data source will **have sufficient permissions** to access the files. **An alternative approach is to encapsulate a credential in the external data source** so that it can be used **to access file data without granting all users permissions to read it directly**:
+
+```sql
+CREATE DATABASE SCOPED CREDENTIAL storagekeycred
+WITH
+    IDENTITY='SHARED ACCESS SIGNATURE',  
+    SECRET = 'sv=xxx...';
+
+CREATE EXTERNAL DATA SOURCE secureFiles
+WITH (
+    LOCATION = 'https://mydatalake.blob.core.windows.net/data/secureFiles/'
+    CREDENTIAL = storagekeycred
+);
+```
+
+#### Tip [Control storage account access for serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-storage-access-control?tabs=user-identity)
+    In addition to SAS authentication, you can define credentials that use managed identity (the Microsoft Entra identity used by your Azure Synapse workspace), a specific Microsoft Entra principal, or passthrough authentication based on the identity of the user running the query (which is the default type of authentication). To learn more about using credentials in a serverless SQL pool, see the Control storage account access for serverless SQL pool in Azure Synapse Analytics article in Azure Synapse Analytics documentation.
+
+### External file format
+
+The CETAS statement creates a table with its data stored in files. You must specify the format of the files you want to create as an external file format.
+
+To create an external file format, use the CREATE EXTERNAL FILE FORMAT statement, as shown in this example:
+
+```sql
+CREATE EXTERNAL FILE FORMAT ParquetFormat
+WITH (
+        FORMAT_TYPE = PARQUET,
+        DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
+    );
+```
+
+#### Tip [CREATE EXTERNAL FILE FORMAT (Transact-SQL)](https://learn.microsoft.com/en-us/sql/t-sql/statements/create-external-file-format-transact-sql?view=sql-server-ver16&tabs=delimited)
+    In this example, the files will be saved in Parquet format. You can also create external file formats for other types of file. See CREATE EXTERNAL FILE FORMAT (Transact-SQL) for details.
+
+
+### Using the CETAS statement
+
+After creating an external data source and external file format, you can **use the CETAS statement to transform data and stored the results in an external table**.
+
+For example, suppose **the source data you want to transform** **consists** of sales orders **in comma-delimited text files** that are **stored** in a folder **in a data lake**. You **want to filter the data** to include only orders that are marked as "special order", **and save the transformed data as Parquet files** in a different folder **in the same data lake**. You could use the same external data source for both the source and destination folders as shown in this example:
+
+```sql
+CREATE EXTERNAL TABLE SpecialOrders
+    WITH (
+        -- details for storing results
+        LOCATION = 'special_orders/',
+        DATA_SOURCE = files,
+        FILE_FORMAT = ParquetFormat
+    )
+AS
+SELECT OrderID, CustomerName, OrderTotal
+FROM
+    OPENROWSET(
+        -- details for reading source files
+        BULK 'sales_orders/*.csv',
+        DATA_SOURCE = 'files',
+        FORMAT = 'CSV',
+        PARSER_VERSION = '2.0',
+        HEADER_ROW = TRUE
+    ) AS source_data
+WHERE OrderType = 'Special Order';
+```
+
+The **LOCATION** and **BULK** parameters in the previous example are relative paths for the results and source files respectively. The **paths are relative to the file system** location referenced by the **files** external data source.
+
+An important point to understand is that you ***must*** use an external data source to specify the location where the transformed data for the external table is to be saved. **When file-based source data is stored in the same folder hierarchy, you can use the same external data source**. Otherwise, you can use a second data source to define a connection to the source data or use the fully qualified path, as shown in this example:
+
+```sql
+CREATE EXTERNAL TABLE SpecialOrders
+    WITH (
+        -- details for storing results
+        LOCATION = 'special_orders/',
+        DATA_SOURCE = files,
+        FILE_FORMAT = ParquetFormat
+    )
+AS
+SELECT OrderID, CustomerName, OrderTotal
+FROM
+    OPENROWSET(
+        -- details for reading source files
+        BULK 'https://mystorage.blob.core.windows.net/data/sales_orders/*.csv',
+        FORMAT = 'CSV',
+        PARSER_VERSION = '2.0',
+        HEADER_ROW = TRUE
+    ) AS source_data
+WHERE OrderType = 'Special Order';
+```
+
+### Dropping external tables
+
+If you no longer need the external table containing the transformed data, you can drop it from the database by using the **DROP EXTERNAL TABLE statement**, as shown here:
+
+```sql
+DROP EXTERNAL TABLE SpecialOrders;
+```
+
+However, **it's important to understand that external tables are a metadata abstraction** over the files that contain the actual data. **Dropping an external table does not delete the underlying files**.
