@@ -252,3 +252,22 @@ If **you’ve finished** exploring Azure Synapse Analytics, **you should delete 
 
 After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
 
+## Knowledge check
+
+1. Which method of the Dataframe object is used to save a dataframe as a file? 
+
+    - [ ] toFile()
+    - [x] write()
+    - [ ] save()
+
+2. Which method is used to split the data across folders when saving a dataframe? 
+
+    - [ ] splitBy()
+    - [ ] distributeBy()
+    - [x] partitionBy()
+
+3. What happens if you drop an external table that is based on existing files? 
+
+    - [ ] An error – you must delete the files first
+    - [x] The table is dropped from the metastore but the files remain unaffected
+    - [ ] The table is dropped from the metastore and the files are deleted
