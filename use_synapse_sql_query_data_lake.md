@@ -609,3 +609,93 @@ By **defining an external data source** in a database, you can **use it to refer
  --- | :---: | ---:
 AWC Logo Cap | 	1063 |	8791.86
 …	| … | 	…
+
+ 4) Modify the SQL code to **save the results** of query **in an external table**, like this:
+
+```sql
+ CREATE EXTERNAL TABLE ProductSalesTotals
+     WITH (
+         LOCATION = 'sales/productsales/',
+         DATA_SOURCE = sales_data,
+         FILE_FORMAT = ParquetFormat
+     )
+ AS
+ SELECT Item AS Product,
+     SUM(Quantity) AS ItemsSold,
+     ROUND(SUM(UnitPrice) - SUM(TaxAmount), 2) AS NetRevenue
+ FROM
+     OPENROWSET(
+         BULK 'sales/csv/*.csv',
+         DATA_SOURCE = 'sales_data',
+         FORMAT = 'CSV',
+         PARSER_VERSION = '2.0',
+         HEADER_ROW = TRUE
+     ) AS orders
+ GROUP BY Item;
+```
+
+ 5) Run the script. This time there’s no output, but the code should have created an external table based on the results of the query.
+ 6) Name the script **Create ProductSalesTotals table** and publish it.
+ 7) On the **data** page, in the **Workspace** tab, view the contents of the **External tables** folder for the **Sales** SQL database to verify that a new table named **ProductSalesTotals** has been created.
+ 8) In the **…** menu for the **ProductSalesTotals** table, select **New SQL script > Select TOP 100 rows**. Then run the resulting script and verify that it returns the aggregated product sales data.
+ 9) On the **files** tab containing the file system for your data lake, view the contents of the **sales** folder (refreshing the view if necessary) and verify that a new **productsales** *folder* has been created.
+ 10) In the **productsales** folder, observe that one or more files with names similar to *ABC123DE—-.parquet* have been created. These files contain the aggregated product sales data. To prove this, you can select one of the files and use the **New SQL script > Select TOP 100 rows** menu to query it directly.
+
+### Encapsulate data transformation in a stored procedure
+
+If you will **need** **to transform data frequentl**y, you can **use a stored procedure to encapsulate a CETAS statement**.
+
+ 1) In Synapse Studio, on the **Develop** page, in the **+** menu, select **SQL script**.
+ 2) In the new script pane, add the following code to create a stored procedure in the **Sales** database that aggregates sales by year and saves the results in an external table:
+
+```sql
+ USE Sales;
+ GO;
+ CREATE PROCEDURE sp_GetYearlySales
+ AS
+ BEGIN
+     -- drop existing table CAREFULL WITH THIS!, you are eliminating a table
+     IF EXISTS (
+             SELECT * FROM sys.external_tables
+             WHERE name = 'YearlySalesTotals'
+         )
+         DROP EXTERNAL TABLE YearlySalesTotals
+     -- create external table
+     CREATE EXTERNAL TABLE YearlySalesTotals
+     WITH (
+             LOCATION = 'sales/yearlysales/',
+             DATA_SOURCE = sales_data,
+             FILE_FORMAT = ParquetFormat
+         )
+     AS
+     SELECT YEAR(OrderDate) AS CalendarYear,
+             SUM(Quantity) AS ItemsSold,
+             ROUND(SUM(UnitPrice) - SUM(TaxAmount), 2) AS NetRevenue
+     FROM
+         OPENROWSET(
+             BULK 'sales/csv/*.csv',
+             DATA_SOURCE = 'sales_data',
+             FORMAT = 'CSV',
+             PARSER_VERSION = '2.0',
+             HEADER_ROW = TRUE
+         ) AS orders
+     GROUP BY YEAR(OrderDate)
+ END
+```
+
+ 3) Run the script to create the stored procedure.
+ 4) Under the code you just ran, add the following code to call the stored procedure:
+
+```sql
+ EXEC sp_GetYearlySales;
+```
+
+ 5) Select only the **EXEC sp_GetYearlySales**; statement you just added, and use the **▷ Run** button to run it.
+ 6) On the **files** tab containing the file system for your data lake, view the contents of the **sales** folder (refreshing the view if necessary) and verify that a new **yearlysales** folder has been created.
+ 7) In the **yearlysales** folder, observe that a parquet file containing the aggregated yearly sales data has been created.
+ 8) Switch back to the SQL script and **re-run** the **EXEC sp_GetYearlySales**; statement, and observe that **an error occurs**.
+
+Even though the **script drops the external table**, **the folder containing the data is not deleted**. To re-run the stored procedure (for example, as part of a scheduled data transformation pipeline), you must delete the old data.
+
+ 9) Switch back to the **files** tab, and view the **sales** folder. Then select the **yearlysales** folder and **delete it**.
+ 10) Switch back to the SQL script and **re-run** the **EXEC sp_GetYearlySales**; statement. This time, the operation succeeds and a **new data file is generated**.
