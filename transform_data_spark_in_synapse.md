@@ -225,3 +225,30 @@ In this exercise, you’ll use a combination of a PowerShell script and an ARM t
  9) Right-click any of the files and select **Preview** to see the data it contains. Note that the files contain a header row, so you can select the option to display column headers.
  10) Close the preview. Then download the **Spark Transform.ipynb** from from **Allfiles/labs/06/notebooks**
 
+ NOTE: **It’s best to copy** this text using the **ctrl+a** then ctrl+c **and pasting** into a tool using **ctrl+v**, such as, notepad and then using file, save as Spark Transform.ipynb with a filetype of all files. You can also download the file by clicking on it, then selecting the ellipsis (…) and then download, remembering where you saved it.
+
+ 11) Then on **Develop** page, expand **Notebooks** click on the **+** Import options
+
+<a href="#">
+    <img src="./img/spark-notebook-import.png" />
+</a>
+
+ 12) Select the file you just downloaded and saved as **Spark Transfrom.ipynb**.
+ 13) Attach the notebook to your **sparkxxxxxxx** Spark pool.
+ 14) Review the notes in the **notebook** and run the code cells.
+
+ note: The first code cell will take a few minutes to run because the Spark pool must be started. Subsequent cells will run more quickly.
+
+
+## Delete Azure resources
+
+If **you’ve finished** exploring Azure Synapse Analytics, **you should delete the resources you’ve created to avoid unnecessary Azure costs**.
+
+ 1) Close the Synapse Studio browser tab and **return to the Azure portal**.
+ 2) On the Azure portal, on the **Home** page, select **Resource groups**.
+ 3) Select the **dp203-xxxxxxx** resource group for your Synapse Analytics workspace (not the managed resource group), and verify that it contains the Synapse workspace and storage account for your workspace.
+ 4) At the top of the **Overview** page for your resource group, select **Delete resource group**.
+ 5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
+
+After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
+
