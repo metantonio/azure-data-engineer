@@ -228,7 +228,7 @@ For example, you can **create a pipeline that** includes the following activitie
  - A **Delete** activity that deletes the target folder for the transformed data in the data lake if it already exists.
  - A **Stored procedure** activity that connects to your serverless SQL pool and runs the stored procedure that encapsulates your CETAS operation.
 
- <a href="#">
+<a href="#">
     <img src="./img/synapse-pipeline2.png" />
 </a>
 
@@ -237,3 +237,7 @@ For example, you can **create a pipeline that** includes the following activitie
 ## Exercise - Transform files using a serverless SQL pool
 
 Now it's your opportunity to use the CREATE EXTERNAL TABLE AS SELECT statement to transform data. In this exercise, you'll use a provided script to provision an Azure Synapse Analytics workspace in your Azure subscription; and then use a serverless SQL pool to transform data from files in a data lake.
+
+ <a href="./use_synapse_sql_query_data_lake.md/#exercise---query-files-using-a-serverless-sql-pool" target="_blank">
+    Exercise
+</a>
