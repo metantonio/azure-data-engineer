@@ -42,14 +42,14 @@ You need to understand parallel processing and data architecture patterns. You s
 
 Training in this course
 
- - [Introduction to data engineering on Azure](./introduction_data_engineering.md)
- - [Introduction to Azure Data Lake Storage Gen2](./introduction_data_lake_storage.md)
- - [Introduction to Azure Synapse Analytics](./introduction_synapse_analytics.md)
- - [Use Azure Synapse serverless SQL pool to query files in a data lake](./use_synapse_sql_query_data_lake.md)
- - [Use Azure Synapse serverless SQL pool to transform data in a data lake](./use_synapse_sql_transform_data_lake.md)
- - [Create a lake database in Azure Synapse Analytics](./create_lake_db_synapse_analytics.md)
- - [Analyze data with Apache Spark in Azure Synapse Analytics](./analyze_data_apache_spark_in_synapse.md)
- - [Transform data with Spark in Azure Synapse Analytics](./transform_data_spark_in_synapse.md)
+ - [x] [Introduction to data engineering on Azure](./introduction_data_engineering.md)
+ - [x] [Introduction to Azure Data Lake Storage Gen2](./introduction_data_lake_storage.md)
+ - [x] [Introduction to Azure Synapse Analytics](./introduction_synapse_analytics.md)
+ - [x] [Use Azure Synapse serverless SQL pool to query files in a data lake](./use_synapse_sql_query_data_lake.md)
+ - [x] [Use Azure Synapse serverless SQL pool to transform data in a data lake](./use_synapse_sql_transform_data_lake.md)
+ - [x] [Create a lake database in Azure Synapse Analytics](./create_lake_db_synapse_analytics.md)
+ - [x] [Analyze data with Apache Spark in Azure Synapse Analytics](./analyze_data_apache_spark_in_synapse.md)
+ - [x] [Transform data with Spark in Azure Synapse Analytics](./transform_data_spark_in_synapse.md)
  - [Use Delta Lake in Azure Synapse Analytics](./use_delta_lake_in_synapse.md)
  - [Analyze data in a relational data warehouse](./analyze_data_in_data_warehouse.md)
  - [Load data into a relational data warehouse](./load_data_into_warehouse.md)
