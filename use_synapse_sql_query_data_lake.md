@@ -699,3 +699,35 @@ Even though the **script drops the external table**, **the folder containing the
 
  9) Switch back to the **files** tab, and view the **sales** folder. Then select the **yearlysales** folder and **delete it**.
  10) Switch back to the SQL script and **re-run** the **EXEC sp_GetYearlySales**; statement. This time, the operation succeeds and a **new data file is generated**.
+
+## Delete Azure resources
+
+If **you’ve finished** exploring Azure Synapse Analytics, **you should delete the resources you’ve created to avoid unnecessary Azure costs**.
+
+ 1) Close the Synapse Studio browser tab and **return to the Azure portal**.
+ 2) On the Azure portal, on the **Home** page, select **Resource groups**.
+ 3) Select the **dp203-xxxxxxx** resource group for your Synapse Analytics workspace (not the managed resource group), and verify that it contains the Synapse workspace and storage account for your workspace.
+ 4) At the top of the **Overview** page for your resource group, select **Delete resource group**.
+ 5) Enter the **dp203-xxxxxxx** resource group name to confirm you want to delete it, and select **Delete**.
+
+After a few minutes, your Azure Synapse workspace resource group and the managed workspace resource group associated with it will be deleted.
+
+## Knowledge check
+
+1. What function is used to read the data in files stored in a data lake? 
+
+    - [ ] FORMAT
+    - [ ] ROWSET
+    - [x] OPENROWSET
+
+2. What character in file path can be used to select all the file/folders that match rest of the path? 
+
+    - [ ] &
+    - [x] *
+    - [ ] /
+
+3. Which external database object encapsulates the connection information to a file location in a data lake store? 
+
+    - [ ] FILE FORMAT
+    - [x] DATA SOURCE
+    - [ ] EXTERNAL TABLE
