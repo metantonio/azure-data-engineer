@@ -105,3 +105,373 @@ As seen in the previous example, you can use **wildcards** in the **BULK** param
 You can also specify multiple file paths in the **BULK** parameter, separating each path with a comma.
 
 ## Querying delimited text files
+
+Delimited text files are a common file format within many businesses. The specific formatting used in delimited files can vary, for example:
+
+ - With and without a header row.
+ - Comma and tab-delimited values.
+ - Windows and Unix style line endings.
+ - Non-quoted and quoted values, and escaping characters.
+
+Regardless of the type of delimited file you're using, you can read data from them by using the **OPENROWSET** function with the **csv FORMAT parameter**, and other parameters as required to handle the specific formatting details for your data. For example:
+
+    ```sql
+    SELECT TOP 100 *
+    FROM OPENROWSET(
+        BULK 'https://mydatalake.blob.core.windows.net/data/files/*.csv',
+        FORMAT = 'csv',
+        PARSER_VERSION = '2.0',
+        FIRSTROW = 2) AS rows
+    ```
+
+The **PARSER_VERSION** is used to determine how the query interprets the text encoding used in the files. **Version 1.0** is the default and **supports a wide range of file encodings**, while **version 2.0** supports **fewer encodings but offers better performance**. The **FIRSTROW** parameter is used to skip rows in the text file, to eliminate any unstructured preamble text or to ignore a row containing column headings.
+
+Additional parameters you might require when working with delimited text files include:
+
+ - **FIELDTERMINATOR** - the character used to separate field values in each row. For example, a tab-delimited file separates fields with a **TAB (\t)** character. The **default field terminator is a comma (,)**.
+
+ - **ROWTERMINATOR** - the character used to signify the end of a row of data. For example, a standard Windows text file uses a combination of a carriage return (CR) and line feed (LF), which is indicated by the code \n; while UNIX-style text files use a single line feed character, which can be indicated using the code 0x0a.
+
+ - **FIELDQUOTE** - the character used to enclose quoted string values. For example, to ensure that the comma in the address field value 126 Main St, apt 2 isn't interpreted as a field delimiter, you might enclose the entire field value in quotation marks like this: "126 Main St, apt 2". The double-quote (") is the default field quote character.
+
+
+### Specifying the rowset schema
+
+It's common for delimited text files to include the column names in the first row. The **OPENROWSET** function can use this to define the schema for the resulting rowset, and automatically infer the data types of the columns based on the values they contain. For example, consider the following delimited text:
+
+```text
+    product_id,product_name,list_price
+    123,Widget,12.99
+    124,Gadget,3.99
+```
+
+The data consists of the following three columns:
+
+ - product_id (integer number)
+ - product_name (string)
+ - list_price (decimal number)
+
+You could use the following query to extract the data with the correct column names and appropriately inferred SQL Server data types (in this case INT, NVARCHAR, and DECIMAL)
+
+```sql
+    SELECT TOP 100 *
+    FROM OPENROWSET(
+        BULK 'https://mydatalake.blob.core.windows.net/data/files/*.csv',
+        FORMAT = 'csv',
+        PARSER_VERSION = '2.0',
+        HEADER_ROW = TRUE) AS rows  
+```
+
+The HEADER_ROW parameter (which is only available when using parser version 2.0) instructs the query engine to use the first row of data in each file as the column names, like this:
+
+```text
+    product_id  product_name    list_price
+    123         Widget          12.9900
+    124         Gadget          3.9900
+```
+
+Now consider the following data:
+
+```text
+    123,Widget,12.99
+    124,Gadget,3.99
+```
+
+This time, the file doesn't contain the column names in a header row; so while the data types can still be inferred, the column names will be set to C1, C2, C3, and so on.
+
+```text
+    C1          C2              C3
+    123         Widget          12.9900
+    124         Gadget          3.9900
+```
+
+To specify explicit column names and data types, you can override the default column names and inferred data types by providing a schema definition in a WITH clause, like this:
+
+```sql
+    SELECT TOP 100 *
+    FROM OPENROWSET(
+        BULK 'https://mydatalake.blob.core.windows.net/data/files/*.csv',
+        FORMAT = 'csv',
+        PARSER_VERSION = '2.0')
+    WITH (
+        product_id INT,
+        product_name VARCHAR(20) COLLATE Latin1_General_100_BIN2_UTF8,
+        list_price DECIMAL(5,2)
+    ) AS rows
+```
+
+This query produces the expected results:
+
+```text
+    product_id  product_name    list_price
+    123         Widget          12.99
+    124         Gadget          3.99
+```
+
+#### Tip: [Incompatibility with UTF-8](https://learn.microsoft.com/en-us/azure/synapse-analytics/troubleshoot/reading-utf8-text)
+
+    When working with text files, you may encounter some incompatibility with UTF-8 encoded data and the collation used in the master database for the serverless SQL pool. To overcome this, you can specify a compatible collation for individual VARCHAR columns in the schema. See the troubleshooting guidance for more details.
+
+## Querying JSON files
+
+JSON is a popular format for web applications that exchange data through REST interfaces or use NoSQL data stores such as Azure Cosmos DB. So, it's not uncommon to persist data as JSON documents in files in a data lake for analysis.
+
+For example, a JSON file that defines an individual product might look like this:
+
+```json
+{
+    "product_id": 123,
+    "product_name": "Widget",
+    "list_price": 12.99
+}
+```
+
+To return product data from a folder containing multiple JSON files in this format, you could use the following SQL query:
+
+```sql
+    SELECT doc
+    FROM
+        OPENROWSET(
+            BULK 'https://mydatalake.blob.core.windows.net/data/files/*.json',
+            FORMAT = 'csv',
+            FIELDTERMINATOR ='0x0b',
+            FIELDQUOTE = '0x0b',
+            ROWTERMINATOR = '0x0b'
+        ) WITH (doc NVARCHAR(MAX)) as rows
+```
+
+OPENROWSET has no specific format for JSON files, so you must use csv format with FIELDTERMINATOR, FIELDQUOTE, and ROWTERMINATOR set to 0x0b, and a schema that includes a single NVARCHAR(MAX) column. The result of this query is a rowset containing a single column of JSON documents, like this:
+
+```text
+doc
+{"product_id":123,"product_name":"Widget","list_price": 12.99}
+{"product_id":124,"product_name":"Gadget","list_price": 3.99}
+```
+
+To extract individual values from the JSON, you can use the JSON_VALUE function in the SELECT statement, as shown here:
+
+```sql
+    SELECT JSON_VALUE(doc, '$.product_name') AS product,
+            JSON_VALUE(doc, '$.list_price') AS price
+    FROM
+        OPENROWSET(
+            BULK 'https://mydatalake.blob.core.windows.net/data/files/*.json',
+            FORMAT = 'csv',
+            FIELDTERMINATOR ='0x0b',
+            FIELDQUOTE = '0x0b',
+            ROWTERMINATOR = '0x0b'
+        ) WITH (doc NVARCHAR(MAX)) as rows
+```
+
+This query would return a rowset similar to the following results:
+
+```text
+    product     price
+    Widget      12.99
+    Gadget      3.99
+```
+
+## Querying Parquet files
+
+Parquet is a commonly used format for big data processing on distributed file storage. It's an efficient data format that is optimized for compression and analytical querying.
+
+In most cases, the schema of the data is embedded within the Parquet file, so you only need to specify the BULK parameter with a path to the file(s) you want to read, and a FORMAT parameter of parquet; like this:
+
+```sql
+SELECT TOP 100 *
+FROM OPENROWSET(
+    BULK 'https://mydatalake.blob.core.windows.net/data/files/*.*',
+    FORMAT = 'parquet') AS rows
+```
+
+## Query partitioned data
+
+It's common in a data lake to partition data by splitting across multiple files in subfolders that reflect partitioning criteria. This enables distributed processing systems to work in parallel on multiple partitions of the data, or to easily eliminate data reads from specific folders based on filtering criteria. For example, suppose you need to efficiently process sales order data, and often need to filter based on the year and month in which orders were placed. You could partition the data using folders, like this:
+
+ - /orders
+    - /year=2020
+        - /month=1
+            - /01012020.parquet
+            - /02012020.parquet
+            - ...
+        - /month=2
+            - /01022020.parquet
+            - /02022020.parquet
+            - ...
+            - ...
+    - /year=2021
+        - /month=1
+            - /01012021.parquet
+            - /02012021.parquet
+            - ...
+    - ...
+
+To create a query that filters the results to include only the orders for January and February 2020, you could use the following code:
+
+```sql
+SELECT *
+FROM OPENROWSET(
+    BULK 'https://mydatalake.blob.core.windows.net/data/orders/year=*/month=*/*.*',
+    FORMAT = 'parquet') AS orders
+WHERE orders.filepath(1) = '2020'
+    AND orders.filepath(2) IN ('1','2');
+```
+
+The numbered **filepath parameters** in the **WHERE** clause reference the **wildcards** in the folder names in the BULK path -so the parameter 1 is the * in the year=* folder name, and parameter 2 is the * in the month=* folder name.
+
+## Create external database objects
+
+You can use the **OPENROWSET** function in SQL queries that run in the default master database of the built-in serverless SQL pool to explore data in the data lake. However, sometimes you may want to create a custom database that contains some objects that make it easier to work with **external data in the data lake that you need to query frequently**.
+
+### Creating a database
+
+You can create a database in a serverless SQL pool just as you would in a SQL Server instance. You can **use the graphical interface in Synapse Studio, or a CREATE DATABASE statement**. One consideration is to set the collation of your database so that it supports conversion of text data in files to appropriate Transact-SQL data types.
+
+The following example code **creates a database named** **salesDB** with a collation that makes it easier to import UTF-8 encoded text data into VARCHAR columns.
+
+```sql
+CREATE DATABASE SalesDB
+    COLLATE Latin1_General_100_BIN2_UTF8
+```
+
+### Creating an external data source
+
+You can use the OPENROWSET function with a BULK path to query file data from your own database, just as you can in the **master** database; but **if you plan to query data in the same location frequently**, it's more efficient to **define an external data source** that references that location. For example, the following code creates a data source named files for the hypothetical *https://mydatalake.blob.core.windows.net/data/files/* folder:
+
+```sql
+CREATE EXTERNAL DATA SOURCE files
+WITH (
+    LOCATION = 'https://mydatalake.blob.core.windows.net/data/files/'
+)
+```
+
+One **benefit of an external data source**, is that you can simplify an OPENROWSET query to **use the combination of the data source and the relative path to the folders or files** you want to query:
+
+```sql
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'orders/*.csv',
+        DATA_SOURCE = 'files',
+        FORMAT = 'csv',
+        PARSER_VERSION = '2.0'
+    ) AS orders
+```
+
+In this example, the **BULK** parameter is used to specify the **relative path for all .csv files in the orders folder**, which is a **subfolder** of the **files folder referenced by the data source**.
+
+Another **benefit of using a data source** is that you can **assign a credential for the data source** to use when accessing the underlying storage, enabling you to provide access to data through SQL without permitting users to access the data directly in the storage account. For example, the following code **creates a credential that uses a shared access signature (SAS) to authenticate** against the underlying Azure storage account hosting the data lake.
+
+```sql
+CREATE DATABASE SCOPED CREDENTIAL sqlcred
+WITH
+    IDENTITY='SHARED ACCESS SIGNATURE',  
+    SECRET = 'sv=xxx...';
+GO
+
+CREATE EXTERNAL DATA SOURCE secureFiles
+WITH (
+    LOCATION = 'https://mydatalake.blob.core.windows.net/data/secureFiles/'
+    CREDENTIAL = sqlcred
+);
+GO
+```
+
+#### Tip [Control storage account access for serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-storage-access-control?tabs=user-identity)
+
+    In addition to SAS authentication, you can define credentials that use managed identity (the Microsoft Entra identity used by your Azure Synapse workspace), a specific Microsoft Entra principal, or passthrough authentication based on the identity of the user running the query (which is the default type of authentication). To learn more about using credentials in a serverless SQL pool, see the Control storage account access for serverless SQL pool in Azure Synapse Analytics article in Azure Synapse Analytics documentation.
+
+
+## Creating an external file format
+
+While an external data source simplifies the code needed to access files with the OPENROWSET function, you **still need to provide format details for the file being access**; which may include multiple settings for delimited text files. You can **encapsulate these settings in an external file format**, like this:
+
+```sql
+CREATE EXTERNAL FILE FORMAT CsvFormat
+    WITH (
+        FORMAT_TYPE = DELIMITEDTEXT,
+        FORMAT_OPTIONS(
+            FIELD_TERMINATOR = ',',
+            STRING_DELIMITER = '"'
+        )
+    );
+GO
+```
+
+After creating file formats for the specific data files you need to work with, you can use the file format to create external tables, as discussed next.
+
+## Creating an external table
+
+When you **need to perform a lot of analysis or reporting from files in the data lake**, using the OPENROWSET function can result in complex code that includes data sources and file paths. To simplify access to the data, **you can encapsulate the files in an external table**; **which users and reporting applications can query** using a standard SQL SELECT statement just like any other database table. To create an external table, use the **CREATE EXTERNAL TABLE statement**, specifying the column schema as for a standard table, and including a WITH clause specifying the external data source, relative path, and external file format for your data.
+
+```sql
+CREATE EXTERNAL TABLE dbo.products
+(
+    product_id INT,
+    product_name VARCHAR(20),
+    list_price DECIMAL(5,2)
+)
+WITH
+(
+    DATA_SOURCE = files,
+    LOCATION = 'products/*.csv',
+    FILE_FORMAT = CsvFormat
+);
+GO
+
+-- query the table
+SELECT * FROM dbo.products;
+```
+
+By creating a database that contains the external objects discussed in this unit, **you can provide a relational database layer over files in a data lake**, *making it easier for many data analysts and reporting tools* to access the data by using standard SQL query semantics.
+
+
+# Exercise - Query files using a serverless SQL pool
+
+## Transform files using a serverless SQL pool
+
+Data analysts often use SQL to query data for analysis and reporting. Data engineers can also make use of SQL to manipulate and transform data; often as part of a data ingestion pipeline or extract, transform, and load (ETL) process.
+
+In this exercise, you’ll use a serverless SQL pool in Azure Synapse Analytics to transform data in files.
+
+This exercise should take approximately 30 minutes to complete.
+
+## Provision an Azure Synapse Analytics workspace
+
+You’ll need an Azure Synapse Analytics workspace with access to data lake storage. You can use the built-in serverless SQL pool to query files in the data lake.
+
+In this exercise, you’ll use a combination of a PowerShell script and an ARM template to provision an Azure Synapse Analytics workspace.
+
+ 1) Sign into the Azure portal at [Azure Portal link](https://portal.azure.com).
+
+ 2) Use the **[>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **PowerShell** environment and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+
+<a href="#">
+    <img src="./img/cloud-shell-run.png" />
+</a>
+
+    NOTE: If you have previously created a cloud shell that uses a Bash environment, use the the drop-down menu at the top left of the cloud shell pane to change it to PowerShell.
+
+ 3) Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the **—**, **◻**, and **X** icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
+
+ 4) In the PowerShell pane, enter the following commands to clone this repo:
+
+```bash
+ rm -r dp-203 -f
+ git clone https://github.com/MicrosoftLearning/dp-203-azure-data-engineer dp-203
+```
+
+ 5) After the repo has been cloned, enter the following commands to change to the folder for this exercise and run the **setup.ps1** script it contains:
+
+```bash
+ cd dp-203/Allfiles/labs/03
+ ./setup.ps1
+```
+
+ 6) **If prompted**, choose which subscription you want to use (this will only happen if you have access to multiple Azure subscriptions).
+
+ 7) When prompted,**enter a suitable password** to be set for your Azure Synapse SQL pool.
+
+    NOTE: Be sure to remember this password!
+
+ 8) Wait for the script to complete - this typically takes around 10 minutes, but in some cases may take longer. While you are waiting, review the [CETAS with Synapse SQL](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-tables-cetas) article in the Azure Synapse Analytics documentation.
