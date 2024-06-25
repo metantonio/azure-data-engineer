@@ -422,3 +422,122 @@ The script provisions an Azure Synapse Analytics workspace and an Azure Storage 
  7) Select the **files** container, and note that it contains folders named **sales** and **synapse**. The **synapse** folder is used by Azure Synapse, and the **sales** folder contains the data files you are going to query.
  8) Open the **sales** folder and the orders folder it contains, and observe that the **orders** folder contains **.csv** files for three years of **sales** data.
 9) Right-click any of the files and select **Preview** to see the data it contains. Note that the files do not contain a header row, so you can unselect the option to display column headers.
+
+### Use Spark to explore data
+
+ 1) Select any of the files in the **orders** folder, and then in the **New notebook** list on the toolbar, select **Load to DataFrame**. A dataframe is a structure in Spark that represents a tabular dataset.
+ 2) In the new **Notebook 1** tab that opens, in the **Attach to** list, select your Spark pool (**sparkxxxxxxx**). Then use the ▷ Run all button to run all of the cells in the notebook (there’s currently only one!).
+
+Since this is the first time you’ve run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a few minutes. Subsequent runs will be quicker.
+
+ 3) While you are waiting for the Spark session to initialize, review the code that was generated; which looks similar to this:
+
+```py
+ %%pyspark
+ df = spark.read.load('abfss://files@datalakexxxxxxx.dfs.core.windows.net/sales/orders/2019.csv', format='csv'
+ ## If header exists uncomment line below
+ ##, header=True
+ )
+ display(df.limit(10))
+```
+
+ 4) When the code has finished running, review the output beneath the cell in the notebook. It shows the first ten rows in the file you selected, with automatic column names in the form **_c0, _c1, _c2**, and so on.
+
+ 5) Modify the code so that the **spark.read.load** function reads data from all of the CSV files in the folder, and the display function shows the first 100 rows. Your code should look like this (with **datalakexxxxxxx** matching the name of your data lake store):
+
+```py
+ %%pyspark
+ df = spark.read.load('abfss://files@datalakexxxxxxx.dfs.core.windows.net/sales/orders/*.csv', format='csv'
+ )
+ display(df.limit(100))
+```
+
+ 6) Use the **▷** button to the left of the code cell to run just that cell, and review the results.
+
+    The dataframe now includes data from all of the files, but the column names are not useful. Spark uses a “schema-on-read” approach to try to determine appropriate data types for the columns based on the data they contain, and if a header row is present in a text file it can be used to identify the column names (by specifying a **header=True** parameter in the **load** function). Alternatively, you can define an explicit schema for the dataframe.
+
+ 7) Modify the code as follows (replacing **datalakexxxxxxx**), to define an explicit schema for the dataframe that includes the column names and data types. Rerun the code in the cell.
+
+```py
+ %%pyspark
+ from pyspark.sql.types import *
+ from pyspark.sql.functions import *
+
+ orderSchema = StructType([
+     StructField("SalesOrderNumber", StringType()),
+     StructField("SalesOrderLineNumber", IntegerType()),
+     StructField("OrderDate", DateType()),
+     StructField("CustomerName", StringType()),
+     StructField("Email", StringType()),
+     StructField("Item", StringType()),
+     StructField("Quantity", IntegerType()),
+     StructField("UnitPrice", FloatType()),
+     StructField("Tax", FloatType())
+     ])
+
+ df = spark.read.load('abfss://files@datalakexxxxxxx.dfs.core.windows.net/sales/orders/*.csv', format='csv', schema=orderSchema)
+ display(df.limit(100))
+```
+
+ 8) Under the results, use the **+ Code** button to add a new code cell to the notebook. Then in the new cell, add the following code to display the dataframe’s schema:
+
+```py
+ df.printSchema()
+```
+
+ 9) Run the new cell and verify that the dataframe schema matches the orderSchema you defined. The printSchema function can be useful when using a dataframe with an automatically inferred schema.
+
+### Analyze data in a dataframe
+
+The **dataframe** object in Spark is similar to a Pandas dataframe in Python, and includes a wide range of functions that you can use to manipulate, filter, group, and otherwise analyze the data it contains.
+
+#### Filter a dataframe
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ customers = df['CustomerName', 'Email']
+ print(customers.count())
+ print(customers.distinct().count())
+ display(customers.distinct())
+```
+
+ 2) Run the new code cell, and review the results. Observe the following details:
+     - When you perform an operation on a dataframe, the result is a new dataframe (in this case, a new **customers** dataframe is created by selecting a specific subset of columns from the **df** dataframe)
+     - Dataframes provide functions such as count and distinct that can be used to summarize and filter the data they contain.
+     - The **dataframe['Field1', 'Field2', ...]** syntax is a shorthand way of defining a subset of column. You can also use **select** method, so the first line of the code above could be written as **customers = df.select("CustomerName", "Email")**
+
+ 3) Modify the code as follows:
+
+```py
+ customers = df.select("CustomerName", "Email").where(df['Item']=='Road-250 Red, 52')
+ print(customers.count())
+ print(customers.distinct().count())
+ display(customers.distinct())
+```
+
+ 4) Run the modified code to view the customers who have purchased the *Road-250 Red, 52* product. Note that you can “chain” multiple functions together so that the output of one function becomes the input for the next - in this case, the dataframe created by the **select** method is the source dataframe for the **where** method that is used to apply filtering criteria.
+
+#### Aggregate and group data in a dataframe
+
+ 1) Add a new code cell to the notebook, and enter the following code in it:
+
+```py
+ productSales = df.select("Item", "Quantity").groupBy("Item").sum()
+ display(productSales)
+```
+
+ 2) Run the code cell you added, and note that the results show the sum of order quantities grouped by product. The **groupBy** method groups the rows by Item, and the subsequent **sum** aggregate function is applied to all of the remaining numeric columns (in this case, Quantity)
+
+ 3) Add another new code cell to the notebook, and enter the following code in it:
+
+ ```py
+ yearlySales = df.select(year("OrderDate").alias("Year")).groupBy("Year").count().orderBy("Year")
+ display(yearlySales)
+```
+
+ 4) Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the **OrderDate** field, and then an **alias** method is used to assign a columm name to the extracted year value. The data is then grouped by the derived Year column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
+
+### Query data using Spark SQL
+
+As you’ve seen, the native methods of the dataframe object enable you to query and analyze data quite effectively. However, many data analysts are more comfortable working with SQL syntax. Spark SQL is a SQL language API in Spark that you can use to run SQL statements, or even persist data in relational tables.
