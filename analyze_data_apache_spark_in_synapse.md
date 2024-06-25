@@ -300,3 +300,125 @@ Bib-Shorts	| 3
 Bike Racks	| 1
 Bike Stands	| 1
 ...	| ...
+
+## Visualize data with Spark
+
+One of the most intuitive ways to analyze the results of data queries is to visualize them as charts. Notebooks in Azure Synapse Analytics provide some **basic charting capabilities** in the user interface, and when that functionality doesn't provide what you need, you can use one of the many Python graphics libraries to create and display data visualizations in the notebook.
+
+### Using built-in notebook charts
+When you display a dataframe or run a SQL query in a Spark notebook in Azure Synapse Analytics, the results are displayed under the code cell. By default, results are rendered as a table, but you can also change the results view to a chart and use the chart properties to customize how the chart visualizes the data, as shown here:
+
+<a href="#">
+    <img src="./img/notebook-chart.png" />
+</a>
+
+The built-in charting functionality in notebooks is useful when you're working with results of a query that don't include any existing groupings or aggregations, and you want to quickly summarize the data visually. When you want to have more control over how the data is formatted, or to display values that you have already aggregated in a query, you should consider using a graphics package to create your own visualizations.
+
+### Using graphics packages in code
+
+There are many graphics packages that you can use to create data visualizations in code. In particular, **Python** supports a large selection of packages; most of them built on the base **Matplotlib** library. The output from a graphics library can be rendered in a notebook, making it easy to combine code to ingest and manipulate data with inline data visualizations and markdown cells to provide commentary.
+
+For example, you could use the following **PySpark** code to aggregate data from the hypothetical products data explored previously in this module, and use **Matplotlib** to create a chart from the aggregated data.
+
+```py
+from matplotlib import pyplot as plt
+
+# Get the data as a Pandas dataframe
+data = spark.sql("SELECT Category, COUNT(ProductID) AS ProductCount \
+                  FROM products \
+                  GROUP BY Category \
+                  ORDER BY Category").toPandas()
+
+# Clear the plot area
+plt.clf()
+
+# Create a Figure
+fig = plt.figure(figsize=(12,8))
+
+# Create a bar plot of product counts by category
+plt.bar(x=data['Category'], height=data['ProductCount'], color='orange')
+
+# Customize the chart
+plt.title('Product Counts by Category')
+plt.xlabel('Category')
+plt.ylabel('Products')
+plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+plt.xticks(rotation=70)
+
+# Show the plot area
+plt.show()
+```
+
+The **Matplotlib** library requires data to be in a Pandas dataframe rather than a Spark dataframe, so the **toPandas** method is used to convert it. The code then creates a figure with a specified size and plots a bar chart with some custom property configuration before showing the resulting plot.
+
+The chart produced by the code would look similar to the following image:
+
+<a href="#">
+    <img src="./img/chart.png" />
+</a>
+
+You can use the **Matplotlib** library to create many kinds of chart; or if preferred, you can use other libraries such as Seaborn to create highly customized charts.
+
+## Exercise - Analyze data with Spark
+
+Now it's your opportunity to use a Spark pool in Azure Synapse Analytics. In this exercise, you'll use a provided script to provision an Azure Synapse Analytics workspace in your Azure subscription; and then use a Spark pool to analyze and visualize data from files in a data lake.
+
+### Analyze data in a data lake with Spark
+
+Apache Spark is an open source engine for distributed data processing, and is widely used to explore, process, and analyze huge volumes of data in data lake storage. Spark is available as a processing option in many data platform products, including Azure HDInsight, Azure Databricks, and Azure Synapse Analytics on the Microsoft Azure cloud platform. One of the benefits of Spark is support for a wide range of programming languages, including Java, Scala, Python, and SQL; making Spark a very flexible solution for data processing workloads including data cleansing and manipulation, statistical analysis and machine learning, and data analytics and visualization.
+
+### Provision an Azure Synapse Analytics workspace
+
+You’ll need an Azure Synapse Analytics workspace with access to data lake storage. You can use the built-in serverless SQL pool to query files in the data lake.
+
+In this exercise, you’ll use a combination of a PowerShell script and an ARM template to provision an Azure Synapse Analytics workspace.
+
+ 1) Sign into the Azure portal at [Azure Portal link](https://portal.azure.com).
+
+ 2) Use the **[>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **PowerShell** environment and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+
+<a href="#">
+    <img src="./img/cloud-shell-run.png" />
+</a>
+
+    NOTE: If you have previously created a cloud shell that uses a Bash environment, use the the drop-down menu at the top left of the cloud shell pane to change it to PowerShell.
+
+ 3) Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the **—**, **◻**, and **X** icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
+
+ 4) In the PowerShell pane, enter the following commands to clone this repo:
+
+```bash
+ rm -r dp-203 -f
+ git clone https://github.com/MicrosoftLearning/dp-203-azure-data-engineer dp-203
+```
+
+ 5) After the repo has been cloned, enter the following commands to change to the folder for this exercise and run the **setup.ps1** script it contains:
+
+```bash
+ cd dp-203/Allfiles/labs/05
+ ./setup.ps1
+```
+
+ 6) **If prompted**, choose which subscription you want to use (this will only happen if you have access to multiple Azure subscriptions).
+
+ 7) When prompted,**enter a suitable password** to be set for your Azure Synapse SQL pool.
+
+    NOTE: Be sure to remember this password!
+
+ 8) Wait for the script to complete - this typically takes around 10 minutes, but in some cases may take longer. While you are waiting, review the Apache Spark in [Azure Synapse Analytics article in the Azure Synapse Analytics documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-overview).
+
+### Query data in files
+
+The script provisions an Azure Synapse Analytics workspace and an Azure Storage account to host the data lake, then uploads some data files to the data lake.
+
+#### View files in the data lake
+
+ 1) After the script has completed, in the Azure portal, go to the **dp500-xxxxxxx** resource group that it created, and select your Synapse workspace.
+ 2) In the **Overview** page for your Synapse workspace, in the **Open Synapse Studio** card, select **Open** to open Synapse Studio in a new browser tab; signing in if prompted.
+ 3) On the left side of Synapse Studio, use the ›› icon to expand the menu - this reveals the different pages within Synapse Studio that you’ll use to manage resources and perform data analytics tasks.
+ 4) On the **Manage** page, select the **Apache Spark pools** tab and note that a Spark pool with a name similar to **sparkxxxxxxx** has been provisioned in the workspace. Later you will use this Spark pool to load and analyze data from files in the data lake storage for the workspace.
+ 5) On the **Data** page, view the **Linked** tab and verify that your workspace includes a link to your Azure Data Lake Storage Gen2 storage account, which should have a name similar to **synapsexxxxxxx** (**Primary - datalakexxxxxxx**).
+ 6) Expand your storage account and verify that it contains a file system container named **files**.
+ 7) Select the **files** container, and note that it contains folders named **sales** and **synapse**. The **synapse** folder is used by Azure Synapse, and the **sales** folder contains the data files you are going to query.
+ 8) Open the **sales** folder and the orders folder it contains, and observe that the **orders** folder contains **.csv** files for three years of **sales** data.
+9) Right-click any of the files and select **Preview** to see the data it contains. Note that the files do not contain a header row, so you can unselect the option to display column headers.
