@@ -231,3 +231,57 @@ Name | Keys | Description | Nullability | Data type | Format / Length
 --- | :---: | --- | :---: | :---: | ---
 CustomerId	|PK 🗹	|Unique customer ID	|🗆	|long
 FirstName	|PK 🗆	|Customer first name	|🗆	|string | 256
+
+ 6) Add more new columns until the table definition looks like this:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | :---: | :---: | ---
+CustomerId	|PK 🗹	|Unique customer ID	|🗆	|long
+FirstName	|PK 🗆	|Customer first name	|🗆	|string | 256
+LastName	|PK 🗆	|Customer last name	|🗹	|string	|256
+EmailAddress	|PK 🗆	|Customer email	|🗆	|string	|256
+Phone	|PK 🗆	|Customer phone	|🗹	|string	|256
+
+ 7) When you’ve added all of the columns, **publish** the database again to save the changes.
+ 8) In the **Data** pane on the left, switch back to the **Workspace** tab so you can see the **RetailDB** lake database. Then expand it and refresh its **Tables** folder to see the newly created **Customer** table.
+
+#### Load data into the table’s storage path
+
+ 1) In the main pane, switch back to the **files** tab, which contains the file system with the **RetailDB** folder. Then open the **RetailDB** folder and *create a new folder* named **Customer** in it. This is where the **Customer** table will get its data.
+ 2) Open the new **Customer** folder, which should be empty.
+ 3) Download the **customer.csv** data file from https://raw.githubusercontent.com/MicrosoftLearning/dp-203-azure-data-engineer/master/Allfiles/labs/04/data/customer.csv and save it in a folder on your local computer (it doesn’t matter where). Then in the **Customer** folder in **Synapse Explorer**, use the **⤒ Upload** button to upload the **customer.csv** file to the **RetailDB/Customer** folder in your data lake.
+
+ Note: In a real production scenario, you would probably create a pipeline to ingest data into the folder for the table data. We’re uploading it directly in the Synapse Studio user interface in this exercise for expediency.
+
+ 4) In the **Data** pane on the left, on the **Workspace** tab, in the … menu for the **Customer** table, select **New SQL script > Select TOP 100 rows**. Then, in the new **SQL script 1** pane that has opened, ensure that the **Built-in** SQL pool is connected, and use the **▷ Run** button to run the SQL code. The results should include first 100 rows from the **Customer** table, based on the data stored in the underlying folder in the data lake.
+ 5) Close the **SQL script 1** tab, discarding your changes.
+
+### Create a table from a database template
+
+As you’ve seen, you can create the tables you need in your lake database from scratch. However, Azure Synapse Analytics also provides numerous database templates based on common database workloads and entities that you can use as a starting point for your database schema.
+
+#### Define the table schema
+
+ 1) In the main pane, switch back to the **RetailDB** pane, which contains your database schema (currently containing only the **Customer** table).
+ 2) In the **+ Table** menu, select **From template**. Then in the **Add from template** page, select **Retail** and click **Continue**.
+ 3) In the **Add from template (Retail)** page, wait for the table list to populate, and then expand **Product** and select **RetailProduct**. Then click **Add**. This adds a new table based on the **RetailProduct** template to your database.
+ 4) In the **RetailDB** pane, select the new **RetailProduct** table. Then, in the pane beneath the design canvas, on the **General** tab, change the name to **Product** and verify that the storage settings for the table specify the input folder **files/RetailDB/Product**.
+ 5) On the **Columns** tab for the **Product** table, note that the table already includes a large number of columns inherited from the template. There are more columns than required for this table, so you’ll need to remove some.
+ 6) Select the checkbox next to **Name** to select all of the columns, and then unselect the following columns (which you need to retain):
+         - ProductId
+         - ProductName
+         - IntroductionDate
+         - ActualAbandonmentDate
+         - ProductGrossWeight
+         - ItemSku
+
+ 7) On the toolbar in the Columns pane, select Delete to remove the selected columns. This should leave you with the following columns:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | :---: | :---: | ---
+ProductId	|PK 🗹	|The unique identifier of a Product.	|🗆	|long
+ProductName	|PK 🗆	|The name of the Product…	|🗹	|string	|128
+IntroductionDate	|PK 🗆	|The date that the Product was introduced for sale.	|🗹	|date	|YYYY-MM-DD
+ActualAbandonmentDate	|PK 🗆	|The actual date that the marketing of the product was discontinued…	|🗹	|date	|YYY-MM-DD
+ProductGrossWeight	|PK 🗆	|The gross product weight.	|🗹	|decimal	|18,8
+ItemSku	|PK 🗆	|The Stock Keeping Unit identifier…	|🗹	|string	|20
