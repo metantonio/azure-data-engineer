@@ -209,3 +209,25 @@ A lake database is a type of database that you can define in your workspace, and
  7) At the top of the **RetailDB** pane, select **Publish** to save the database so far.
  8) In the **Data** pane on the left, view the **Linked** tab. Then expand **Azure Data Lake Storage Gen2** and the primary **datalakexxxxxxx** store for your **synapsexxxxxxx** workspace, and select the **files** file system; which currently contains a folder named **synapse**.
  9) In the **files** tab that has opened, use the **+ New folder** button to create a new folder named **RetailDB** - this will be the *input folder* for the *data files used by tables* in your database.
+
+### Create a table
+
+Now that you have created a lake database, you can define its schema by creating tables.
+
+#### Define the table schema
+
+ 1) Switch back to the **RetailDB** tab for your database definition, and in the **+ Table** list, select **Custom**, and note that a new table named **Table_1** is added to your database.
+ 2) With **Table_1** selected, in the **General** tab under the database design canvas, change the **Name** property to **Customer**.
+ 3) Expand the **Storage settings for table** section and note that the table will be stored as delimited text in the **files/RetailDB/Customer** folder in the default data lake store for your Synapse workspace.
+ 4) On the **Columns** tab, note that by default, the table contains one column named **Column_1**. Edit the column definition to match the following properties, Note that PK is a primary key:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | --- | :---: | ---
+CustomerId	|PK 🗹	|Unique customer ID	|🗆	|long
+
+ 5) In the **+ Column** list, select **New column**, and modify the new column definition to add a **FirstName** column to the table as follows:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | :---: | :---: | ---
+CustomerId	|PK 🗹	|Unique customer ID	|🗆	|long
+FirstName	|PK 🗆	|Customer first name	|🗆	|string | 256
