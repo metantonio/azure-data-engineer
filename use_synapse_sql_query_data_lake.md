@@ -537,3 +537,16 @@ This code uses the OPENROWSET to read data from the CSV files in the sales folde
     --- | :---: | --- | --- | --- | --- |:---: | ---: | ---:
     SO43701	 | 1 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 1 | 3399.99 | 271.9992 
     … | … |	… | … | … | … | … | … | …
+
+ 7) **Publish the changes to your script**, and then close the script pane.
+
+### Transform data using CREATE EXTERNAL TABLE AS SELECT (CETAS) statements
+
+A simple way to use SQL to **transform data in a file** and persist the results in another file is to use a **CREATE EXTERNAL TABLE AS SELECT (CETAS) statement**. This statement creates a table based on the requests of a query, but the data for **the table is stored as files in a data lake**. The transformed data can then be queried through the external table, or accessed directly in the file system (for example, for inclusion in a downstream process to load the transformed data into a data warehouse).
+
+#### Create an external data source and file format
+
+By **defining an external data source** in a database, you can **use it to reference the data lake location** where you want **to store files for external tables**. An external file format enables you to define the format for those files - for example, Parquet or CSV. To use these objects to work with external tables, you need to create them in a database other than the default **master** database.
+
+ 1) In Synapse Studio, on the Develop page, in the + menu, select SQL script.
+ 2) In the new script pane, add the following code (replacing datalakexxxxxxx with the name of your data lake storage account) to create a new database and add an external data source to it.
