@@ -548,5 +548,64 @@ A simple way to use SQL to **transform data in a file** and persist the results 
 
 By **defining an external data source** in a database, you can **use it to reference the data lake location** where you want **to store files for external tables**. An external file format enables you to define the format for those files - for example, Parquet or CSV. To use these objects to work with external tables, you need to create them in a database other than the default **master** database.
 
- 1) In Synapse Studio, on the Develop page, in the + menu, select SQL script.
- 2) In the new script pane, add the following code (replacing datalakexxxxxxx with the name of your data lake storage account) to create a new database and add an external data source to it.
+ 1) In Synapse Studio, on the **Develop** page, in the **+** menu, select **SQL script**.
+ 2) In the new script pane, add the following code (replacing *datalakexxxxxxx* with the name of your data lake storage account) to create a new database and add an external data source to it.
+
+```sql
+ -- Database for sales data
+ CREATE DATABASE Sales
+   COLLATE Latin1_General_100_BIN2_UTF8;
+ GO;
+    
+ Use Sales;
+ GO;
+    
+ -- External data is in the Files container in the data lake
+ CREATE EXTERNAL DATA SOURCE sales_data WITH (
+     LOCATION = 'https://datalakexxxxxxx.dfs.core.windows.net/files/'
+ );
+ GO;
+    
+ -- Format for table files
+ CREATE EXTERNAL FILE FORMAT ParquetFormat
+     WITH (
+             FORMAT_TYPE = PARQUET,
+             DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
+         );
+ GO;
+```
+
+ 3) Modify the script properties to change its name to **Create Sales DB**, and publish it.
+ 4) Ensure that the script is connected to the **Built-in** SQL pool and the **master** database, and then run it.
+ 5) Switch back to the **Data** page and use the **↻** button at the top right of Synapse Studio to refresh the page. Then view the **Workspace** tab in the **Data** pane, where a **SQL database** list is now displayed. Expand this list to verify that the **Sales** database has been created.
+ 6) Expand the **Sales** database, its **External Resources** folder, and the **External data sources** folder under that to see the **sales_data** external data source you created.
+
+#### Create an External table
+
+ 1) In Synapse Studio, on the **Develop** page, in the **+** menu, select **SQL script**.
+ 2) In the new script pane, add the following code to retrieve and aggregate data from the CSV sales files by using the external data source - noting that the **BULK** *path* is relative to the folder location on which the data source is defined:
+
+```sql
+ USE Sales;
+ GO;
+    
+ SELECT Item AS Product,
+        SUM(Quantity) AS ItemsSold,
+        ROUND(SUM(UnitPrice) - SUM(TaxAmount), 2) AS NetRevenue
+ FROM
+     OPENROWSET(
+         BULK 'sales/csv/*.csv',
+         DATA_SOURCE = 'sales_data',
+         FORMAT = 'CSV',
+         PARSER_VERSION = '2.0',
+         HEADER_ROW = TRUE
+     ) AS orders
+ GROUP BY Item;
+```
+
+ 3) Run the script. The results should look similar to this:
+
+ Product |	ItemsSold |	NetRevenue
+ --- | :---: | ---:
+AWC Logo Cap | 	1063 |	8791.86
+…	| … | 	…
