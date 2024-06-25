@@ -285,3 +285,82 @@ IntroductionDate	|PK 🗆	|The date that the Product was introduced for sale.	|�
 ActualAbandonmentDate	|PK 🗆	|The actual date that the marketing of the product was discontinued…	|🗹	|date	|YYY-MM-DD
 ProductGrossWeight	|PK 🗆	|The gross product weight.	|🗹	|decimal	|18,8
 ItemSku	|PK 🗆	|The Stock Keeping Unit identifier…	|🗹	|string	|20
+
+ 8) Add a new column named ListPrice to the table as shown here:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | :---: | :---: | ---
+ProductId	|PK 🗹	|The unique identifier of a Product.	|🗆	|long
+ProductName	|PK 🗆	|The name of the Product…	|🗹	|string	|128
+IntroductionDate	|PK 🗆	|The date that the Product was introduced for sale.	|🗹	|date	|YYYY-MM-DD
+ActualAbandonmentDate	|PK 🗆	|The actual date that the marketing of the product was discontinued…	|🗹	|date	|YYY-MM-DD
+ProductGrossWeight	|PK 🗆	|The gross product weight.	|🗹	|decimal	|18,8
+ItemSku	|PK 🗆	|The Stock Keeping Unit identifier…	|🗹	|string	|20
+ListPrice	|PK 🗆	|The product price.|🗆	|decimal	|18,2
+
+ 9) When you’ve modified the columns as shown above, **publish** the database again to save the changes.
+ 10) In the **Data** pane on the left, switch back to the **Workspace** tab so you can see the **RetailDB** lake database. Then use the **…** menu for its **Tables** folder to refresh the view and see the newly created **Product** table.
+
+#### Load data into the table’s storage path
+
+ 1) In the main pane, switch back to the **files** tab, which contains the file system, and navigate to the **files/RetailDB** folder, which currently contains the **Customer** folder for the table you created previously.
+ 2) In the **RetailDB** folder, create a new folder named **Product**. This is where the **Product** table will get its data.
+ 3) Open the new **Product** folder, which should be empty.
+ 4) Download the **product.csv** data file from https://raw.githubusercontent.com/MicrosoftLearning/dp-203-azure-data-engineer/master/Allfiles/labs/04/data/product.csv and save it in a folder on your local computer (it doesn’t matter where). Then in the Product folder in Synapse Explorer, use the **⤒ Upload** button to upload the **product.csv** file to the **RetailDB/Product** folder in your data lake.
+ 5) In the *Data* pane on the left, on the **Workspace** tab, in the … menu for the **Product** table, select **New SQL script > Select TOP 100 rows**. Then, in the new **SQL script 1** pane that has opened, ensure that the **Built-in** SQL pool is connected, and use the **▷ Run** button to run the SQL code. The results should include first 100 rows from the **Product** table, based on the data stored in the underlying folder in the data lake.
+ 6) Close the **SQL script 1** tab, discarding your changes.
+
+### Create a table from existing data
+
+So far, you’ve created tables and then populated them with data. In some cases, you may already have data in a data lake from which you want to derive a table.
+
+#### Upload data
+
+ 1) In the main pane, switch back to the **files** tab, which contains the file system, and navigate to the **files/RetailDB** folder, which currently contains the **Customer** and **Product** folders for the tables you created previously.
+ 2) In the **RetailDB** folder, create a new folder named **SalesOrder**.
+ 3) Open the new **SalesOrder** folder, which should be empty.
+ 4) Download the **salesorder.csv** data file from https://raw.githubusercontent.com/MicrosoftLearning/dp-203-azure-data-engineer/master/Allfiles/labs/04/data/salesorder.csv and save it in a folder on your local computer (it doesn’t matter where). Then in the SalesOrder folder in Synapse Explorer, use the **⤒ Upload** button to upload the **salesorder.csv** file to the **RetailDB/SalesOrder** folder in your data lake.
+
+#### Create a table
+
+ 1) In the main pane, switch back to the **RetailDB** pane, which contains your database schema (currently containing the Customer and Product tables).
+ 2) In the + Table menu, select From data lake. Then in the Create external table from data lake pane, specify the following options:
+     - External table name: SalesOrder
+     - Linked service: Select synapsexxxxxxx-WorkspaceDefautStorage(datalakexxxxxxx)
+     - Input file of folder: files/RetailDB/SalesOrder
+ 3) Continue to the next page and then create the table with the following options:
+     - File type: CSV
+     - Field terminator: Default (comma ,)
+     - First row: Leave infer column names unselected.
+     - String delimiter: Default (Empty string)
+     - Use default type: Default type (true,false)
+     - Max string length: 4000
+ 4) When the table has been created, note that it includes columns named C1, C2, and so on and that the data types have been inferred from the data in the folder. Modify the column definitions as follows:
+
+Name | Keys | Description | Nullability | Data type | Format / Length
+--- | :---: | --- | :---: | :---: | ---
+SalesOrderId	|PK 🗹	|The unique identifier of an order.	|🗆	|long	 
+OrderDate	|PK 🗆	|The date of the order.	|🗆	|timestamp	|yyyy-MM-dd
+LineItemId	|PK 🗹	|The ID of an individual line item.	|🗆	|long	 
+CustomerId	|PK 🗆	|The customer.	|🗆	|long	 
+ProductId	|PK 🗆	|The product.	|🗆	|long	 
+Quantity	|PK 🗆	|The order quantity.	|🗆	|long
+
+    Note: The table contains a record for each individual item ordered, and includes a composite primary key comprised of SalesOrderId and LineItemId.
+
+ 5) On the **Relationships** tab for the **SalesOrder** table, in the **+ Relationship** list, select **To table**, and then define the following relationship:
+
+From table	|From column	|To table	|To column
+--- | :---: | --- | :---: 
+Customer	| CustomerId	| SalesOrder	| CustomerId| 
+
+ 6) Add a second To table relationship with the following settings:
+
+ From table	|From column	|To table	|To column
+--- | :---: | --- | :---: 
+Product	| ProductId	| SalesOrder	| ProductId| 
+
+ The ability to define relationships between tables helps enforce referential integrity between related data entities. This is a common feature of relational databases that would otherwise be difficult to apply to files in a data lake.
+
+ 7) **Publish** the database again to save the changes.
+ 8) In the **Data** pane on the left, switch back to the **Workspace** tab so you can see the **RetailDB** lake database. Then use the **…** menu for its **Tables** folder to refresh the view and see the newly created **SalesOrder** table.
