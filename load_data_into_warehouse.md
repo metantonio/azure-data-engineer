@@ -51,7 +51,7 @@ WITH
 
 You can use the **COPY statement to load data from the data lake**, as shown in the following example:
 
- Note: This is generally the recommended approach to load staging tables due to its high performance throughput.
+ Note: This is generally the **recommended approach to load staging tables** due to its high performance throughput.
 
 ```sql
 COPY INTO dbo.StageProduct
@@ -318,4 +318,90 @@ WHEN NOT MATCHED THEN
 
  Note: For more information about the MERGE statement, see the [MERGE documentation for Azure Synapse Analytics](https://learn.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql?view=azure-sqldw-latest&preserve-view=true).
 
- 
+
+## Load fact tables
+
+Typically, **a regular data warehouse load operation loads fact tables after dimension tables**. This approach ensures that the dimensions to which the facts will be related are already present in the data warehouse.
+
+The staged fact data usually includes the business (alternate) keys for the related dimensions, so your logic to load the data must look up the corresponding surrogate keys. When the data warehouse slowly changing dimensions, the appropriate version of the dimension record must be identified to ensure the correct surrogate key is used to match the event recorded in the fact table with the state of the dimension at the time the fact occurred.
+
+In many cases, you can retrieve the latest "current" version of the dimension; but in some cases you might need to find the right dimension record based on DateTime columns that indicate the period of validity for each version of the dimension.
+
+The following example assumes that the dimension records have an incrementing surrogate key, and that the most recently added version of a specific dimension instance (which will have the highest key value) should be used.
+
+```sql
+INSERT INTO dbo.FactSales
+SELECT  (SELECT MAX(DateKey)
+         FROM dbo.DimDate
+         WHERE FullDateAlternateKey = stg.OrderDate) AS OrderDateKey,
+        (SELECT MAX(CustomerKey)
+         FROM dbo.DimCustomer
+         WHERE CustomerAlternateKey = stg.CustNo) AS CustomerKey,
+        (SELECT MAX(ProductKey)
+         FROM dbo.DimProduct
+         WHERE ProductAlternateKey = stg.ProductID) AS ProductKey,
+        (SELECT MAX(StoreKey)
+         FROM dbo.DimStore
+         WHERE StoreAlternateKey = stg.StoreID) AS StoreKey,
+        OrderNumber,
+        OrderLineItem,
+        OrderQuantity,
+        UnitPrice,
+        Discount,
+        Tax,
+        SalesAmount
+FROM dbo.StageSales AS stg
+```
+
+## Perform post load optimization
+
+After loading new data into the data warehouse, **it's a good idea to rebuild the table indexes and update statistics** on commonly queried columns.
+
+### Rebuild indexes
+
+The following example rebuilds all indexes on the **DimProduct** table.
+
+```sql
+ALTER INDEX ALL ON dbo.DimProduct REBUILD
+```
+
+ Tip: For more information about rebuilding indexes, see the [Indexes on dedicated SQL pool tables in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-index) article in the Azure Synapse Analytics documentation.
+
+### Update statistics
+
+The following example creates statistics on the **ProductCategory** column of the **DimProduct** table:
+
+```sql
+CREATE STATISTICS productcategory_stats
+ON dbo.DimProduct(ProductCategory);
+```
+
+ Tip: For more information about updating statistics, see the [Table statistics for dedicated SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-statistics) article in the Azure Synapse Analytics documentation.
+
+## Exercise - load data into a relational data warehouse
+
+Now it's your chance to explore loading and updating data into a relational data warehouse for yourself. In this exercise, you'll create and update fact and dimension tables into a dedicated SQL pool using the various techniques described in this module.
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/09-Load-Data-into-Data-Warehouse.html" target="_blank">
+    Exercise
+</a>
+
+## Knowledge check
+
+1. In which order should you load tables in the data warehouse?  
+
+    - [x] Staging tables, then dimension tables, then fact tables
+    - [ ] Staging tables, then fact tables, then dimension tables
+    - [ ] Dimension tables, then staging tables, then fact tables
+
+2. Which command should you use to load a staging table with data from files in the data lake?
+
+    - [x] COPY
+    - [ ] LOAD
+    - [ ] INSERT
+
+3. When a customer changes their phone number, the change should be made in the existing row for that customer in the dimension table. What type of slowly changing dimension does this scenario require? 
+
+    - [ ] Type 0
+    - [x] Type 1
+    - [ ] Type 2
