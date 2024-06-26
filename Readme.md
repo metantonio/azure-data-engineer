@@ -51,7 +51,7 @@ Training in this course
  - [x] [Analyze data with Apache Spark in Azure Synapse Analytics](./analyze_data_apache_spark_in_synapse.md)
  - [x] [Transform data with Spark in Azure Synapse Analytics](./transform_data_spark_in_synapse.md)
  - [x] [Use Delta Lake in Azure Synapse Analytics](./use_delta_lake_in_synapse.md)
- - [Analyze data in a relational data warehouse](./analyze_data_in_data_warehouse.md)
+ - [x] [Analyze data in a relational data warehouse](./analyze_data_in_data_warehouse.md)
  - [Load data into a relational data warehouse](./load_data_into_warehouse.md)
  - [Build a data pipeline in Azure Synapse Analytics](./build_pipeline_in_synapse.md)
  - [Use Spark Notebooks in an Azure Synapse Pipeline](./use_spark_notebook_synapse_pipeline.md)
