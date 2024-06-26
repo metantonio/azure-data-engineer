@@ -410,3 +410,30 @@ CalendarYear	| CalendarQuarter	| TotalSales
 2021	| 1	| 34562.96
 2021	| 2	| 36162.27
 ...	| ...	| ...
+
+**You can join as many dimension tables as needed** to calculate the aggregations you need. For example, the following code extends the previous example to break down the quarterly sales totals by city based on the customer's address details in the **DimCustomer** table:
+
+```sql
+SELECT  dates.CalendarYear,
+        dates.CalendarQuarter,
+        custs.City,
+        SUM(sales.SalesAmount) AS TotalSales
+FROM dbo.FactSales AS sales
+JOIN dbo.DimDate AS dates ON sales.OrderDateKey = dates.DateKey
+JOIN dbo.DimCustomer AS custs ON sales.CustomerKey = custs.CustomerKey
+GROUP BY dates.CalendarYear, dates.CalendarQuarter, custs.City
+ORDER BY dates.CalendarYear, dates.CalendarQuarter, custs.City;
+```
+
+This time, the results include a quarterly sales total for each city:
+
+CalendarYear	| CalendarQuarter	| City| 	TotalSales
+---	| :---:	| :---: | 	---:
+2020	| 1	| Amsterdam	| 5982.53
+2020	| 1	| Berlin	| 2826.98
+2020	| 1	| Chicago	| 5372.72
+...	| ...	| ...	| ..
+2020	| 2	| Amsterdam| 	7163.93
+2020	| 2	| Berlin	| 8191.12
+2020	| 2	| Chicago	| 2428.72
+...	| ...	| ...	| ..
