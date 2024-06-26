@@ -437,3 +437,25 @@ CalendarYear	| CalendarQuarter	| City| 	TotalSales
 2020	| 2	| Berlin	| 8191.12
 2020	| 2	| Chicago	| 2428.72
 ...	| ...	| ...	| ..
+
+### Joins in a snowflake schema
+
+**When using a snowflake schema**, dimensions may be partially normalized; requiring multiple joins to relate fact tables to snowflake dimensions. For example, suppose your data warehouse includes a **DimProduct** dimension table from which the product categories have been normalized into a separate **DimCategory** table. A query to aggregate items sold by product category might look similar to the following example:
+
+```sql
+SELECT  cat.ProductCategory,
+        SUM(sales.OrderQuantity) AS ItemsSold
+FROM dbo.FactSales AS sales
+JOIN dbo.DimProduct AS prod ON sales.ProductKey = prod.ProductKey
+JOIN dbo.DimCategory AS cat ON prod.CategoryKey = cat.CategoryKey
+GROUP BY cat.ProductCategory
+ORDER BY cat.ProductCategory;
+```
+
+The results from this query include the number of items sold for each product category:
+
+ProductCategory	| ItemsSold
+--- | ---:
+Accessories	| 28271
+Bits and pieces	| 5368
+...	| ...
