@@ -42,8 +42,23 @@ An example of a dimension table for customer might contain the following data:
 
 CustomerKey	| CustomerAltKey	| Name	| Email	| Street	| City	| PostalCode	| CountryRegion
 :---	| :--	| :---	| :---	| :---	| :---:	| ---:	| :---:
-123	| I-543	| Navin Jones	| navin1@contoso.com	| 1 Main St.	| Seattle	| 90000	| United States
+**123**	| **I-543**	| **Navin Jones**	| navin1@contoso.com	| **1 Main St.**	| **Seattle**	| **90000**	| United States
 124	| R-589	| Mary Smith	| mary2@contoso.com	| 234 190th Ave	| Buffalo	| 50001	| United States
 125	| I-321	| Antoine Dubois	| antoine1@contoso.com	| 2 Rue Jolie	| Paris	| 20098	| France
-126	| I-543	| Navin Jones	| navin1@contoso.com	| 24 125th Ave.	| New York	| 50000	| United States
+**126**	| **I-543**	| **Navin Jones**	| navin1@contoso.com	| **24 125th Ave.**	| **New York**	| **50000**	| United States
 ...	| ...	| ...	| ...	| ...	| ...	| ...	| ...
+
+ Note: Observe that the **table contains two records for Navin Jones**. Both records use the same alternate key to identify this person (I-543), but **each record has a different surrogate key**. From this, you can surmise that the customer moved from Seattle to New York. Sales made to the customer while living in Seattle are associated with the key 123, while purchases made after moving to New York are recorded against record 126.
+
+In addition to dimension tables that represent business entities, **it's common for a data warehouse to include a dimension table that represents time**. This table enables data analysts to aggregate data over temporal intervals. Depending on the type of data you need to analyze, the lowest granularity (referred to as the grain) of a time dimension could represent times (to the hour, second, millisecond, nanosecond, or even lower), or dates.
+
+An example of a time dimension table with a grain at the date level might contain the following data:
+
+DateKey	| DateAltKey	| DayOfWeek	| DayOfMonth	| Weekday	| Month	|MonthName	|Quarter	|Year
+:---:	| :---:	| :---:	| :---:	| ---	| :---:	| :---:	| ---:	| ---:
+19990101|	01-01-1999	|6	|1	|Friday	|1	|January	|1	|1999
+...	|...	|...	|...	|...	|...	|...	|...	|...
+20220101	|01-01-2022	|7	|1	|Saturday	|1	|January	|1	|2022
+20220102	|02-01-2022	|1	|2	|Sunday	|1	|January	|1	|2022
+...	|...	|...	|...	|...	|...	|...	|...	|...
+20301231	|31-12-2030	|3	|31	|Tuesday	|12	|December	|4	|2030
