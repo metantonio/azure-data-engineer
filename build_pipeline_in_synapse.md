@@ -20,3 +20,17 @@ With the wide range of data stores available in Azure, **there's the need to man
 ## Understand pipelines in Azure Synapse Analytics
 
 Pipelines in Azure Synapse Analytics **encapsulate a sequence of activities that perform data movement and processing tasks**. You can use a pipeline to define data transfer and transformation activities, and orchestrate these activities through control flow activities that manage branching, looping, and other typical processing logic. The graphical design tools in Azure Synapse Studio enable you to build complex pipelines with minimal or no coding required.
+
+### Core pipeline concepts
+
+Before building pipelines in Azure Synapse Analytics, you should understand a few core concepts.
+
+<a href="#">
+    <img src="./img/pipeline-concepts.png" />
+</a>
+
+### Activities
+
+**Activities are the executable tasks** in a pipeline. You can define a flow of activities by connecting them in a sequence. The outcome of a particular activity (success, failure, or completion) can be used to direct the flow to the next activity in the sequence.
+
+**Activities can encapsulate data transfer operations**, including simple data copy operations that extract data from a source and load it to a target (or sink), as well as more complex data flows that apply transformations to the data as part of an extract, transfer, and load (ETL) operation. Additionally, there are activities that encapsulate processing tasks on specific systems, such as running a Spark notebook or calling an Azure function. Finally, *there are control flow activities that you can use to implement loops, conditional branching, or manage variable and parameter values*.
