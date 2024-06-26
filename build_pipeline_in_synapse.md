@@ -19,3 +19,4 @@ With the wide range of data stores available in Azure, **there's the need to man
 
 ## Understand pipelines in Azure Synapse Analytics
 
+Pipelines in Azure Synapse Analytics **encapsulate a sequence of activities that perform data movement and processing tasks**. You can use a pipeline to define data transfer and transformation activities, and orchestrate these activities through control flow activities that manage branching, looping, and other typical processing logic. The graphical design tools in Azure Synapse Studio enable you to build complex pipelines with minimal or no coding required.
