@@ -563,3 +563,41 @@ Now it's your opportunity to explore a relational data warehouse. In this exerci
 <a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/08-Explore-data-warehouse.html" target="_blank">
     Exercise
 </a>
+
+## Knowledge check
+
+1. In which of the following table types should an insurance company store details of customer attributes by which claims will be aggregated?? 
+
+    - [ ] Staging table
+    - [x] Dimension table
+    - [ ] Fact table
+
+2. You create a dimension table for product data, assigning a unique numeric key for each row in a column named **ProductKey**. The **ProductKey** is only defined in the data warehouse. What kind of key is **ProductKey**?
+
+    - [x] A surrogate key
+    - [ ] An alternate key
+    - [ ] A business key
+
+3. What distribution option would be best for a sales fact table that will contain billions of records?
+
+    - [x] HASH
+    - [ ] ROUND_ROBIN
+    - [ ] REPLICATE
+
+4. You need to write a query to return the total of the **UnitsProduced** numeric measure in the **FactProduction** table aggregated by the **ProductName** attribute in the **FactProduct** table. Both tables include a **ProductKey** surrogate key field. What should you do?
+
+    - [ ] Use two SELECT queries with a UNION ALL clause to combine the rows in the FactProduction table with those in the FactProduct table.
+    - [ ] Use a SELECT query against the FactProduction table with a WHERE clause to filter out rows with a ProductKey that doesn't exist in the FactProduct table.
+    - [x] Use a SELECT query with a SUM function to total the UnitsProduced metric, using a JOIN on the ProductKey surrogate key to match the FactProduction records to the FactProduct records and a GROUP BY clause to aggregate by ProductName.
+
+5. You use the RANK function in a query to rank customers in order of the number of purchases they have made. Five customers have made the same number of purchases and are all ranked equally as 1. What rank will the customer with the next highest number of purchases be assigned?
+
+    - [ ] Two
+    - [x] Six
+    - [ ] One
+
+6. You need to compare approximate production volumes by product while optimizing query response time. Which function should you use?
+
+    - [ ] COUNT
+    - [ ] NTILE
+    - [x] APPROX_COUNT_DISTINCT
