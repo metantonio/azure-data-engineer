@@ -475,3 +475,43 @@ When planning to use a serverless SQL pool to query data in an Azure Cosmos DB a
     Azure Cosmos DB containers can be replicated to multiple regions. If you have a multi-region container, you can specify a ``region`` parameter in the ``OPENROWSET`` connection string to ensure queries are sent to a specific regional replica of the container.
 
  - When working with string columns, use the ``OPENROWSET`` function with the explicit ``WITH`` clause and specify an appropriate data length for the string data.
+
+## Exercise - Implement Azure Synapse Link for Cosmos DB
+
+Now it's your chance to explore Azure Synapse Link for Azure Cosmos DB for yourself. In this exercise, you'll use a provided script to provision an Azure Synapse Analytics workspace and an Azure Cosmos DB account in your Azure subscription; and then you'll enable Azure Synapse Link for Azure Cosmos DB and use it to analyze data with Spark and SQL.
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/14-Synapselink-cosmos.html" target="_blank">
+    Exercise
+</a>
+
+## Knowledge check
+
+1. You have an Azure Cosmos DB for NoSQL account and an Azure Synapse Analytics workspace. What must you do first to enable HTAP integration with Azure Synapse Analytics? 
+
+    - [ ] Configure global replication in Azure Cosmos DB.
+    - [ ] Create a dedicated SQL pool in Azure Synapse Analytics.
+    - [x] Enable Azure Synapse Link in Azure Cosmos DB.
+
+2. You have an existing container in a Cosmos DB core (SQL) database. What must you do to enable analytical queries over Azure Synapse Link from Azure Synapse Analytics? 
+
+    - [ ] Delete and recreate the container.
+    - [x] Enable Azure Synapse Link in the container to create an analytical store.
+    - [ ] Add an item to the container.
+
+3. You plan to use a Spark pool in Azure Synapse Analytics to query an existing analytical store in Azure Cosmos DB. What must you do? 
+
+    - [x] Create a linked service for the Azure Cosmos DB database where the analytical store enabled container is defined.
+    - [ ] Disable automatic pausing for the Spark pool in Azure Synapse Analytics.
+    - [ ] Install the Azure Cosmos DB SDK for Python package in the Spark pool.
+
+4. You're writing PySpark code to load data from an Azure Cosmos DB analytical store into a dataframe. What format should you specify? 
+
+    - [ ] cosmos.json
+    - [x] cosmos.olap
+    - [ ] cosmos.sql
+
+5. You're writing a SQL code in a serverless SQL pool to query an analytical store in Azure Cosmos DB. What function should you use? 
+
+    - [ ] OPENDATASET
+    - [ ] ROW
+    - [x] OPENROWSET
