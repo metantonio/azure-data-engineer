@@ -380,3 +380,33 @@ After using the **COPY** statement to load data into staging tables, you can use
  Note: Implementing an effective data warehouse loading solution requires careful consideration of how to manage surrogate keys, slowly changing dimensions, and other complexities inherent in a relational data warehouse schema. To learn more about techniques for loading a data warehouse, consider completing the Load data into a relational data warehouse module.
 
 ## Query a data warehouse
+
+When the **dimension and fact tables** in a data warehouse **have been loaded** with data, you can **use SQL to query the tables and analyze the data they contain**. The Transact-SQL syntax used to query tables in a Synapse dedicated SQL pool is similar to SQL used in SQL Server or Azure SQL Database.
+
+### Aggregating measures by dimension attributes
+
+Most data analytics with a data warehouse involves **aggregating numeric measures in fact tables by attributes in dimension tables**. Because of the way a star or snowflake schema is implemented, **queries to perform this kind of aggregation rely on JOIN clauses to connect fact tables to dimension tables**, and a combination of aggregate functions and GROUP BY clauses to define the aggregation hierarchies.
+
+For example, the following SQL queries the **FactSales** and **DimDate** tables in a hypothetical data warehouse *to aggregate sales amounts by year and quarter*:
+
+```sql
+SELECT  dates.CalendarYear,
+        dates.CalendarQuarter,
+        SUM(sales.SalesAmount) AS TotalSales
+FROM dbo.FactSales AS sales
+JOIN dbo.DimDate AS dates ON sales.OrderDateKey = dates.DateKey
+GROUP BY dates.CalendarYear, dates.CalendarQuarter
+ORDER BY dates.CalendarYear, dates.CalendarQuarter;
+```
+
+The results from this query would look similar to the following table:
+
+CalendarYear	| CalendarQuarter	| TotalSales
+:---:	| :---:	| ---:
+2020	| 1	| 25980.16
+2020	| 2	| 27453.87
+2020	| 3	| 28527.15
+2020	| 4	| 31083.45
+2021	| 1	| 34562.96
+2021	| 2	| 36162.27
+...	| ...	| ...
