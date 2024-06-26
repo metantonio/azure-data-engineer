@@ -156,3 +156,26 @@ WHERE NOT EXISTS
 RENAME OBJECT dbo.DimProduct TO DimProductArchive;
 RENAME OBJECT dbo.DimProductUpsert TO DimProduct;
 ```
+
+While this technique is effective in merging new and existing dimension data, lack of support for IDENTITY columns means that it's difficult to generate a surrogate key.
+
+ Tip: [For more information, see CREATE TABLE AS SELECT (CTAS) in the Azure Synapse Analytics documentation.](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-develop-ctas)
+
+### Using an INSERT statement
+
+When **you need to load staged data into an existing dimension table, you can use an INSERT statement**. This approach works if the staged data contains only records for new dimension entities (not updates to existing entities). This approach is much less complicated than the technique in the last section, which required a UNION ALL and then renaming table objects.
+
+```sql
+INSERT INTO dbo.DimCustomer
+SELECT CustomerNo AS CustAltKey,
+    CustomerName,
+    EmailAddress,
+    Phone,
+    StreetAddress,
+    City,
+    PostalCode,
+    CountryRegion
+FROM dbo.StageCustomers
+```
+
+ Note: Assuming the **DimCustomer** dimension table is defined with an **IDENTITY** **CustomerKey** column for the surrogate key (as described in the previous unit), the key will be generated automatically and the remaining columns will be populated using the values retrieved from the staging table by the **SELECT** query.
