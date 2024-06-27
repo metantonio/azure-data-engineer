@@ -59,7 +59,7 @@ Training in this course
  - [x] [Implement Azure Synapse Link with Azure Cosmo DB](./implement_synapse_link_with_cosmodb.md)
  - [x] [Implement Azure Synapse Link for SQL](./implement_synapse_link_for_sql.md)
  - [x] [Get started with Azure Stream Analytics](./get_started_azure_stream_analytics.md)
- - [Ingest streaming data using Azure Stream Analytics and Azure Synapse Analytics](./ingest_streaming_data_stream_and_synapse.md)
+ - [x] [Ingest streaming data using Azure Stream Analytics and Azure Synapse Analytics](./ingest_streaming_data_stream_and_synapse.md)
  - [Visualize real-time data with Azure Stream Analytics and Power BI](./visualize_real_time_data_stream_and_powerbi.md)
  - [Introduction to Microsoft Purview](./introduction_microsoft_pureview.md)
  - [Integrate Microsfot Pureview and Azure Synapse Analytics](./integrate_pureview_and_synapse.md)
