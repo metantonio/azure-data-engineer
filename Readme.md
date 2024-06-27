@@ -64,6 +64,6 @@ Training in this course
  - [x] [Introduction to Microsoft Purview](./introduction_microsoft_pureview.md)
  - [x] [Integrate Microsfot Pureview and Azure Synapse Analytics](./integrate_pureview_and_synapse.md)
  - [x] [Explore Azure Databricks](./explore_azure_databricks.md)
- - [Use Apache Spark in Azure Databricks](./use_spark_in_databricks.md)
+ - [x] [Use Apache Spark in Azure Databricks](./use_spark_in_databricks.md)
  - [Run Azure Databricks Notebooks with Azure Data Factory](./run_databricks_notebooks_in_data_factory.md)
 
