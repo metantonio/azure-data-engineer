@@ -220,3 +220,29 @@ GROUP BY System.Timestamp()
 
 ``System.Timestamp()`` is considered in the ``GROUP BY`` clause as a snapshot window definition because it groups events into a window based on the equality of timestamps.
 
+
+## Exercise - Get started with Azure Stream Analytics
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/17-stream-analytics.html" target="_blank">
+    Exercise
+</a>
+
+## Knowledge check
+
+1. Which definition of stream processing is correct? 
+
+    - [x] Data is processed continually as new data records arrive.
+    - [ ] Data is collected in a temporary store, and all records are processed together as a batch.
+    - [ ] Data that is incomplete or contains errors is redirected to separate storage for correction by a human operator.
+
+2. You need to process a stream of sensor data, aggregating values over one minute windows and storing the results in a data lake. Which service should you use?
+
+    - [ ] Azure SQL Database
+    - [ ] Azure Cosmos DB
+    - [x] Azure Stream Analytics
+
+3. You want to aggregate event data by contiguous, fixed-length, non-overlapping temporal intervals. What kind of window should you use? 
+
+    - [ ] Sliding
+    - [ ] Session
+    - [x] Tumbling
