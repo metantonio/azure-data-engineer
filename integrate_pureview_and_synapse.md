@@ -120,10 +120,12 @@ You connect a Microsoft Purview account to an Azure Synapse Analytics workspace 
 
 To connect a Purview account by using the Synapse Studio interface, you ***require Collection Administrator access to the Purview account's root collection***. After successfully connecting the account, the managed identity used by your Azure Synapse Analytics workspace will be added to the collection's **Data Curator** role.
 
-**If your Microsoft Purview account is behind a firewall, you need to create a managed endpoint, and configure the connection to access Purview using that endpoint**. For more information, see Access a secured Microsoft Purview account from Azure Synapse Analytics.
+**If your Microsoft Purview account is behind a firewall, you need to create a managed endpoint, and configure the connection to access Purview using that endpoint**. For more information, see [Access a secured Microsoft Purview account from Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-access-secured-purview-account).
 
 #### Tip
 
 To learn more about connecting Azure Synapse Analytics to Microsoft Purview, see [QuickStart: Connect a Synapse workspace to a Microsoft Purview account](https://learn.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/quickstart-connect-azure-purview).
 
 You'll get a chance to connect an Azure Synapse Analytics workspace to a Microsoft Purview account in the exercise later in this module.
+
+## 
