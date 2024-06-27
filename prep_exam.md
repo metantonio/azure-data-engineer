@@ -14,6 +14,19 @@
     - [x] select
     - [x] sink
 
-        - Derived column: This task is used to create new columns or modify existing columns based on expressions or conditions. You can use it to parse and transform the fixed-length fields into individual columns.
-        - Select: This task allows you to choose which columns to include or exclude from the data flow. You will use it to select only the three columns that you want to write to the CSV file.
-        - Sink: This task is used to write the output of the data flow to a destination, such as a CSV file.
+        - **Derived column**: This task is used to create new columns or modify existing columns based on expressions or conditions. You can use it to parse and transform the fixed-length fields into individual columns.
+        - **Select**: This task allows you to choose which columns to include or exclude from the data flow. You will use it to select only the three columns that you want to write to the CSV file.
+        - **Sink**: This task is used to write the output of the data flow to a destination, such as a CSV file.
+
+ 2. You have source data that contains an array of JSON objects. Each JSON object has a child array of JSON objects.
+
+    You create a data flow activity in an Azure Synapse Analytics pipeline.
+
+    You need to transform the source so that it can be written to an Azure SQL Database table where each row represents an element of the child array, along with the values of its parent element.
+
+    Which type of task should you add to the data flow activity?
+
+    - [x] flatten
+    - [ ] parse
+    - [ ] pivot
+    - [ ] unpivot
