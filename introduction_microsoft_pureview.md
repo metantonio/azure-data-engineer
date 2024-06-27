@@ -205,4 +205,5 @@ Data lineage can offer insights into the data lifecycle by looking at the data p
     <img src="./img/lineage-end-end.png" />
 </a>
 
-##
+## When to use Microsoft Purview
+
