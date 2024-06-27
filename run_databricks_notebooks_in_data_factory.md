@@ -79,3 +79,74 @@ User properties	| `` | 	Custom user-defined properties.
 ### Running a pipeline
 
 When the pipeline containing the **Notebook** activity is published, you can run it by defining a ***trigger***. You can then monitor pipeline runs in the **Monitor** section of Azure Data Factory Studio.
+
+## Use parameters in a notebook
+
+You can use parameters to pass variable values to a notebook from the pipeline. Parameterization enables greater flexibility than using hard-coded values in the notebook code.
+
+### Using parameters in a notebook
+
+To define and use parameters in a notebook, use the ``dbutils.widgets`` library in your notebook code.
+
+For example, the following Python code defines a variable named **folder** and assigns a default value of data:
+
+```python
+dbutils.widgets.text("folder", "data")
+```
+
+To retrieve a parameter value, use the get function, like this:
+
+```python
+folder = dbutils.widgets.get("folder")
+```
+
+The ``get`` function will retrieve the value for the specific parameter that was passed to the notebook. If no such parameter was passed, it will get the default value of the variable you declared previously.
+
+#### Passing output values
+
+In addition to using parameters that can be passed in to a notebook, you can pass values out to the calling application by using the ``notebook.exit`` function, as shown here:
+
+```python
+path = "dbfs:/{0}/products.csv".format(folder)
+dbutils.notebook.exit(path)
+```
+
+### Setting parameter values in a pipeline
+
+To pass parameter values to a **Notebook** activity, add each parameter to the activity's **Base parameters**, as shown here:
+
+<a href="#">
+    <img src="./img/notebook-parameters.png" />
+</a>
+
+In this example, the parameter value is explicitly specified as a property of the **Notebook** activity. You could also define a *pipeline* parameter and assign its value dynamically to the **Notebook** activity's base parameter; adding a further level of abstraction.
+
+#### Tip
+
+For more information about using parameters in Azure Data Factory, see [How to use parameters, expressions and functions in Azure Data Factory in the Azure Data Factory documentation](https://learn.microsoft.com/en-us/azure/data-factory/how-to-expression-language-functions).
+
+## Exercise - Run an Azure Databricks Notebook with Azure Data Factory
+
+<a href="https://microsoftlearning.github.io/mslearn-databricks/Instructions/Exercises/05-Azure-Databricks-Data-Factory.html" target="_blank">
+    Exercise
+</a>
+
+## Knowledge check
+
+1. You want to connect to an Azure Databricks workspace from Azure Data Factory. What must you define in Azure Data Factory?
+
+    - [ ] A global parameter
+    - [x] A linked service
+    - [ ] A customer managed key
+
+2. You need to run a notebook in the Azure Databricks workspace referenced by a linked service. What type of activity should you add to a pipeline? 
+
+    - [x] Notebook
+    - [ ] Python
+    - [ ] Jar
+
+3. You need to use a parameter in a notebook. Which library should you use to define parameters with default values and get parameter values that are passed to the notebook? 
+    
+    - [ ] notebook
+    - [ ] argparse
+    - [x] dbutils.widget
