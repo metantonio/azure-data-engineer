@@ -57,7 +57,7 @@ Training in this course
  - [x] [Use Spark Notebooks in an Azure Synapse Pipeline](./use_spark_notebook_synapse_pipeline.md)
  - [x] [Plan hybrid transactional and ananlytical processing in Azure Synapse Analytics](./plan_hybrid_transactional_analytical_process.md)
  - [x] [Implement Azure Synapse Link with Azure Cosmo DB](./implement_synapse_link_with_cosmodb.md)
- - [Implement Azure Synapse Link for SQL](./implement_synapse_link_for_sql.md)
+ - [x] [Implement Azure Synapse Link for SQL](./implement_synapse_link_for_sql.md)
  - [Get started with Azure Stream Analytics](./get_started_azure_stream_analytics.md)
  - [Ingest streaming data using Azure Stream Analytics and Azure Synapse Analytics](./ingest_streaming_data_stream_and_synapse.md)
  - [Visualize real-time data with Azure Stream Analytics and Power BI](./visualize_real_time_data_stream_and_powerbi.md)
