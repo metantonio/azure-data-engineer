@@ -111,8 +111,20 @@ SQL Warehouses are only available in ***premium*** Azure Databricks workspaces.
 
 ## Knowledge check
 
-1. You want to scan data assets in a dedicated SQL pool in your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview?  
+1. You plan to create an Azure Databricks workspace and use it to work with a SQL Warehouse. Which of the following pricing tiers can you select?   
 
-    - [x] Azure Synapse Analytics.
-    - [ ] Azure Data Lake Storage Gen2
-    - [ ] Azure SQL Database
+    - [ ] Enterprise
+    - [ ] Standard
+    - [x] Premium
+
+2. You've created an Azure Databricks workspace in which you plan to use code to process data files. What must you create in the workspace? 
+
+    - [ ] A SQL Warehouse
+    - [x] A Spark cluster
+    - [ ] A Windows Server virtual machine
+
+3. You want to use Python code to interactively explore data in a text file that you've uploaded to your Azure Databricks workspace. What should you create? 
+
+    - [ ] A SQL query
+    - [ ] An Azure function
+    - [x] A Notebook
