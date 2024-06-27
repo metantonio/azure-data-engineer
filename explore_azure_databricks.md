@@ -105,6 +105,14 @@ SQL Warehouses are only available in ***premium*** Azure Databricks workspaces.
 
 ## Exercise - Explore Azure Databricks
 
-<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/22-Synapse-purview.html" target="_blank">
+<a href="https://microsoftlearning.github.io/mslearn-databricks/Instructions/Exercises/01-Explore-Azure-Databricks.html" target="_blank">
     Exercise
 </a>
+
+## Knowledge check
+
+1. You want to scan data assets in a dedicated SQL pool in your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview?  
+
+    - [x] Azure Synapse Analytics.
+    - [ ] Azure Data Lake Storage Gen2
+    - [ ] Azure SQL Database
