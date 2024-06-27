@@ -128,4 +128,67 @@ To learn more about connecting Azure Synapse Analytics to Microsoft Purview, see
 
 You'll get a chance to connect an Azure Synapse Analytics workspace to a Microsoft Purview account in the exercise later in this module.
 
-## 
+## Search a Purview catalog in Synapse Studio
+
+After connecting an Azure Synapse Analytics workspace to a Microsoft Purview account, you can search the Purview catalog from Synapse Studio. This ability to discover and examine data assets from across the enterprise can greatly assist data engineers, data analysts, and other consumers of data by providing a curated catalog of documented data sources for analysis and reporting.
+
+### Search the Purview catalog in Synapse Studio
+
+You can search the catalog from a connected Purview account by using the ***Search*** bar in the ***Data***, ***Develop***, or ***Integrate*** pages in Synapse Studio, as shown here:
+
+<a href="#">
+    <img src="./img/synapse-search-purview.png" />
+</a>
+
+The *search results* interface, and the details for each asset found reflect the user interface in the Microsoft Purview Governance Portal, ensuring that the data discovery and examination experience in Synapse Studio is consistent for users of Microsoft Purview in its own portal.
+
+#### Tip
+
+For more information about searching the Purview catalog in Synapse Studio, see [Discover, connect, and explore data in Synapse using Microsoft Purview](https://learn.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview).
+
+You'll get a chance to try searching a connected Purview account for yourself in the exercise later in this module.
+
+## Track data lineage in pipelines
+
+In a typical large-scale analytics solution, data is transferred and transformed across multiple systems until it's loaded into an analytical data store for reporting and analysis. ***Tracking the lineage of data*** as moves across the enterprise ***is an important factor in determining the provenance, trustworthiness, and recency of data assets*** used to inform analysis and decision making.
+
+### Generate and view data lineage information
+
+In Azure Synapse Analytics, data movement and transformation is managed by using *pipelines*, which consist of an orchestrated set of *activities* that operate on data. The design and implementation of pipelines is too large a subject to cover in depth in this module, but a key point to be aware of is that there are two activity types available in Synapse Analytics pipelines that automatically generate data lineage information in a connected Purview catalog:
+
+ - The **Copy Data** activity
+ - The **Data Flow** activity
+
+Running a pipeline that includes either of these activities in a workspace with a connected Purview account will result in the creation or update of data assets with lineage information. The assets recorded include:
+
+ - The source from which the data is extracted.
+ - The activity used to transfer the data.
+ - The destination where the data is stored.
+
+In the Microsoft Purview Governance Portal, you can open the assets in the Purview catalog, and view the lineage information as shown here:
+
+<a href="#">
+    <img src="./img/purview-lineage.png" />
+</a>
+
+You can also view the lineage for a pipeline activity in Synapse Studio.
+
+#### Tip
+
+For more information about tracking data lineage for Azure Synapse Analytics pipelines in Microsoft Purview, see [How to get lineage from Azure Synapse Analytics into Microsoft Purview](https://learn.microsoft.com/en-us/azure/purview/how-to-lineage-azure-synapse-analytics).
+
+You'll get a chance to generate and view data lineage from a Synapse Analytics pipeline in the exercise later in this module.
+
+## Exercise - Integrate Azure Synapse Analytics and Microsoft Purview
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/17-stream-analytics.html" target="_blank">
+    Exercise
+</a>
+
+## Knowledge check
+
+1. Which definition of stream processing is correct? 
+
+    - [x] Data is processed continually as new data records arrive.
+    - [ ] Data is collected in a temporary store, and all records are processed together as a batch.
+    - [ ] Data that is incomplete or contains errors is redirected to separate storage for correction by a human operator.
