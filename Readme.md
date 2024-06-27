@@ -40,7 +40,7 @@ You need to understand parallel processing and data architecture patterns. You s
 
 ## COURSE
 
-Training in this course
+Training in this course with answered knowledge check
 
  - [x] [Introduction to data engineering on Azure](./introduction_data_engineering.md)
  - [x] [Introduction to Azure Data Lake Storage Gen2](./introduction_data_lake_storage.md)
@@ -65,5 +65,10 @@ Training in this course
  - [x] [Integrate Microsfot Pureview and Azure Synapse Analytics](./integrate_pureview_and_synapse.md)
  - [x] [Explore Azure Databricks](./explore_azure_databricks.md)
  - [x] [Use Apache Spark in Azure Databricks](./use_spark_in_databricks.md)
- - [Run Azure Databricks Notebooks with Azure Data Factory](./run_databricks_notebooks_in_data_factory.md)
+ - [x] [Run Azure Databricks Notebooks with Azure Data Factory](./run_databricks_notebooks_in_data_factory.md)
 
+
+
+## Practice assessment for exam DP-203: Data Engineering on Microsoft Azure
+
+[Practice assessment for exam DP-203: Data Engineering on Microsoft Azure](./prep_exam.md)
