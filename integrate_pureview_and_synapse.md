@@ -1,0 +1,1 @@
+# Integrate Microsoft Purview and Azure Synapse Analytics
