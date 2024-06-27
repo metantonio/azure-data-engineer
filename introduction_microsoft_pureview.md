@@ -264,7 +264,7 @@ These roles are assigned by using the collections where your data sources are re
 
 1. What does Microsoft Purview do with the data it discovers from your registered sources? 
 
-    - [ ] It catalogs and classifies the data that's scanned.
+    - [x] It catalogs and classifies the data that's scanned.
     - [ ] It moves the data to your Azure subscription, automatically creating the necessary storage accounts.
     - [ ] It performs data transformations to match your on-premises schemas.
 
@@ -272,10 +272,10 @@ These roles are assigned by using the collections where your data sources are re
 
     - [ ] On the Overview tab of the Microsoft Purview account page.
     - [ ] On the Managed Resources tab of the Microsoft Purview account page.
-    - [ ] In the Microsoft Purview governance portal.
+    - [x] In the Microsoft Purview governance portal.
 
 3. What aspect of Microsoft Purview is used to configure the data discovery for your data sources? 
 
-    - [ ] Scan rules
+    - [x] Scan rules
     - [ ] Collections
     - [ ] Classifications

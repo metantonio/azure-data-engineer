@@ -61,7 +61,7 @@ Training in this course
  - [x] [Get started with Azure Stream Analytics](./get_started_azure_stream_analytics.md)
  - [x] [Ingest streaming data using Azure Stream Analytics and Azure Synapse Analytics](./ingest_streaming_data_stream_and_synapse.md)
  - [x] [Visualize real-time data with Azure Stream Analytics and Power BI](./visualize_real_time_data_stream_and_powerbi.md)
- - [Introduction to Microsoft Purview](./introduction_microsoft_pureview.md)
+ - [x] [Introduction to Microsoft Purview](./introduction_microsoft_pureview.md)
  - [Integrate Microsfot Pureview and Azure Synapse Analytics](./integrate_pureview_and_synapse.md)
  - [Explore Azure Databricks](./explore_azure_databricks.md)
  - [Use Apache Spark in Azure Databricks](./use_spark_in_databricks.md)
