@@ -94,3 +94,44 @@ When working with window functions (such as the **TumblingWindow** function in t
 
 For more information about Power BI output limitations, see [Power BI output from Azure Stream Analytics](https://learn.microsoft.com/en-us/azure/stream-analytics/power-bi-output#limitations-and-best-practices) in the Azure Stream Analytics documentation.
 
+## Create real-time data visualizations in Power BI
+
+When you successfully run an Azure Stream Analytics job that sends results to a Power BI output, a streaming dataset containing a single table is created in the Power BI workspace specified for the output. The table contains the data produced by the Stream Analytics query.
+
+### Creating real-time visualizations in a dashboard
+
+To visualize data in real-time, you can create a *dashboard* with a real-time visualization tile. Real-time visualizations on a dashboard show data from a streaming dataset, and are updated dynamically as new data flows into the dataset.
+
+<a href="#">
+    <img src="./img/power-bi-dashboard.png" />
+</a>
+
+## Exercise - Create a real-time data visualization
+
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/19-Stream-Power-BI.html" target="_blank">
+    Exercise
+</a>
+
+#### Tip
+
+[Power Bi service credentials](https://app.powerbi.com/)
+
+## Knowledge check
+
+1. Which type of Azure Stream Analytics output should you use to support real-time visualizations in Microsoft Power BI? 
+
+    - [ ] Azure Synapse Analytics
+    - [ ] Azure Event Hubs
+    - [x] Power BI
+
+2. You want to use an output to write the results of a Stream Analytics query to a table named device-events in a dataset named realtime-data in a Power BI workspace named analytics workspace. What should you do?
+
+    - [x] Create only the workspace. The dataset and table will be created automatically.
+    - [ ] Create the workspace and dataset. The table will be created automatically.
+    - [ ] Create the workspace, dataset, and table before creating the output.
+
+3. You want to create a visualization that updates dynamically based on a table in a streaming dataset in Power BI. What should you do? 
+
+    - [ ] Create a report from the dataset.
+    - [x] Create a dashboard with a tile based on the streaming dataset.
+    - [ ] Export the streaming dataset to Excel and create a report from the Excel workbook.
