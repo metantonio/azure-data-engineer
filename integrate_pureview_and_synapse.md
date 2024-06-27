@@ -154,7 +154,7 @@ In a typical large-scale analytics solution, data is transferred and transformed
 
 ### Generate and view data lineage information
 
-In Azure Synapse Analytics, data movement and transformation is managed by using *pipelines*, which consist of an orchestrated set of *activities* that operate on data. The design and implementation of pipelines is too large a subject to cover in depth in this module, but a key point to be aware of is that there are two activity types available in Synapse Analytics pipelines that automatically generate data lineage information in a connected Purview catalog:
+In Azure Synapse Analytics, data movement and transformation is managed by using *pipelines*, which consist of an orchestrated set of *activities* that operate on data. The design and implementation of pipelines is too large a subject to cover in depth in this module, but a key point to be aware of is that there are two activity types available in **Synapse Analytics pipelines that automatically generate data lineage** information in a connected Purview catalog:
 
  - The **Copy Data** activity
  - The **Data Flow** activity
@@ -181,14 +181,32 @@ You'll get a chance to generate and view data lineage from a Synapse Analytics p
 
 ## Exercise - Integrate Azure Synapse Analytics and Microsoft Purview
 
-<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/17-stream-analytics.html" target="_blank">
+<a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/22-Synapse-purview.html" target="_blank">
     Exercise
 </a>
 
 ## Knowledge check
 
-1. Which definition of stream processing is correct? 
+1. You want to scan data assets in a dedicated SQL pool in your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview?  
 
-    - [x] Data is processed continually as new data records arrive.
-    - [ ] Data is collected in a temporary store, and all records are processed together as a batch.
-    - [ ] Data that is incomplete or contains errors is redirected to separate storage for correction by a human operator.
+    - [x] Azure Synapse Analytics.
+    - [ ] Azure Data Lake Storage Gen2
+    - [ ] Azure SQL Database
+
+2. You want to scan data assets in the default data lake used by your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview? 
+
+    - [ ] Azure Synapse Analytics.
+    - [x] Azure Data Lake Storage Gen2
+    - [ ] Azure Cosmos DB
+
+3. You want data analysts using Synapse Studio to be able to find data assets that are registered in a Microsoft Purview collection. What should you do? 
+
+    - [ ] Register an Azure Synapse Analytics source in the Purview account
+    - [ ] Add a Data Explorer pool to the Synapse Workspace
+    - [x] Connect the Purview account to the Synapse analytics workspace
+
+4. Which of the following pipeline activities records data lineage data in a connected Purview account? 
+
+    - [ ] Get Metadata
+    - [x] Copy Data
+    - [ ] Lookup
