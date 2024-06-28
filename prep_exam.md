@@ -108,3 +108,45 @@
          - Sliding windows are used to create aggregations for so many events, not at identical timelapses.
 
          - Snapshot windows aggregate all events with the same timestamp.
+
+
+ 7. You have an Azure Stream Analytics job named Job1. Job1 is configured to use one **Streaming Unit (SU)** and can be parallelized for up to three nodes.
+
+    You need to ensure there are three nodes available for the job.
+
+    What is the minimum number of SUs you should configure?
+
+    - [ ] 3
+    - [ ] 6
+    - [x] 18
+    - [ ] 24
+
+         - **Each six SUs is one node**; therefore three nodes will require a minimum of 18 SUs.
+
+ 8. You create an Azure Stream Analytics job. You run the job for five hours.
+
+    You review the logs and notice multiple instances of the following message.
+
+    ```json
+    {
+        "message Time":"2019-02-04 17:11:52Z",
+        "error":null, 
+        "message":"First Occurred: 02/04/2019 17:11:48 | Resource Name: ASAjob | Message: Source 'ASAjob' had 24 data errors of kind 'LateInputEvent' between processing times '2019-02-04T17:10:49.7250696Z' and '2019-02-04T17:11:48.7563961Z'. Input event with application timestamp '2019-02-04T17:05:51.6050000' and arrival time '2019-02-04T17:10:44.3090000' was sent later than configured tolerance.",
+        "type":"DiagnosticMessage",
+        "correlation ID":"49efa148-4asd-4fe0-869d-a40ba4d7ef3b"
+    }
+    ```
+
+    You need to ensure that these events are not dropped.
+
+    What should you do?
+
+    - [ ] Decrease the number of Streaming Units (SUs) to 3.
+    - [ ] Increase the number of Streaming Unit (SUs) for the job to 12.
+    - [x] Increase the tolerance for late arrivals.
+    - [ ] Increase the tolerance for out-of-order events.
+
+         - Increasing the tolerance for late arrivals ensures that late arrivals are not dropped.
+         - The error is about late arrivals, not out-of-order events.
+         - Increasing the number of SUs to 12 will not change how late arrivals are handled.
+         - Decreasing the number of SUs to 3 will not change how late arrivals are handled.
