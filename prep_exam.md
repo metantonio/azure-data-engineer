@@ -220,7 +220,7 @@
      What should you do?
 
 - [x] Change the Automated publish config setting.
-- [ ] Select **Override live mode** in the Git Configuration.
+- [ ] Select **Override live mode** in the Git Configuration. (Please, don't even think about use this ``ಠ_ಠ``)
 - [ ] Use a Git client to merge the collaboration branch into the live branch.
 - [ ] Use the browser to create a pull request.
 
@@ -231,3 +231,18 @@
      - Using a Git client to merge the collaboration branch into the live branch does the same thing as Override live mode.
 
      - Using the browser to create a pull request creates a pull request that must be approved, but still does not publish from Data Factory.
+
+13. You have an Azure Data Factory pipeline named Pipeline1.
+
+    Which two types of triggers can you use to start Pipeline1 directly? Each correct answer presents a complete solution.
+
+- [x] custom event
+- [ ] SharePoint list
+- [x] tumbling window
+- [ ] Twitter post
+
+     - Tumbling window is a valid type of trigger in Data Factory.
+     - Custom event is a valid type of trigger in Data Factory.
+     - You cannot use SharePoint to trigger a Data Factory pipeline directly. You can do it from a logic app.
+     - You cannot use Twitter to trigger a Data Factory pipeline directly. You can do it from a logic app.
+
