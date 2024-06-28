@@ -88,3 +88,23 @@
          - Creating a new aggregate task after source1 and copying the script to the aggregate task will not work, and cause errors in the flow.
          - Changing the incoming stream for derivedColumn1 to distinctRows1 will break the flow as there will be no data coming into distinctRows1.
          - Creating a new flowlet task after source1 adds a subflow to the task.
+
+
+ 6. You have an Azure Stream Analytics solution that receives data from multiple thermostats in a building.
+
+    You need to write a query that returns the average temperature per device every five minutes for readings within that same five minute period.
+
+    Which two windowing functions could you use?
+
+    - [ ] ``HoppingWindow``
+    - [ ] ``SessionWindow``
+    - [ ] "SlidingWindow"
+    - [x] ``TumblingWindow``
+
+         - Tumbling windows have a defined period and can aggregate all events for that same time period. A tumbling window is essentially a specific case of a hopping window where the time period and the event aggregation period are the same.
+
+         - Hopping windows have a defined period and can aggregate the events for a potentially different time period
+
+         - Sliding windows are used to create aggregations for so many events, not at identical timelapses.
+
+         - Snapshot windows aggregate all events with the same timestamp.
