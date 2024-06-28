@@ -246,3 +246,54 @@
      - You cannot use SharePoint to trigger a Data Factory pipeline directly. You can do it from a logic app.
      - You cannot use Twitter to trigger a Data Factory pipeline directly. You can do it from a logic app.
 
+14. You have an Azure Data Factory pipeline named Pipeline1.
+
+    You need to send an email message if Pipeline1 fails.
+
+    What should you do?
+
+- [ ] Create a fail activity in the pipeline and set a Failure predecessor on the activity for the last activity in Pipeline1.
+- [ ] Create a metric in the Data Factory resource.
+- [x] Create an alert in the Data Factory resource.
+- [ ] Create an if condition activity in the pipeline and set a Failure predecessor on the activity for the last activity in Pipeline1.
+
+     - An alert can trigger an email.
+     - Fail activities can only set up a failure message, not send emails. Metrics do not trigger events. An If condition creates a branching option in the pipeline, but by itself, it cannot send an email.
+
+15. You are creating an Azure Data Factory pipeline.
+
+    You ***need to store the passwords used to connect to resources***.
+
+    Where should you store the passwords?
+
+- [x] Azure Key Vault
+- [ ] Azure Repos
+- [ ] Azure SQL Database
+- [ ] Data Factory
+
+     - Passwords for resources are not stored in the Data Factory pipeline. It is recommended that the passwords be stored in Key Vault so they can be stored securely.
+
+16. You are testing a change to an Azure Data Factory pipeline.
+
+    You **need to check the change into source control without affecting other users’ work** in the data factory.
+
+    What should you do?
+
+- [x] Save the change to a forked branch in the source control project.
+- [ ] Save the change to the master branch of the source control project.
+- [ ] Save the changed pipeline to your workstation.
+
+     - Create a forked branch won't affect other users' work and you will save the change into the source control
+
+17. You have an Azure Synapse Analytics data pipeline.
+
+    You need to run the pipeline at scheduled intervals.
+
+    What should you configure?
+
+- [ ] a control flow
+- [ ] a sink
+- [x] a trigger
+- [ ] an activity
+
+     - **A trigger is needed to initiate a pipeline run**. Control flow is an activity that implements processing logic. Activities are tasks within a pipeline that cannot trigger the pipeline. A sink represents a target in a data flow but does not provide trigger capability.
