@@ -166,15 +166,16 @@
 
          - Increasing the SUs to 12 still uses two nodes. The other options still use a single node that will stop for maintenance.
 
- 10. You have an Azure Data Factory pipeline named Pipeline1.
 
-    You need to ensure that Pipeline1 runs when an email is received.
+ 10. You have an **Azure Data Factory pipeline** named Pipeline1.
 
-    What should you use to create the trigger?
+     You need to ensure that Pipeline1 runs when an email is received.
 
-    - [x] an Azure logic app
-    - [ ] the Azure Synapse Analytics pipeline designer
-    - [ ] the Data Factory pipeline designer
+     What should you use to create the trigger?
 
-     - A logic app can be triggered by an email, and then run a pipeline.
-     - Only timer, event hub, and storage triggers can be added from the designer.
+- [x] an Azure logic app
+- [ ] the Azure Synapse Analytics pipeline designer
+- [ ] the Data Factory pipeline designer
+
+    - A logic app can be triggered by an email, and then run a pipeline.
+    - Only timer, event hub, and storage triggers can be added from the designer.
