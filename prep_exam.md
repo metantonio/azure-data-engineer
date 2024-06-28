@@ -446,7 +446,7 @@
 
 27. You are evaluating the use of Azure Data Lake Storage Gen2.
 
-    What should you consider when choosing a partitioning strategy?
+    What should you consider when choosing a **partitioning strategy**?
 
 - [ ] access policies
 - [x] data residency
@@ -457,3 +457,31 @@
      - Data residency must be considered to identify whether different datasets can only exist in specific regions.
      - File size does not affect partitioning.
      - Access policies can be applied at folder and container levels, and do not require partitioning.
+
+28. You are importing data into an Azure Synapse Analytics database. The data is being ***inserted by using PolyBase***.
+
+    You need to **maximize network throughput for the import process**.
+
+    What should you use?
+
+- [ ] Scale the target database out.
+- [ ] Scale the target database up.
+- [x] Shard the source data across multiple files.
+- [ ] Shard the source data across multiple storage accounts.
+
+     - Sharding the source data into multiple files will increase the amount of bandwidth available to the import process.
+
+29. You have an Azure Synapse Analytics database named DB1.
+
+    You plan to import data into DB1.
+
+    You need to maximize the performance of the data import.
+
+    What should you implement?
+
+- [ ] functional partitioning on the source data
+- [x] horizontal partitioning on the source data
+- [ ] table partitioning on the target database
+- [ ] vertical partitioning on the source data
+
+     - By using horizontal partitioning, you can improve the performance of the data load. As more server resources and bandwidth are available to the source files, the import process gets faster.
