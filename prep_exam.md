@@ -719,3 +719,77 @@ What should you implement?
 - [ ] ``SELECT * FROM sys.dm_pdw_sql_requests WHERE label = 'query1'``
 
      - Labels for queries are available ``from sys.dm_pdw_exec_requests``. Once the request IDs for the queries are identified, the request IDs can be used for the other dynamic management views.
+
+46. You have an Azure Synapse Analytics workspace that includes an Azure Synapse Analytics cluster named Cluster1.
+
+    You need to review the estimated execution plan for a query on a specific node of Cluster1. The query has a spid of 94 and a distribution ID of 5.
+
+    Which command should you run?
+
+- [x] `DBCC PDW_SHOWEXECUTIONPLAN (5, 94)`
+- [ ] ``DBCC SHOWEXECUTIONPLAN (5,94)``
+- [ ] ``SELECT * FROM sys.dm_exec_query_plan WHERE spid = 94 AND distribution_id = 5``
+- [ ] `SELECT * FROM sys.pdw_nodes_exec_query_plan WHERE spid = 94 AND distribution_id = 5`
+
+     - The execution plan for the specific distribution is available by busing the ``DBCC PDW_SHOWEXECUTIONPLAN`` command.
+
+47. You have an Azure Synapse Analytics database named DB1.
+
+    You need to increase the ***concurrency*** available for DB1.
+
+    Which cmdlet should you run?
+
+- [x] `Set-AzSqlDatabase`
+- [ ] `Start-AzSqlDatabaseActivty`
+- [ ] ``Update-AzKustoDatabase``
+- [ ] ``Update-AzSynapseSqlDatabase``
+
+     - Increasing the concurrency on a database requires scaling the database up by using the ``Set-AzSqlDatabase`` cmdlet.
+
+48. You have an Azure subscription that contains an Azure SQL database named DB1.
+
+    You need to implement row-level security (RLS) for DB1. The solution must block users from updating rows with values that violate RLS.
+
+    Which block predicate should you use?
+
+- [ ] ``AFTER INSERT``
+- [x] ``AFTER UPDATE``
+- [ ] ``BEFORE DELETE``
+- [ ] ``BEFORE UPDATE``
+
+    - AFTER UPDATE prevents users from updating rows to values that violate the predicate. 
+    - AFTER INSERT prevents users from inserting rows that violate the predicate. 
+    - BEFORE UPDATE prevents users from updating rows that currently violate the predicate. Blocks delete operations if the row violates the predicate
+
+49. You have an Azure Synapse Analytics SQL pool.
+
+    You need to monitor **currently-executing query executions** in the SQL pool.
+
+    Which three dynamic management views should you use? Each correct answer presents part of the solution.
+
+- [ ] sys.dm_exec_cached_plans
+- [x] sys.dm_pdw_exec_requests
+- [ ] sys.dm_pdw_errors
+- [x] sys.dm_pdw_request_steps
+- [x] sys.dm_pdw_sql_requests
+
+     - An Azure Synapse Analytics SQL pool uses the ``sys.dm_pdw_exec_requests``, ``sys.dm_pdw_request_steps``, and ``sys.dm_pdw_sql_requests`` views to monitor SQL pool activity. The ``sys.dm_exec_cached_plans`` view stores execution plans that do not show current activity. The ``sys.dm_pdw_errors`` view stores errors, not current activity.
+
+50. You have a **job that aggregates data over a five-second tumbling window**.
+
+    You are monitoring the job and notice that the **SU (Memory) %** Utilization metric is more than 80 percent, and the Backlogged Input Events metric shows values greater than 0.
+
+    What should you do to resolve the performance issue?
+
+- [ ] Change the compatibility level.
+- [ ] Change the tumbling window to a snapshot window.
+- [ ] Create a user-defined aggregate to perform the aggregation.
+- [x] Increase the number of the Streaming Units (SU).
+
+     - You should **increase the number of SUs because the job is running out of resources**. *When the Backlogged Input Events metric is greater than zero, the job is not able to process all incoming events*.
+
+     - You should not change the compatibility level, as this option is not responsible for faster event processing.
+
+     - You should not write a user aggregate, as it this is useful only if the aggregation function is available in the SQL dialect of the query.
+
+     - You should not change the tumbling window to a snapshot window, as this can lead to data loss.
