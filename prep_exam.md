@@ -179,3 +179,55 @@
 
     - A logic app can be triggered by an email, and then run a pipeline.
     - Only timer, event hub, and storage triggers can be added from the designer.
+
+
+11. You have an Azure Data Factory pipeline named Pipeline1. Pipeline1 executes many API write operations every time it runs. Pipeline1 is scheduled to run every five minutes.
+
+    After executing Pipeline1 10 times, you notice the following entry in the logs.
+
+    ``Type=Microsoft.DataTransfer.Execution.Core.ExecutionException,Message=There are substantial concurrent MappingDataflow executions which is causing failures due to throttling under Integration Runtime 'AutoResolveIntegrationRuntime'.``
+
+    You need to ensure that you can run Pipeline1 every five minutes.
+
+    What should you do?
+
+- [ ] Change the compute size to large.
+- [x] Create a new integration runtime and a new Pipeline as a copy of Pipeline1. Configure both pipelines to run every 10 minutes, five minutes apart.
+- [ ] Create a second trigger and set each trigger to run every 10 minutes, five minutes apart.
+- [ ] Create another pipeline in the data factory and schedule each pipeline to run every 10 minutes, five minutes apart.
+
+     - There is a limit of simultaneous pipelines in an integration runtime. You need to split the pipeline to run into multiple runtimes.
+
+     - Compute size will not affect integration runtime limits.
+
+     - Creating another pipeline in the data factory and scheduling each pipeline to run every 10 minutes, five minutes apart, will cause the same limitation.
+
+     - Creating a second trigger and setting each trigger to run every 10 minutes, five minutes apart, still uses the same integration runtime.
+
+
+12.  You have an Azure Data Factory named datafactory1.
+
+     You configure datafacotry1 to use Git for source control.
+
+     You make changes to an existing pipeline.
+
+     When you try to publish the changes, you notice the following message displayed when you hover over the Publish All button.
+
+     ``Publish from ADF Studio is disabled to avoid overwriting automated deployments. If required you can change publish setting in Git configuration.``
+
+     You need to allow publishing from the portal.
+
+     What should you do?
+
+- [x] Change the Automated publish config setting.
+- [ ] Select **Override live mode** in the Git Configuration.
+- [ ] Use a Git client to merge the collaboration branch into the live branch.
+- [ ] Use the browser to create a pull request.
+
+     - Changing the Automated publish config setting defaults to Disable publish when Git is configured.
+
+     - Selecting Override live mode in the Git configuration copies the data from the collaboration branch to the live branch.
+
+     - Using a Git client to merge the collaboration branch into the live branch does the same thing as Override live mode.
+
+     - Using the browser to create a pull request creates a pull request that must be approved, but still does not publish from Data Factory.
