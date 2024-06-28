@@ -297,3 +297,102 @@
 - [ ] an activity
 
      - **A trigger is needed to initiate a pipeline run**. Control flow is an activity that implements processing logic. Activities are tasks within a pipeline that cannot trigger the pipeline. A sink represents a target in a data flow but does not provide trigger capability.
+
+
+18. You are developing an **Apache Spark pipeline** to ***transform data from a source to a target***.
+
+    You need to filter the data in a column named **Category** where the category is cars.
+
+    Which command should you run?
+
+- [x] df.select("ProductName", "ListPrice").where((df["Category"] == "Cars"))
+- [ ] df.select("ProductName", "ListPrice") | where((df["Category"] == "Cars"))
+- [ ] df.select("ProductName", "ListPrice").where((df["Category"] -eq "Cars"))
+- [ ] df.select("ProductName", "ListPrice") | where((df["Category"] -eq "Cars"))
+
+     - The correct format of the ``where`` statement is putting ``.where`` after the select statement on Python (is a method).
+
+19. You have a database named **DB1** and a data warehouse named **DW1**.
+
+    You need to ensure that all changes to **DB1** are stored in **DW1**.The solution must capture the new value and the existing value and ***store each value as a new record***.
+
+    What should you include in the solution?
+
+- [x] change data capture
+- [ ] change tracking
+- [ ] merge replication
+- [ ] transactional replication
+
+     - ***Change data capture*** captures every change to the data and presents the new values as a new row in the tables.
+
+20. You have a database named DB1 and a data warehouse named DW1.
+
+    You need to ensure that all changes to DB1 are stored in DW1. The solution must meet the following requirements:
+
+     - Identify each row that has changed.
+     - Minimize the performance impact on the source system.
+
+    What should you include in the solution?
+
+- [ ] change data capture
+- [x] change tracking
+- [ ] merge replication
+- [ ] transactional replication
+
+     - Change tracking captures the fact that a row was changed without tracking the data that was changed. Change tracking requires less server resources than change data capture.
+
+21. You have a database named DB1 and a data warehouse named DW1.
+
+    You need to ensure that all changes to DB1 are stored in DW1. The solution must meet the following requirements:
+
+     - Identify that a row has changed, but not the final value of the row.
+     - Minimize the performance impact on the source system.
+
+    What should you include in the solution?
+
+- [ ] change data capture
+- [x] change tracking
+- [ ] merge replication
+- [ ] snapshot replication
+
+     - Change tracking captures the fact that a row was changed without tracking the data that was changed. Change tracking requires fewer server resources than change data capture.
+
+22. You have an Azure subscription that contains an Azure Stream Analytics solution.
+
+    You need to write a query that calculates the average rainfall per hour. The solution must segment the data stream into a contiguous **series of fixed-size**, **non-overlapping** time segments.
+
+    Which windowing function should you use?
+
+- [ ] collect
+- [ ] sliding
+- [x] tumbling
+- [ ] VARP
+
+     - Sliding windows generate events for points in time when the content of the window actually changes. Events in hopping and sliding windows can belong to more than one window result set. ***Tumbling window functions segment a data stream into a contiguous series of fixed-size, non-overlapping time segments. Events cannot belong to more than one tumbling window***. VARP and collect are aggregated functions, not windowing.
+
+23. You use an Azure Databricks pipeline to process a stateful streaming operation.
+
+    You need to reduce the amount of state data to improve latency during a long-running steaming operation.
+
+    What should you use in the streaming DataFrame?
+
+- [ ] a partition
+- [ ] a tumbling window
+- [x] a watermark
+- [ ] RocksDB state management
+
+     - **Watermarks interact with output modes** to control when data is written to the sink. Because watermarks reduce the total amount of state information to be processed, effective use of watermarks is essential for efficient stateful streaming throughput. **Partitions are useful to improve performance but not to reduce state information**. A tumbling window segments a data stream into a contiguous series of fixed-size time segments. RocksDB state management helps debug job slowness.
+
+24. You have 500 IoT devices and an Azure subscription.
+
+    You plan to build a data pipeline that will process real-time data from the devices.
+
+    You need to ensure that the devices can send messages to the subscription.
+
+    What should you deploy?
+
+- [x] an Azure event hub
+- [ ] an Azure Storage account
+- [ ] an Azure Stream Analytics workspace
+
+     - To send real-time data from IoT devices to an Azure subscription, the messages are received by an event hub.
