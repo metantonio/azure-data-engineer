@@ -513,3 +513,73 @@
 
      - You cannot add relationships until a database is created. You can only view relationships before a database is created. You can only publish the database after the database has been created.
 
+32. You have a data solution that includes an Azure SQL **database named SQL1** and an Azure Synapse **database named** **SYN1**. SQL1 contains a table named Table1. Data is loaded from SQL1 to the SYN1.
+
+    You need to **ensure that Table1 supports incremental loading**.
+
+    What should you do?
+
+- [x] Add a new column to track lineage in Table1.
+- [ ] Define a new foreign key in Table1.
+- [ ] Enable data classification in Microsoft Purview.
+- [ ] Enable data lineage in Microsoft Purview.
+
+     - A new column of type date or int can be used to track lineage in a table and be used for filtering during an incremental load.
+     - Data lineage in Microsoft Purview cannot be used to assist an incremental load. It is just used for tracing lineage.
+     - Data classification cannot be used for incremental loading.
+     - Foreign keys are used for relationship between tables, not lineage.
+
+33. You have an Azure subscription that uses Microsoft Purview.
+
+    You need to identify which assets have been cataloged by Microsoft Purview.
+
+    What should you use?
+
+- [ ] Azure Data Factory
+- [ ] Azure Data Studio
+- [ ] the Microsoft Purview compliance portal
+- [x] the Microsoft Purview governance portal
+
+     - The governance portal allows you to view and search against the metadata within your Microsoft Purview catalog,
+
+34. You need to limit sensitive data exposure to non-privileged users. You must be able to grant and revoke access to the sensitive data.
+
+What should you implement?
+
+- [ ] Always Encrypted
+- [x] dynamic data masking
+- [ ] row-level security (RLS)
+- [ ] transparent data encryption (TDE)
+
+    -  Dynamic data masking helps prevent unauthorized access to sensitive data by enabling customers to designate how much of the sensitive data to reveal with minimal impact on the application layer. It is a policy-based security feature that hides the sensitive data in the result set of a query over designated database fields, while the data in the database is not changed.
+
+35. You have an Azure Data Lake Storage Gen2 account.
+
+    You grant developers Read and Write permissions by using ACLs to the files in the path \root\input\cleaned.
+
+    The developers report that they cannot open the files.
+
+    How should you modify the permissions to ensure that the developers can open the files?
+
+- [ ] Add Contributor permission to the developers.
+- [ ] Add Execute permissions to the files.
+- [x] Grant Execute permissions to all folders.
+- [ ] Grant Execute permissions to the root folder only.
+
+     - If you are granting permissions by using only ACLs (not Azure RBAC), then to grant a security principal read or write access to a file, you will need to grant the security principal Execute permissions to the root folder of the container and to each folder in the hierarchy of folders that lead to the file.
+     - Adding Contributor permissions to the developers will not help as this type of permission does not provide access to the data.
+
+36. You have an Azure Storage account named account1.
+
+    You need to ensure that requests to account1 can only be made from specific domains.
+
+    What should you configure?
+
+- [ ] blob public access
+- [ ] CDN
+- [x] CORS
+- [ ] secure transfer
+
+     - By using CORS, you can specify which domains a web request is allowed to respond to. If the domain is not listed as an approved domain, the request will be rejected.
+
+37. 
