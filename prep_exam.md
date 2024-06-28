@@ -396,3 +396,50 @@
 - [ ] an Azure Stream Analytics workspace
 
      - To send real-time data from IoT devices to an Azure subscription, the messages are received by an event hub.
+
+25. You have 100 retail stores distributed across **Asia, Europe, and North America**.
+
+    You are developing an analytical workload using Azure Stream Analytics that contains sales data for stores in different regions. The workload contains a **fact table** with the following columns:
+
+    - **Date**: Contains the order date
+    - **Customer**: Contains the customer ID
+    - **Store**: Contains the store ID
+    - **Region** Contains the region ID
+    - **Product**: Contains the product ID
+    - **Price**: Contains the unit price per product
+    - **Quantity**: Contains the quantity sold
+    - **Amount**: Contains the price multiplied by quantity
+
+    You need to design a **partition solution for the fact table**. The solution must meet the following requirements:
+
+    - Optimize read performance when querying sales data for a single region in a given month.
+    - Optimize read performance when querying sales data for all regions in a given month.
+    - Minimize the number of partitions.
+
+    Which column should you use for partitioning?
+
+- [ ] Date partitioned by month
+- [x] Product
+- [ ] Region
+- [ ] Store
+
+     - ***Product ensures parallelism when querying data from a given month within the same region, or multiple regions***.
+     - Using date and partitioning by month, all sales for a month will be in the same partition, not providing parallelism.
+     - All sales for a given region will be in the same partition, not providing parallelism.
+     - Since a store is in a single region, it will still not provide parallelism for the same region.
+
+26. You plan to deploy an app that will distribute files across multiple Azure Storage accounts.
+
+    You need to recommend a **partitioning strategy** that meets the following requirements:
+
+     - Optimizes the data distribution balance.
+     - Minimizes the creation of extra tables.
+
+    What should you recommend?
+
+- [x] Hash
+- [ ] lookup
+- [ ] range
+
+     - Lookup partitioning requires a lookup table to identify which partition data should reside in. Range partitioning does not provide optimization for balancing.
+     - Hash partitioning is optimized for data distribution and uses a hash function to eliminate the need for a lookup table.
