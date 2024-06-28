@@ -443,3 +443,17 @@
 
      - Lookup partitioning requires a lookup table to identify which partition data should reside in. Range partitioning does not provide optimization for balancing.
      - Hash partitioning is optimized for data distribution and uses a hash function to eliminate the need for a lookup table.
+
+27. You are evaluating the use of Azure Data Lake Storage Gen2.
+
+    What should you consider when choosing a partitioning strategy?
+
+- [ ] access policies
+- [x] data residency
+- [ ] file size
+- [ ] geo-replication requirements
+
+     - Geo-replication will affect pricing, not partitioning.
+     - Data residency must be considered to identify whether different datasets can only exist in specific regions.
+     - File size does not affect partitioning.
+     - Access policies can be applied at folder and container levels, and do not require partitioning.
