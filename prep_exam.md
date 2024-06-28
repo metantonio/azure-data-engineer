@@ -485,3 +485,31 @@
 - [ ] vertical partitioning on the source data
 
      - By using horizontal partitioning, you can improve the performance of the data load. As more server resources and bandwidth are available to the source files, the import process gets faster.
+
+
+30. You are designing a database solution that will host data for multiple business units.
+
+    You need to ensure that queries from one business unit do not affect the other business units.
+
+    Which type of partitioning should you use?
+
+- [x] functional
+- [ ] horizontal
+- [ ] table
+- [ ] vertical 
+
+     - By using functional partitioning, **different users of the database can be isolated from each other** to ensure that one business unit does not affect another business unit.
+
+31. You plan to deploy an Azure Synapse Analytics solution that will use the ``Retail database template`` and include three tables from the Business Metrics category.
+
+    You need to create a one-to-many relationship from a table in Retail to a table in Business Metrics.
+
+    What should you do first?
+
+- [x] Create a database.
+- [ ] Publish the database.
+- [ ] Select the table in Business Metric.
+- [ ] Select the table in Retail. 
+
+     - You cannot add relationships until a database is created. You can only view relationships before a database is created. You can only publish the database after the database has been created.
+
