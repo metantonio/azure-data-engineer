@@ -597,3 +597,22 @@ What should you implement?
      - You should query the ``sys.dm_pdw_exec_requests`` dynamic management view, as it contains information about the queries, including their duration.
      - The ``sys.dm_pdw_exec_sessions`` dynamic management view contains information about connections to the database.
      - Opening the Monitor page and reviewing the Pipeline runs tab displays information about the pipelines.
+
+38. You have an Azure Synapse Analytics workspace.
+
+    You need to configure the diagnostics settings for pipeline runs. You must retain the data for auditing purposes indefinitely and minimize costs associated with retaining the data.
+
+    Which destination should you use?
+
+- [x] Archive to a storage account.
+- [ ] Send to a Log Analytics workspace.
+- [ ] Send to a partner solution.
+- [ ] Stream to an Azure event hub.
+
+    - You should choose to archive to a storage account as it is useful for audit, static analysis, or backup. Compared to using Azure Monitor logs or a Log Analytics workspace, this storage is less expensive, and logs can be kept there indefinitely.
+
+     - You should not choose to stream to an event hub since the data can be sent to external systems, such as third-party SIEMs and other Log Analytics solutions.
+
+     - You should not choose to send the data to a Log Analytics workspace, as this option is used to help you to integrate the data into queries, alerts, and visualizations with existing log data.
+
+     - You should not send the data to a partner solution, as this is only useful when using a partner.
