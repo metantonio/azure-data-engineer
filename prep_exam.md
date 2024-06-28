@@ -600,7 +600,7 @@ What should you implement?
 
 38. You have an Azure Synapse Analytics workspace.
 
-    You need to configure the diagnostics settings for pipeline runs. You must retain the data for auditing purposes indefinitely and minimize costs associated with retaining the data.
+    You need to configure the diagnostics settings for pipeline runs. You must retain the data ***for auditing purposes indefinitely*** and minimize costs associated with retaining the data.
 
     Which destination should you use?
 
@@ -616,3 +616,78 @@ What should you implement?
      - You should not choose to send the data to a Log Analytics workspace, as this option is used to help you to integrate the data into queries, alerts, and visualizations with existing log data.
 
      - You should not send the data to a partner solution, as this is only useful when using a partner.
+
+39. You have two Azure Data Factory pipelines.
+
+    You need to monitor the runtimes of the pipelines.
+
+    What should you do?
+
+- [ ] From Azure Data Studio, use the performance monitor view.
+- [ ] From the Azure Monitor blade of the Azure portal, review the metrics.
+- [x] From the Data Factory blade of the Azure portal, review the Monitor & Manage tile.
+
+     - The runtimes of existing pipelines is available in the Azure portal, on the Data Factory blade, under the Monitor & Manage tile.
+     - Azure Data Studio is not used to monitor Data Factory.
+
+40. You have an Azure Data Factory named ADF1.
+
+    You need to ensure that you can analyze pipeline runtimes for ADF1 for the ***last 90 days***.
+
+    What should you use?    
+
+- [ ] Azure Data Factory
+- [x] Azure Monitor
+- [ ] Azure Stream Analytics
+- [ ] Azure App Insights
+
+     - Data Factory only stores pipeline runtimes for ***45 days***. To view the data for a longer period, that data must be sent to Azure Monitor, where the information can then be retrieved and viewed.
+
+41. You have an Azure Data Factory pipeline named S3toDataLake1 that copies data between Amazon S3 storage and Azure Data Lake storage.
+
+    You need to use the Azure Data Factory Pipeline runs dashboard to view the history of runs over a specific time range and group them by tags for S3toDataLake1.
+
+    Which view should you use?
+
+- [ ] Activity
+- [ ] Debug
+- [x] Gantt
+- [ ] List
+
+     - Correct: Gantt view allows you to see all the pipeline runs grouped by name, annotation, or tag created in the pipeline, and it also displays bars relative to how long the run took.
+
+42. You have an Azure Data Factory named ADF1.
+
+    You configure ADF1 to send data to Log Analytics in Azure-Diagnostics mode.
+
+    You need to review the data.
+
+    Which table should you query?
+
+- [ ] ``ADFActivityRun``
+- [ ] ``ADFPipelineRun``
+- [ ] ``ADFSSISIntegrationRuntimeLogs``
+- [ ] ``ADFSSISPackageExecutableStatistics``
+- [x] ``AzureDiagnostics``
+
+     - When Data Factory is configured to send logging data to Log Analytics and is in Azure-Diagnostics mode, the data will be sent to the ``AzureDiagnostics`` table in Log Analytics.
+
+     - The ``ADFActivityRun``, ``ADFPipelineRun``, ``ADFSSISIntegrationRuntimeLogs``, and ``ADFSSISPackageExecutableStatistics`` tables are used when the Data Factory is in Resource-Specific mode.
+
+43. You monitor an Apache Spark job that has been slower than usual during the last two days. ***The job runs a single SQL statement in which two tables are joined***.
+
+    You discover that one of the tables has significant data skew.
+
+    You need to improve job performance.
+
+    Which hint should you use in the query?
+
+- [ ] ``COALESCE``
+- [ ] ``REBALANCE``
+- [ ] `REPARTITION`
+- [x] ``SKEW``
+
+     - You should use the SKEW hint in the query.
+     - The COALESCE hint reduces the number of partitions to the specified number of partitions.
+     - The REPARTITION hint is used to specify the number of partitions using the specified partitioning expressions.
+     - The REBALANCE hint can be used to rebalance the query result output partitions, so that every partition is a reasonable size (not too small and not too big).
