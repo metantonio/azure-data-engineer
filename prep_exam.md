@@ -582,4 +582,18 @@ What should you implement?
 
      - By using CORS, you can specify which domains a web request is allowed to respond to. If the domain is not listed as an approved domain, the request will be rejected.
 
-37. 
+37. You have an Azure Synapse Analytics workspace.
+
+    You need to measure the performance of SQL queries running on the dedicated SQL pool.
+
+    Which two actions achieve the goal? Each correct answer presents a complete solution
+
+- [ ] From the Monitor page of Azure Synapse Studio, review the Pipeline runs tab.
+- [x] From the Monitor page of Azure Synapse Studio, review the SQL requests tab.
+- [x] Query the ``sys.dm_pdw_exec_request`` view.
+- [ ] Query the ``sys.dm_pdw_exec_sessions`` view.
+
+     - You should open the Monitor page and review the SQL request tab where you will find all the queries running on the dedicated SQL pools.
+     - You should query the ``sys.dm_pdw_exec_requests`` dynamic management view, as it contains information about the queries, including their duration.
+     - The ``sys.dm_pdw_exec_sessions`` dynamic management view contains information about connections to the database.
+     - Opening the Monitor page and reviewing the Pipeline runs tab displays information about the pipelines.
