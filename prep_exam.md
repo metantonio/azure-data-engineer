@@ -691,3 +691,31 @@ What should you implement?
      - The COALESCE hint reduces the number of partitions to the specified number of partitions.
      - The REPARTITION hint is used to specify the number of partitions using the specified partitioning expressions.
      - The REBALANCE hint can be used to rebalance the query result output partitions, so that every partition is a reasonable size (not too small and not too big).
+
+44. You monitor an Azure Data Factory pipeline that occasionally fails.
+
+    You need to implement an alert that will contain failed pipeline run metrics. The solution must minimize development effort.
+
+    Which two actions achieve the goal? Each correct answer presents a complete solution.
+
+- [x] From Azure portal, create an alert and add the metrics.
+- [x] From the Monitor page of Azure Data Factory Studio, create an alert.
+- [ ] Implement a Web activity in the pipeline.
+- [ ] Implement a WebHook activity in the pipeline.
+
+     - The options that do not require any development effort are to create an alert by using Azure Monitor or in Azure Data Factory. You can still create custom alerts by implementing a Web activity or a WebHook activity in the pipeline, but some services will require additional effort to read the alert.
+
+45. You have an Azure Synapse Analytics workspace.
+
+    Users report that queries that have a label of ``‘query1’`` are slow to complete.
+
+    You need to identify all the queries that have a label of ``‘query1’``.
+
+    Which query should you run?
+
+- [ ] ``SELECT * FROM sys.dm_pdw_dms_workers WHERE label = 'query1'``
+- [x] ``SELECT * FROM sys.dm_pdw_exec_requests WHERE label = 'query1'``
+- [ ] ``SELECT * FROM sys.dm_pdw_request_steps WHERE label = 'query1'``
+- [ ] ``SELECT * FROM sys.dm_pdw_sql_requests WHERE label = 'query1'``
+
+     - Labels for queries are available ``from sys.dm_pdw_exec_requests``. Once the request IDs for the queries are identified, the request IDs can be used for the other dynamic management views.
