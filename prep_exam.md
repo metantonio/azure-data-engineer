@@ -150,3 +150,31 @@
          - The error is about late arrivals, not out-of-order events.
          - Increasing the number of SUs to 12 will not change how late arrivals are handled.
          - Decreasing the number of SUs to 3 will not change how late arrivals are handled.
+
+ 9. You have an Azure Stream Analytics job named Job1.
+
+    Job1 runs continuously and **executes non-parallelized queries**.
+
+    You need to minimize the impact of Azure node updates on Job1. The solution must minimize costs.
+
+    To what should you increase the Scale Units (SUs)?
+
+    - [ ] 2
+    - [ ] 3
+    - [ ] 6
+    - [x] 12
+
+         - Increasing the SUs to 12 still uses two nodes. The other options still use a single node that will stop for maintenance.
+
+ 10. You have an Azure Data Factory pipeline named Pipeline1.
+
+    You need to ensure that Pipeline1 runs when an email is received.
+
+    What should you use to create the trigger?
+
+    - [x] an Azure logic app
+    - [ ] the Azure Synapse Analytics pipeline designer
+    - [ ] the Data Factory pipeline designer
+
+     - A logic app can be triggered by an email, and then run a pipeline.
+     - Only timer, event hub, and storage triggers can be added from the designer.
