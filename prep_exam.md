@@ -793,3 +793,471 @@ What should you implement?
      - You should not write a user aggregate, as it this is useful only if the aggregation function is available in the SQL dialect of the query.
 
      - You should not change the tumbling window to a snapshot window, as this can lead to data loss.
+
+51. Data in a relational database table is… 
+
+    - [x] Structured
+    - [ ] Semi-stuctured
+    - [ ] Unstuctured
+
+52. In a data lake, data is stored in? 
+
+    - [ ] Relational tables
+    - [x] Files
+    - [ ] A single  JSON document
+
+53. Which of the following Azure services provides capabilities for running data pipelines AND managing analytical data in a data lake or relational data warehouse? 
+
+    - [ ] Azure Stream Analytics
+    - [x] Azure Synapse Analytics
+    - [ ] Azure Databricks
+
+54. Azure Data Lake Storage Gen2 stores data in… 
+
+    - [ ] A document database hosted in Azure Cosmos DB.
+    - [x] An HDFS-compatible file system hosted in Azure Storage.
+    - [ ] A relational data warehouse hosted in Azure Synapse Analytics.
+
+55. What option must you enable to use Azure Data Lake Storage Gen2? 
+
+    - [ ] Global replication
+    - [ ] Data encryption
+    - [x] Hierarchical namespace
+
+56. Which feature of Azure Synapse Analytics enables you to transfer data from one store to another and apply transformations to the data at scheduled intervals?
+
+    - [ ] Serverless SQL pool
+    - [ ] Apache Spark pool
+    - [x] Pipelines
+
+57. You want to create a data warehouse in Azure Synapse Analytics in which the data is stored and queried in a relational data store. What kind of pool should you create? 
+
+    - [ ] Serverless SQL pool
+    - [x] Dedicated SQL pool
+    - [ ] Apache Spark pool
+
+58. A data analyst wants to analyze data by using Python code combined with text descriptions of the insights gained from the analysis. What should they use to perform the analysis? 
+
+    - [x] A notebook connected to an Apache Spark pool.
+    - [ ] A SQL script connected to a serverless SQL pool.
+    - [ ] A KQL script connected to a Data Explorer pool.
+
+59. What function is used to read the data in files stored in a data lake? 
+
+    - [ ] FORMAT
+    - [ ] ROWSET
+    - [x] OPENROWSET
+
+60. What character in file path can be used to select all the file/folders that match rest of the path? 
+
+    - [ ] &
+    - [x] *
+    - [ ] /
+
+61. Which external database object encapsulates the connection information to a file location in a data lake store? 
+
+    - [ ] FILE FORMAT
+    - [x] DATA SOURCE
+    - [ ] EXTERNAL TABLE
+
+62. You need to store the results of a query in a serverless SQL pool as files in a data lake. Which SQL statement should you use? 
+
+    - [ ] BULK INSERT
+    - [x] CREATE EXTERNAL TABLE AS SELECT
+    - [ ] COPY
+
+63. Which of the following file formats can you use to persist the results of a query? 
+
+    - [ ] CSV only
+    - [ ] Parquet only
+    - [x] CSV and Parquet
+
+64. You drop an existing external table from a database in a serverless SQL pool. What else must you do before recreating an external table with the same location?  
+
+    - [x] Delete the folder containing the data files for dropped table.
+    - [ ] Drop and recreate the database
+    - [ ] Create an Apache Spark pool
+
+65. Which if the following statements is true of a lake database?  
+
+    - [ ] Data is stored in a relational database store and cannot be directly accessed in the data lake files.
+    - [ ] Data is stored in files that cannot be queried using SQL.
+    - [x] A relational schema is overlaid on the underlying files, and can be queried using a serverless SQL pool or a Spark pool.
+
+66. You need to create a new lake database for a retail solution. What's the most efficient way to do this? 
+
+    - [ ] Create a sample database in Azure SQL Database and export the SQL scripts to create the schema for the lake database.
+    - [x] Start with the Retail database template in Azure Synapse Studio, and adapt it as necessary.
+    - [ ] Start with an empty database and create a normalized schema.
+
+67. You have Parquet files in an existing data lake folder for which you want to create a table in a lake database. What should you do? 
+
+    - [ ] Use a CREATE EXTERNAL TABLE AS SELECT (CETAS) query to create the table.
+    - [ ] Convert the files in the folder to CSV format.
+    - [x] Use the database designer to create a table based on the existing folder.
+
+68. Which definition best describes Apache Spark? 
+
+    - [ ] A highly scalable relational database management system.
+    - [ ] A virtual server with a Python runtime.
+    - [x] A distributed platform for parallel data processing using multiple languages.
+
+69. You need to use Spark to analyze data in a parquet file. What should you do? 
+
+    - [x] Load the parquet file into a dataframe.
+    - [ ] Import the data into a table in a serverless SQL pool.
+    - [ ] Convert the data to CSV format.
+
+70. You want to write code in a notebook cell that uses a SQL query to retrieve data from a view in the Spark catalog. Which magic should you use? 
+
+    - [ ] %%spark
+    - [ ] %%pyspark
+    - [x] %%sql
+
+71. Which method of the Dataframe object is used to save a dataframe as a file? 
+
+    - [ ] toFile()
+    - [x] write()
+    - [ ] save()
+
+72. Which method is used to split the data across folders when saving a dataframe? 
+
+    - [ ] splitBy()
+    - [ ] distributeBy()
+    - [x] partitionBy()
+
+73. What happens if you drop an external table that is based on existing files? 
+
+    - [ ] An error – you must delete the files first
+    - [x] The table is dropped from the metastore but the files remain unaffected
+    - [ ] The table is dropped from the metastore and the files are deleted
+
+74. Which of the following descriptions best fits Delta Lake? 
+
+    - [ ] A Spark API for exporting data from a relational database into CSV files.
+    - [x] A relational storage layer for Spark that supports tables based on Parquet files.
+    - [ ] A synchronization solution that replicates data between SQL pools and Spark pools.
+
+75. You've loaded a Spark dataframe with data, that you now want to use in a Delta Lake table. What format should you use to write the dataframe to storage? 
+
+    - [ ] CSV
+    - [x] PARQUET
+    - [ ] DELTA
+
+76. What feature of Delta Lake enables you to retrieve data from previous versions of a table? 
+
+    - [ ] Spark Structured Streaming
+    - [x] Time Travel
+    - [ ] Catalog Tables
+
+77. You have a managed catalog table that contains Delta Lake data. If you drop the table, what will happen? 
+
+    - [x] The table metadata and data files will be deleted.
+    - [ ] The table metadata will be removed from the catalog, but the data files will remain intact.
+    - [ ] The table metadata will remain in the catalog, but the data files will be deleted.
+
+78.  When using Spark Structured Streaming, a Delta Lake table can be which of the following? 
+
+    - [ ] Only a source
+    - [ ] Only a sink
+    - [x] Either a source or a sink
+
+79. In which of the following table types should an insurance company store details of customer attributes by which claims will be aggregated?? 
+
+    - [ ] Staging table
+    - [x] Dimension table
+    - [ ] Fact table
+
+80. You create a dimension table for product data, assigning a unique numeric key for each row in a column named **ProductKey**. The **ProductKey** is only defined in the data warehouse. What kind of key is **ProductKey**?
+
+    - [x] A surrogate key
+    - [ ] An alternate key
+    - [ ] A business key
+
+81. What distribution option would be best for a sales fact table that will contain billions of records?
+
+    - [x] HASH
+    - [ ] ROUND_ROBIN
+    - [ ] REPLICATE
+
+82. You need to write a query to return the total of the **UnitsProduced** numeric measure in the **FactProduction** table aggregated by the **ProductName** attribute in the **FactProduct** table. Both tables include a **ProductKey** surrogate key field. What should you do?
+
+    - [ ] Use two SELECT queries with a UNION ALL clause to combine the rows in the FactProduction table with those in the FactProduct table.
+    - [ ] Use a SELECT query against the FactProduction table with a WHERE clause to filter out rows with a ProductKey that doesn't exist in the FactProduct table.
+    - [x] Use a SELECT query with a SUM function to total the UnitsProduced metric, using a JOIN on the ProductKey surrogate key to match the FactProduction records to the FactProduct records and a GROUP BY clause to aggregate by ProductName.
+
+83. You use the RANK function in a query to rank customers in order of the number of purchases they have made. Five customers have made the same number of purchases and are all ranked equally as 1. What rank will the customer with the next highest number of purchases be assigned?
+
+    - [ ] Two
+    - [x] Six
+    - [ ] One
+
+84. You need to compare approximate production volumes by product while optimizing query response time. Which function should you use?
+
+    - [ ] COUNT
+    - [ ] NTILE
+    - [x] APPROX_COUNT_DISTINCT
+
+85. In which order should you load tables in the data warehouse?  
+
+    - [x] Staging tables, then dimension tables, then fact tables
+    - [ ] Staging tables, then fact tables, then dimension tables
+    - [ ] Dimension tables, then staging tables, then fact tables
+
+86. Which command should you use to load a staging table with data from files in the data lake?
+
+    - [x] COPY
+    - [ ] LOAD
+    - [ ] INSERT
+
+87. When a customer changes their phone number, the change should be made in the existing row for that customer in the dimension table. What type of slowly changing dimension does this scenario require? 
+
+    - [ ] Type 0
+    - [x] Type 1
+    - [ ] Type 2
+
+88. What does a pipeline use to access external data source and processing resources?   
+
+    - [ ] Data Explorer pools
+    - [x] Linked services
+    - [ ] External tables
+
+89. What kind of object should you add to a data flow to define a target to which data is loaded? 
+
+    - [ ] Source
+    - [ ] Transformation
+    - [x] Sink
+
+90. What must you create to run a pipeline at scheduled intervals? 
+
+    - [ ] A control flow
+    - [x] A trigger
+    - [ ] An activity
+
+91. What kind of pool is required to run a Synapse notebook in a pipeline?   
+
+    - [ ] A Dedicated SQL pool
+    - [ ] A Data Explorer pool
+    - [x] An Apache Spark pool
+
+92. What kind of pipeline activity encapsulates a Synapse notebook? 
+
+    - [x] Notebook activity
+    - [ ] HDInsight Spark activity
+    - [ ] Script activity
+
+93. A notebook cell contains variable declarations. How can you use them as parameters? 
+
+    - [ ] Add a %%Spark magic at the beginning of the cell
+    - [x] Toggle the Parameters cell setting for the cell
+    - [ ] Use the var keyword for each variable declaration
+
+94. Which of the following descriptions matches a hybrid transactional/analytical processing (HTAP) architecture.  
+
+    - [ ] Business applications store data in an operational data store, which is also used to support analytical queries for reporting.
+    - [x] Business applications store data in an operational data store, which is synchronized with low latency to a separate analytical store for reporting and analysis.
+    - [ ] Business applications store operational data in an analytical data store that is optimized for queries to support reporting and analysis.
+
+95. You want to use Azure Synapse Analytics to analyze operational data stored in a Cosmos DB for NoSQL container. Which Azure Synapse Link service should you use?
+
+    - [ ] Azure Synapse Link for SQL
+    - [ ] Azure Synapse Link for Dataverse
+    - [x] Azure Synapse Link for Azure Cosmos DB
+
+96. You plan to use Azure Synapse Link for Dataverse to analyze business data in your Azure Synapse Analytics workspace. Where is the replicated data from Dataverse stored? 
+
+    - [ ] In an Azure Synapse dedicated SQL pool
+    - [x] In an Azure Data Lake Gen2 storage container.
+    - [ ] In an Azure Cosmos DB container.
+
+97. You have an Azure Cosmos DB for NoSQL account and an Azure Synapse Analytics workspace. What must you do first to enable HTAP integration with Azure Synapse Analytics? 
+
+    - [ ] Configure global replication in Azure Cosmos DB.
+    - [ ] Create a dedicated SQL pool in Azure Synapse Analytics.
+    - [x] Enable Azure Synapse Link in Azure Cosmos DB.
+
+98. You have an existing container in a Cosmos DB core (SQL) database. What must you do to enable analytical queries over Azure Synapse Link from Azure Synapse Analytics? 
+
+    - [ ] Delete and recreate the container.
+    - [x] Enable Azure Synapse Link in the container to create an analytical store.
+    - [ ] Add an item to the container.
+
+99. You plan to use a Spark pool in Azure Synapse Analytics to query an existing analytical store in Azure Cosmos DB. What must you do? 
+
+    - [x] Create a linked service for the Azure Cosmos DB database where the analytical store enabled container is defined.
+    - [ ] Disable automatic pausing for the Spark pool in Azure Synapse Analytics.
+    - [ ] Install the Azure Cosmos DB SDK for Python package in the Spark pool.
+
+100. You're writing PySpark code to load data from an Azure Cosmos DB analytical store into a dataframe. What format should you specify? 
+
+    - [ ] cosmos.json
+    - [x] cosmos.olap
+    - [ ] cosmos.sql
+
+101. You're writing a SQL code in a serverless SQL pool to query an analytical store in Azure Cosmos DB. What function should you use? 
+
+    - [ ] OPENDATASET
+    - [ ] ROW
+    - [x] OPENROWSET
+
+102. From which of the following data sources can you use Azure Synapse Link for SQL to replicate data to Azure Synapse Analytics? 
+
+    - [ ] Azure Cosmos DB.
+    - [x] SQL Server 2022.
+    - [ ] Azure SQL Managed Instance.
+
+103. What must you create in your Azure Synapse Analytics workspace as a target database for Azure Synapse Link for Azure SQL Database? 
+
+    - [ ] A serverless SQL pool
+    - [ ] An Apache Spark pool
+    - [x] A dedicated SQL pool
+
+104. You plan to use Azure Synapse Link for SQL to replicate tables from SQL Server 2022 to Azure Synapse Analytics. What additional Azure resource must you create? 
+
+    - [x] An Azure Storage account with an Azure Data Lake Storage Gen2 container
+    - [ ] An Azure Key Vault containing the SQL Server admin password
+    - [ ] An Azure Application Insights resource
+
+105. Which definition of stream processing is correct? 
+
+    - [x] Data is processed continually as new data records arrive.
+    - [ ] Data is collected in a temporary store, and all records are processed together as a batch.
+    - [ ] Data that is incomplete or contains errors is redirected to separate storage for correction by a human operator.
+
+106. You need to process a stream of sensor data, aggregating values over one minute windows and storing the results in a data lake. Which service should you use?
+
+    - [ ] Azure SQL Database
+    - [ ] Azure Cosmos DB
+    - [x] Azure Stream Analytics
+
+107. You want to aggregate event data by contiguous, fixed-length, non-overlapping temporal intervals. What kind of window should you use? 
+
+    - [ ] Sliding
+    - [ ] Session
+    - [x] Tumbling
+
+108. Which type of output should you use to ingest the results of an Azure Stream Analytics job into a dedicated SQL pool table in Azure Synapse Analytics? 
+
+    - [x] Azure Synapse Analytics
+    - [ ] Blob storage/ADLS Gen2
+    - [ ] Azure Event Hubs
+
+109. Which type of output should be used to ingest the results of an Azure Stream Analytics job into files in a data lake for analysis in Azure Synapse Analytics? 
+
+    - [ ] Azure Synapse Analytics
+    - [x] Blob storage/ADLS Gen2
+    - [ ] Azure Event Hubs
+
+110. Which type of Azure Stream Analytics output should you use to support real-time visualizations in Microsoft Power BI? 
+
+    - [ ] Azure Synapse Analytics
+    - [ ] Azure Event Hubs
+    - [x] Power BI
+
+111. You want to use an output to write the results of a Stream Analytics query to a table named device-events in a dataset named realtime-data in a Power BI workspace named analytics workspace. What should you do?
+
+    - [x] Create only the workspace. The dataset and table will be created automatically.
+    - [ ] Create the workspace and dataset. The table will be created automatically.
+    - [ ] Create the workspace, dataset, and table before creating the output.
+
+112. You want to create a visualization that updates dynamically based on a table in a streaming dataset in Power BI. What should you do? 
+
+    - [ ] Create a report from the dataset.
+    - [x] Create a dashboard with a tile based on the streaming dataset.
+    - [ ] Export the streaming dataset to Excel and create a report from the Excel workbook.
+
+113. What does Microsoft Purview do with the data it discovers from your registered sources? 
+
+    - [x] It catalogs and classifies the data that's scanned.
+    - [ ] It moves the data to your Azure subscription, automatically creating the necessary storage accounts.
+    - [ ] It performs data transformations to match your on-premises schemas.
+
+114. Where would you register your data sources for use in Microsoft Purview? 
+
+    - [ ] On the Overview tab of the Microsoft Purview account page.
+    - [ ] On the Managed Resources tab of the Microsoft Purview account page.
+    - [x] In the Microsoft Purview governance portal.
+
+115. What aspect of Microsoft Purview is used to configure the data discovery for your data sources? 
+
+    - [x] Scan rules
+    - [ ] Collections
+    - [ ] Classifications
+
+116. You want to scan data assets in a dedicated SQL pool in your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview?  
+
+    - [x] Azure Synapse Analytics.
+    - [ ] Azure Data Lake Storage Gen2
+    - [ ] Azure SQL Database
+
+117. You want to scan data assets in the default data lake used by your Azure Synapse Analytics workspace. What kind of source should you register in Microsoft Purview? 
+
+    - [ ] Azure Synapse Analytics.
+    - [x] Azure Data Lake Storage Gen2
+    - [ ] Azure Cosmos DB
+
+118. You want data analysts using Synapse Studio to be able to find data assets that are registered in a Microsoft Purview collection. What should you do? 
+
+    - [ ] Register an Azure Synapse Analytics source in the Purview account
+    - [ ] Add a Data Explorer pool to the Synapse Workspace
+    - [x] Connect the Purview account to the Synapse analytics workspace
+
+119. Which of the following pipeline activities records data lineage data in a connected Purview account? 
+
+    - [ ] Get Metadata
+    - [x] Copy Data
+    - [ ] Lookup
+
+120. You plan to create an Azure Databricks workspace and use it to work with a SQL Warehouse. Which of the following pricing tiers can you select?   
+
+    - [ ] Enterprise
+    - [ ] Standard
+    - [x] Premium
+
+121. You've created an Azure Databricks workspace in which you plan to use code to process data files. What must you create in the workspace? 
+
+    - [ ] A SQL Warehouse
+    - [x] A Spark cluster
+    - [ ] A Windows Server virtual machine
+
+122. You want to use Python code to interactively explore data in a text file that you've uploaded to your Azure Databricks workspace. What should you create? 
+
+    - [ ] A SQL query
+    - [ ] An Azure function
+    - [x] A Notebook
+
+123. Which definition best describes Apache Spark? 
+
+    - [ ] A highly scalable relational database management system.
+    - [ ] A virtual server with a Python runtime.
+    - [x] A distributed platform for parallel data processing using multiple languages.
+
+124. You need to use Spark to analyze data in a parquet file. What should you do? 
+
+    - [x] Load the parquet file into a dataframe.
+    - [ ] Import the data into a table in a serverless SQL pool.
+    - [ ] Convert the data to CSV format.
+
+125. You want to write code in a notebook cell that uses a SQL query to retrieve data from a view in the Spark catalog. Which magic should you use? 
+
+    - [ ] %%spark
+    - [ ] %%pyspark
+    - [x] %%sql
+
+126. You want to connect to an Azure Databricks workspace from Azure Data Factory. What must you define in Azure Data Factory?
+
+    - [ ] A global parameter
+    - [x] A linked service
+    - [ ] A customer managed key
+
+127. You need to run a notebook in the Azure Databricks workspace referenced by a linked service. What type of activity should you add to a pipeline? 
+
+    - [x] Notebook
+    - [ ] Python
+    - [ ] Jar
+
+128. You need to use a parameter in a notebook. Which library should you use to define parameters with default values and get parameter values that are passed to the notebook? 
+    
+    - [ ] notebook
+    - [ ] argparse
+    - [x] dbutils.widget
