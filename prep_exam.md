@@ -164,7 +164,7 @@
     - [ ] 6
     - [x] 12
 
-         - Increasing the SUs to 12 still uses two nodes. The other options still use a single node that will stop for maintenance.
+         - Update a Node requires a maintenance stop, so Increasing the SUs to 12 still uses two nodes. The other options still use a single node that will stop for maintenance.
 
 
  10. You have an **Azure Data Factory pipeline** named Pipeline1.
