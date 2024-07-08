@@ -96,14 +96,14 @@
 
     Which two windowing functions could you use?
 
-    - [ ] ``HoppingWindow``
+    - [x] ``HoppingWindow``
     - [ ] ``SessionWindow``
     - [ ] "SlidingWindow"
     - [x] ``TumblingWindow``
 
-         - Tumbling windows have a defined period and can aggregate all events for that same time period. A tumbling window is essentially a specific case of a hopping window where the time period and the event aggregation period are the same.
+         - Tumbling windows: This window function generates results at non-overlapping intervals. For example, a tumbling window with a duration of five minutes will provide the average temperature for each five-minute period without any overlap.
 
-         - Hopping windows have a defined period and can aggregate the events for a potentially different time period
+         - Hopping windows: This window function generates results at regular intervals but allows for overlapping time periods. For instance, a hopping window with a hop size of five minutes and a window size of five minutes will generate results every five minutes, including data from the overlapping periods.
 
          - Sliding windows are used to create aggregations for so many events, not at identical timelapses.
 
