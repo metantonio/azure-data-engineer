@@ -195,3 +195,81 @@ Azure Data Factory
         └── Managed Identity
 
 ```
+
+
+## Diagram of Azure Synapse Analytics
+
+```bash
+Azure Synapse Analytics
+│
+├── Main Components
+│   ├── SQL Data Warehouse
+│   ├── Spark Pools
+│   ├── Synapse Pipelines
+│   │   ├── Activities
+│   │   │   ├── Copy Data
+│   │   │   ├── Data Flow
+│   │   │   ├── Lookup
+│   │   │   ├── Execute Pipeline
+│   │   │   └── Web
+│   │   ├── Triggers
+│   │       ├── Schedule
+│   │       ├── Tumbling Window
+│   │       └── Event-Based
+│   ├── Data Integration
+│   │   ├── Linked Services
+│   │   │   ├── Azure Storage Account
+│   │   │   ├── SQL Server
+│   │   │   ├── HTTP
+│   │   │   └── REST
+│   │   └── Datasets
+│   │       ├── Azure Blob Storage
+│   │       ├── Azure SQL Database
+│   │       ├── Azure Data Lake Storage
+│   │       └── On-premise SQL Server
+│   ├── Data Exploration
+│   │   ├── SQL On-Demand
+│   │   ├── Spark Notebooks
+│   │   └── Data Explorer Pools
+│   └── Data Management
+│       ├── Integration Runtime
+│       │   ├── Azure Integration Runtime
+│       │   ├── Self-Hosted Integration Runtime
+│       │   └── Azure-SSIS Integration Runtime
+│       └── Data Governance
+│           ├── Azure Purview
+│           └── Data Lineage
+│
+├── Key Functionalities
+│   ├── Data Ingestion
+│   ├── Data Transformation
+│   │   ├── SQL-based transformations
+│   │   └── Spark-based transformations
+│   ├── Data Integration
+│   ├── Data Exploration and Analysis
+│   └── Orchestration and Monitoring
+│
+├── Integration with other services
+│   ├── Power BI
+│   ├── Azure Machine Learning
+│   ├── Azure Data Lake Storage
+│   └── Azure Cosmos DB
+│
+├── Common use cases
+│   ├── Big Data Analytics
+│   ├── Data Warehousing
+│   ├── Real-Time Analytics
+│   └── Data Integration
+│
+└── Security and Governance
+    ├── Authentication and Authorization
+    │   ├── Azure Active Directory (AAD)
+    │   └── Role-Based Access Control (RBAC)
+    ├── Auditing and Monitoring
+    │   ├── Activity Logs
+    │   └── Azure Monitor
+    └── Data Protection
+        ├── Stand-by and transit encryption 
+        └── Managed Identity
+
+```
