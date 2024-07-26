@@ -72,3 +72,59 @@ Training in this course with answered knowledge check
 ## Practice assessment for exam DP-203: Data Engineering on Microsoft Azure
 
 [Practice assessment for exam DP-203: Data Engineering on Microsoft Azure](./prep_exam.md)
+
+
+```bash
++-----------------------------+
+|         Azure Portal        |
++-----------------------------+
+               |
+               v
++-----------------------------+        +----------------------------+
+|      Azure Active Directory | <----> | Azure Resource Manager     |
++-----------------------------+        +----------------------------+
+               |                                    |
+               v                                    v
++-----------------------------+        +----------------------------+
+|  Azure Virtual Machines     |        | Azure Storage              |
+|  (Compute Services)         | <----> | (Blob, File, Queue, Table) |
++-----------------------------+        +----------------------------+
+               |                                    |
+               v                                    v
++-----------------------------+        +----------------------------+
+|  Azure Virtual Network      | <----> | Azure SQL Database         |
+|  (Networking)               |        +----------------------------+
++-----------------------------+                |
+               |                                v
+               v                    +----------------------------+
++-----------------------------+     |   Azure Synapse Analytics  |
+|  Azure App Service          | <-->+  (formerly SQL Data       |
+|  (Web Apps, APIs)           |     |   Warehouse)              |
++-----------------------------+     +----------------------------+
+               |                                |
+               v                                v
++-----------------------------+        +----------------------------+
+|  Azure Kubernetes Service   |        |    Azure Data Factory      |
+|  (AKS)                      | <----> |   (Data Integration)       |
++-----------------------------+        +----------------------------+
+               |                                |
+               v                                v
++-----------------------------+        +----------------------------+
+|  Azure Functions            |        |    Azure Data Lake         |
+|  (Serverless Computing)     | <----> |      Storage (Gen2)        |
++-----------------------------+        +----------------------------+
+               |                                |
+               v                                v
++-----------------------------+        +----------------------------+
+|     Azure Databricks        | <----> |     Azure Purview          |
+|  (Analytics & Machine       |        | (Data Governance)          |
+|   Learning)                 |        +----------------------------+
++-----------------------------+                |
+               |                                v
+               v                    +----------------------------+
++-----------------------------+     |      Azure Synapse         |
+|       Azure Spark           | <-->+     (Big Data &            |
+|  (Big Data Processing)      |     |     Analytics)             |
++-----------------------------+     +----------------------------+
+
+```
