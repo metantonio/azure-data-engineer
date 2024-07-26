@@ -128,3 +128,69 @@ Training in this course with answered knowledge check
 +-----------------------------+     +----------------------------+
 
 ```
+
+## Diagram of Azure Data Factory
+
+```bash
+Azure Data Factory
+│
+├── Main Components
+│   ├── Pipelines
+│   │   ├── Activities
+│   │   │   ├── Copy Data
+│   │   │   ├── Data Flow
+│   │   │   ├── Lookup
+│   │   │   ├── Execute Pipeline
+│   │   │   └── Web
+│   │   ├── Triggers
+│   │       ├── Schedule
+│   │       ├── Tumbling Window
+│   │       └── Event-Based
+│   ├── Datasets
+│   │   ├── Azure Blob Storage
+│   │   ├── Azure SQL Database
+│   │   ├── Azure Data Lake Storage
+│   │   └── On-premise SQL Server
+│   ├── Linked Services
+│   │   ├── Azure Storage Account
+│   │   ├── SQL Server
+│   │   ├── HTTP
+│   │   └── REST
+│   └── Integration Runtime
+│       ├── Azure Integration Runtime
+│       ├── Self-Hosted Integration Runtime
+│       └── Azure-SSIS Integration Runtime
+│
+├── Key Functionalities
+│   ├── Data Movement
+│   ├── Data Transformation
+│   │   ├── Data Flows
+│   │   │   ├── Transformation without code
+│   │   │   ├── Mapping transformations
+│   │   │   └── Debug transformation
+│   └── Orchestration and Monitoring
+│
+├── Integration with other services
+│   ├── Azure Synapse Analytics
+│   ├── Azure Databricks
+│   ├── Azure Machine Learning
+│   └── Power BI
+│
+├── Common use cases
+│   ├── ETL/ELT
+│   ├── Backup and Recovery
+│   ├── Data Migration
+│   └── Big Data Integration
+│
+└── Security and Governance
+    ├── Authentication and Authorization
+    │   ├── Azure Active Directory (AAD)
+    │   └── Role-Based Access Control (RBAC)
+    ├── Auditing and Monitoring
+    │   ├── Logs de actividad
+    │   └── Azure Monitor
+    └── Data Protection
+        ├── Stand-by and transit encryption 
+        └── Managed Identity
+
+```
