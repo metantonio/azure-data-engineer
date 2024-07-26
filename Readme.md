@@ -73,6 +73,7 @@ Training in this course with answered knowledge check
 
 [Practice assessment for exam DP-203: Data Engineering on Microsoft Azure](./prep_exam.md)
 
+## Azure Services Map
 
 ```bash
 +-----------------------------+
