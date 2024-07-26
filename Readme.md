@@ -191,7 +191,7 @@ Azure Data Factory
     │   ├── Logs de actividad
     │   └── Azure Monitor
     └── Data Protection
-        ├── Stand-by and transit encryption 
+        ├── Encryption in Transit and at Rest 
         └── Managed Identity
 
 ```
@@ -269,7 +269,74 @@ Azure Synapse Analytics
     │   ├── Activity Logs
     │   └── Azure Monitor
     └── Data Protection
-        ├── Stand-by and transit encryption 
+        ├── Encryption in Transit and at Rest 
+        └── Managed Identity
+
+```
+
+## Azure Databricks
+
+```bash
+Azure Databricks
+│
+├── Key Components
+│   ├── Clusters
+│   │   ├── Interactive Clusters
+│   │   └── Job Clusters
+│   ├── Notebooks
+│   │   ├── Collaborative Notebooks
+│   │   └── Notebook Workflows
+│   ├── Jobs
+│   │   ├── Job Scheduling
+│   │   └── Job Monitoring
+│   ├── Delta Lake
+│   │   ├── ACID Transactions
+│   │   ├── Schema Enforcement
+│   │   └── Time Travel
+│   ├── Databricks SQL
+│   │   ├── SQL Endpoints
+│   │   └── Query Editor
+│   └── Workflows
+│       ├── Data Engineering Workflows
+│       └── Machine Learning Workflows
+│
+├── Core Features
+│   ├── Data Processing
+│   │   ├── Batch Processing
+│   │   └── Stream Processing
+│   ├── Machine Learning
+│   │   ├── Collaborative ML Workflows
+│   │   ├── MLflow Integration
+│   │   └── Model Deployment
+│   ├── Data Analysis
+│   │   ├── Interactive Analysis
+│   │   └── BI Tool Integration
+│   └── Data Lake Integration
+│       ├── Delta Lake
+│       └── Data Lakehouse
+│
+├── Integration with Other Services
+│   ├── Azure Data Lake Storage
+│   ├── Azure Synapse Analytics
+│   ├── Power BI
+│   ├── Azure Machine Learning
+│   └── Azure DevOps
+│
+├── Common Use Cases
+│   ├── Big Data Analytics
+│   ├── ETL Pipelines
+│   ├── Real-Time Analytics
+│   └── Advanced Analytics and AI
+│
+└── Security and Governance
+    ├── Authentication and Authorization
+    │   ├── Azure Active Directory (AAD)
+    │   └── Role-Based Access Control (RBAC)
+    ├── Auditing and Monitoring
+    │   ├── Activity Logs
+    │   └── Azure Monitor
+    └── Data Protection
+        ├── Encryption in Transit and at Rest
         └── Managed Identity
 
 ```
