@@ -340,3 +340,126 @@ Azure Databricks
         └── Managed Identity
 
 ```
+
+## Azure Data Lake
+
+```bash
+Azure Data Lake
+│
+├── Key Components
+│   ├── Data Lake Storage
+│   │   ├── Gen1
+│   │   └── Gen2
+│   ├── Data Ingestion
+│   │   ├── Batch Ingestion
+│   │   └── Stream Ingestion
+│   ├── Data Catalog
+│   │   ├── Metadata Management
+│   │   └── Data Lineage
+│   └── Data Security
+│       ├── Access Control
+│       │   ├── Role-Based Access Control (RBAC)
+│       │   └── Access Control Lists (ACLs)
+│       └── Data Encryption
+│
+├── Core Features
+│   ├── Scalability
+│   │   ├── Unlimited Storage
+│   │   └── High Throughput
+│   ├── Data Management
+│   │   ├── Data Tiering
+│   │   └── Lifecycle Management
+│   ├── Data Integration
+│   │   ├── Azure Data Factory
+│   │   ├── Databricks
+│   │   └── HDInsight
+│   └── Advanced Analytics
+│       ├── Machine Learning
+│       └── Big Data Analytics
+│
+├── Integration with Other Services
+│   ├── Azure Synapse Analytics
+│   ├── Azure Databricks
+│   ├── Power BI
+│   ├── Azure Machine Learning
+│   └── Azure HDInsight
+│
+├── Common Use Cases
+│   ├── Big Data Analytics
+│   ├── Data Warehousing
+│   ├── Machine Learning
+│   └── IoT Analytics
+│
+└── Security and Governance
+    ├── Authentication and Authorization
+    │   ├── Azure Active Directory (AAD)
+    │   └── Role-Based Access Control (RBAC)
+    ├── Auditing and Monitoring
+    │   ├── Activity Logs
+    │   └── Azure Monitor
+    └── Data Protection
+        ├── Encryption in Transit and at Rest
+        └── Managed Identity
+
+```
+
+## Azure Data Warehouse
+
+```bash
+Azure Data Warehouse
+│
+├── Key Components
+│   ├── Data Storage
+│   │   ├── Columnar Storage
+│   │   └── Data Compression
+│   ├── Compute
+│   │   ├── Scalable Compute
+│   │   └── Query Optimization
+│   ├── Data Ingestion
+│   │   ├── Batch Loading
+│   │   └── Real-Time Ingestion
+│   └── Data Security
+│       ├── Access Control
+│       │   ├── Role-Based Access Control (RBAC)
+│       │   └── User-Defined Roles
+│       └── Data Encryption
+│
+├── Core Features
+│   ├── Scalability
+│   │   ├── On-Demand Scaling
+│   │   └── Elastic Compute
+│   ├── Performance
+│   │   ├── Parallel Processing
+│   │   └── Caching
+│   ├── Data Management
+│   │   ├── Data Partitioning
+│   │   └── Indexing
+│   └── Advanced Analytics
+│       ├── SQL-Based Analytics
+│       └── Integration with BI Tools
+│
+├── Integration with Other Services
+│   ├── Azure Data Lake
+│   ├── Azure Synapse Analytics
+│   ├── Power BI
+│   ├── Azure Machine Learning
+│   └── Azure Databricks
+│
+├── Common Use Cases
+│   ├── Enterprise Data Warehousing
+│   ├── Business Intelligence
+│   ├── Advanced Analytics
+│   └── Data Integration
+│
+└── Security and Governance
+    ├── Authentication and Authorization
+    │   ├── Azure Active Directory (AAD)
+    │   └── Role-Based Access Control (RBAC)
+    ├── Auditing and Monitoring
+    │   ├── Activity Logs
+    │   └── Azure Monitor
+    └── Data Protection
+        ├── Encryption in Transit and at Rest
+        └── Managed Identity
+
+```
